@@ -1,0 +1,132 @@
+package analizadores;
+
+import java_cup.runtime.*;
+import java.util.LinkedList;
+import java_cup.runtime.*;
+import java.util.LinkedList;
+import arbol.*;
+import arbol.expresiones.*;
+import arbol.instrucciones.*;
+import arbol.entorno.*;
+
+parser code 
+{:   
+
+    /* Variable que guarda el árbol de sintáxis abstracta generado luego del análisis sintáctico */
+    public AST AST;
+    
+    /**
+     * Método al que se llama automáticamente ante algún error sintactico.
+     **/ 
+    public void syntax_error(Symbol s){ 
+            System.err.println("Error Sintáctico en la Línea " + (s.left) +" Columna "+s.right+ ". No se esperaba este componente: " +s.value+".");
+
+            //Interfaz.lista_errores.add(new CError("Sintáctico", "No se esperaba este componente '" + s.value + "'", s.left, s.right));
+    
+    } 
+    /**
+     * Método al que se llama en el momento en que ya no es posible una recuperación de errores.
+     **/ 
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+            System.err.println("Error síntactico irrecuperable en la Línea " + (s.left)+ " Columna "+s.right+". Componente " + s.value + " no reconocido."); 
+    }  
+:} 
+
+terminal String mas,menos,por,division,parizquierdo,parderecho,igual,puntoycoma,llaveizq,llaveder,rint,rdouble,rchar,rboolean,rstring,rclass,coma,rvoid;
+terminal String entero,doble,rtrue,rfalse,cadena,caracter,id,rprintln,rprint,rprinttabla;
+terminal String menorque,mayorque,menorigualque,mayorigualque,igualigual,diferenteque,or,and,xor,not,rif,relse,rwhile,rbreak,rcontinue,modulo,rfor,rdo,rswitch,rcase,rdefault,dospuntos,interrogacion,masmas,menosmenos,rpow,rreturn,corizquierdo,corderecho,rnew,rpublic,rprotected,rprivate,rabstract,rstatic,rfinal,rstr,rtoDouble,rtoInt,rtoChar,rextends,punto,rthis,rnull,rimport,
+rgraph,rsuper,rread_file,rwrite_file,rinstanceof,rread;
+
+terminal umenos; //Para manejar el - E
+
+non terminal INICIO;
+non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
+non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR;
+non terminal Expresion E;
+non terminal Tipo T;
+
+
+//Operaciones numericas
+//precedence left interrogacion; //Así lo tenía antes
+precedence right interrogacion,dospuntos;
+
+
+precedence left or;
+precedence left and;
+precedence left xor;
+precedence right not;
+
+precedence left menorque,menorigualque,mayorque,mayorigualque,igualigual,diferenteque;
+
+precedence left mas,menos;
+precedence left por,division,modulo;
+//precedence left potencia;
+//precedence left masmas,menosmenos; //Así lo tenía antes
+
+precedence left punto; //Para los accesos
+
+precedence left umenos;
+
+start with INICIO; 
+
+INICIO::= L_INSTRUCCIONES:a
+    {:
+    //se guarda el AST, que es la lista principal de instrucciones en la variable
+    //AST que se definió dentro del parser
+        parser.AST = new AST(a);
+        
+    :}
+;
+
+
+L_INSTRUCCIONES ::= L_INSTRUCCIONES:a INSTRUCCION:b {: RESULT=a ; RESULT.add(b); :}
+                            | INSTRUCCION:a {: RESULT = new LinkedList<>(); RESULT.add(a); :}
+;
+
+INSTRUCCION ::= DECLARACION:a puntoycoma {:  :}
+            | ASIGNACION:a puntoycoma {:  :}
+            | IMPRIMIR:a puntoycoma{:  :}
+;
+
+
+
+DECLARACION ::= 
+        T:a id:b igual E:c {: RESULT = new Declaracion( a, b, c, bleft, bright);  :}
+        | T:a id:b {: RESULT= new Declaracion ( a, b, bleft, bright);  :}
+;
+
+ASIGNACION ::= 
+                id:a igual E:b {: RESULT = new Asignacion (a , b , aleft, aright); :}
+                //| id:a L_DIMENSIONES_EXPRESION:b igual E:c {: RESULT = new AsignacionArreglo(a,aleft,aright,b,c); :}
+;
+
+T ::= rint:a {: RESULT = new Tipo (Tipo.EnumTipo.entero) ; :}
+    | rchar {: RESULT = new Tipo (Tipo.EnumTipo.caracter) ; :}
+    | rboolean {:RESULT = new Tipo (Tipo.EnumTipo.booleano) ;  :}
+    | rdouble {: RESULT = new Tipo (Tipo.EnumTipo.doble) ; :}
+    | rstring {: RESULT = new Tipo (Tipo.EnumTipo.cadena) ; :}
+;
+
+IMPRIMIR ::= rprintln parizquierdo E:a parderecho {: RESULT = new Imprimir( a, true); :}
+    | rprint parizquierdo E:a parderecho {: RESULT = new Imprimir(a, false); :}
+;
+
+
+
+
+
+
+
+E ::= 
+        entero:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.entero), a); :}
+        | caracter:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.caracter), a.replace("\'","")); :}
+        //| caracter:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.caracter), a); :}
+        | rtrue {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.booleano), true); :}
+        | rfalse {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.booleano), false); :}
+        | doble:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.doble), a); :}
+        | cadena:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.cadena), a.replace("\"","")); :}
+        //| cadena:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.cadena), a); :}
+        
+
+        | id:a {: RESULT = new Id(a, aleft,aright); :}
+;
