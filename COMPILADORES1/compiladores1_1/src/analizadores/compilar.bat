@@ -1,5 +1,4 @@
-javac JLex/Main.java
+%javac JLex/Main.java%
 java JLex.Main Lexico
-java -jar Cup/java-cup-11b.jar -parser Sintactico Sintactico
+java -jar Cup/java-cup-11b.jar -parser parser Sintactico
 pause
-

@@ -86,8 +86,6 @@ BLANCOS=[ \r\t]+
 <YYINITIAL> "." {return new Symbol(sym.punto,yyline,yychar, yytext());}
 
 
-
-
 <YYINITIAL> "int" {return new Symbol(sym.rint,yyline,yychar, yytext());}
 <YYINITIAL> "double" {return new Symbol(sym.rdouble,yyline,yychar, yytext());}
 <YYINITIAL> "char" {return new Symbol(sym.rchar,yyline,yychar, yytext());}
@@ -158,7 +156,7 @@ BLANCOS=[ \r\t]+
 
 
 . {
-    System.err.println("Este es un error lexico: "+yytext()+", en la linea: "+yyline+", en la columna: "+yychar);
+    System.err.println("Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
     //Interfaz.lista_errores.add(new CError("Léxico", "Caractér incorrecto '" + yytext() + "'", yyline, yychar));
     
 
