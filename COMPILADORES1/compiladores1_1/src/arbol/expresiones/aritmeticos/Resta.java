@@ -45,6 +45,9 @@ public class Resta extends Expresion {
                     case doble:
                         double restaDoble = Double.parseDouble(str1) - Double.parseDouble(str2);
                         return new Literal (new Tipo (Tipo.EnumTipo.doble) , restaDoble);
+                    case caracter:
+                        int restaCaracter = Integer.parseInt(str1) - (int) str2.charAt(0);
+                        return new Literal (new Tipo (Tipo.EnumTipo.entero) , restaCaracter);
                 }
                 break;
             case doble:
@@ -55,7 +58,22 @@ public class Resta extends Expresion {
                     case doble :
                         double restaDoble = Double.parseDouble(str1) - Double.parseDouble(str2);
                         return new Literal (new Tipo (Tipo.EnumTipo.doble), restaDoble);
-                        
+                    case caracter:
+                        double restaCaracter = Double.parseDouble(str1) - (int) str2.charAt(0);
+                        return new Literal (new Tipo(Tipo.EnumTipo.doble) , restaCaracter) ;
+                }
+                
+            case caracter:
+                switch (ed.tipo.tipo) {
+                    case entero:
+                        int restaEntero = (int) str1.charAt(0) - Integer.parseInt(str2); 
+                        return new Literal (new Tipo (Tipo.EnumTipo.entero), restaEntero) ;
+                    case doble:
+                        double restaDoble = (int) str1.charAt(0) - Double.parseDouble(str2);
+                        return new Literal (new Tipo (Tipo.EnumTipo.doble) , restaDoble);
+                    case caracter:
+                        int restaCaracter = (int) str1.charAt(0) - (int) str2.charAt(0);
+                        return new Literal (new Tipo (Tipo.EnumTipo.entero), restaCaracter) ;
                 }
         }
         
