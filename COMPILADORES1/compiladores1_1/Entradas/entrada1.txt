@@ -1,0 +1,12 @@
+// comentario 
+int var1 = 100;
+char var2 = 'N';
+boolean var3 = false;
+double var4 = 89.1582;
+String var5 = "Compiladores 1";
+
+println(var1);
+println(var2);
+println(var3);
+println(var4);
+println(var5);

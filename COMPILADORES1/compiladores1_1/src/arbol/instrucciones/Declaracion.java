@@ -40,72 +40,90 @@ public class Declaracion extends Instruccion {
     
     @Override
     public Object ejecutar(Entorno ent) {
-        
-        if (valor != null) {
+        if (valor != null) { //Si se le asignó valor a la variable
             Expresion resultado = valor.getValor(ent);
+
             Simbolo simbolo;
-            
-            switch (tipo.tipo) { // variable a delcarar
+            switch (tipo.tipo) { //Tipo de la variable
                 case entero:
-                    
-                    
-                    switch (resultado.tipo.tipo){ // varibale del retorno para saber si si puedo asignarlo
+                    switch (resultado.tipo.tipo) {
                         case entero:
                             simbolo = new Simbolo(tipo, resultado.valor);
-                            ent.insertar(id, simbolo, linea, columna, "La variable fue insertada");
+                            ent.insertar(id, simbolo, linea, columna, "La variable");
                             return null;
-                        
                         case caracter:
                             int ascii = (int) resultado.valor.toString().charAt(0);
-                            simbolo = new Simbolo (tipo , ascii);
-                            ent.insertar(id, simbolo, linea, columna, "La variable ");
+                            simbolo = new Simbolo(tipo, ascii);
+                            ent.insertar(id, simbolo, linea, columna, "La variable");
                             return null;
                     }
-                    
-                    break;
-                
-                case doble :
-                    
-                    switch (resultado.tipo.tipo) { // variable del retrno para saber si lepuedo asgnar el valor
-                        case doble:
-                            simbolo = new Simbolo(tipo, resultado.valor);
-                            ent.insertar(id, simbolo, linea, columna, "La variale fue insertada");
-                            return null;
-                        case entero:
-                            simbolo = new Simbolo (tipo , resultado.valor);
-                            ent.insertar(id, simbolo, linea, columna, "La variable fue insertada");
-                    }
-               
-            } 
-            
-            /// si salimos del switch, significa que no coinciden los tipos
-            System.out.println("No se puee asignar el tipo porque no coincide" + tipo.toString() + "=" + resultado.tipo.toString());
-        }else {
-            
-            switch (tipo.tipo){
-                case entero:
-                    ent.insertar(id, new Simbolo(tipo, 0), linea, columna, id);
-                    break;
-                case caracter:
-                    ent.insertar(id, new Simbolo(tipo, '\0'), linea, columna, id);
-                    break;
-                case booleano:
-                    ent.insertar(id, new Simbolo(tipo, false), linea, columna, id);
                     break;
                 case doble:
-                    ent.insertar(id, new Simbolo(tipo, 0.0), linea, columna, id);
+                    switch (resultado.tipo.tipo) {
+                        case caracter:
+                            int ascii = (int) resultado.valor.toString().charAt(0);
+                            simbolo = new Simbolo(tipo, ascii);
+                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            return null;
+                        case entero:
+                        case doble:
+                            simbolo = new Simbolo(tipo, resultado.valor);
+                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            return null;
+                    }
+                    break;
+                case caracter:
+                    switch (resultado.tipo.tipo) {
+                        case caracter:
+                            simbolo = new Simbolo(tipo, resultado.valor);
+                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            return null;
+                    }
+                    break;
+                case booleano:
+                    switch (resultado.tipo.tipo) {
+                        case booleano:
+                            simbolo = new Simbolo(tipo, resultado.valor);
+                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            return null;
+                    }
                     break;
                 case cadena:
-                    ent.insertar(id, new Simbolo(tipo, ""), linea, columna, id);
+                    switch (resultado.tipo.tipo) {
+                        case cadena:
+                            simbolo = new Simbolo(tipo, resultado.valor);
+                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            return null;
+                    }
                     break;
-                
+
             }
-            
-            
+
+            //Si llega aquí es porque hubo error de tipos
+//            proyecto1.Interfaz.lista_errores.add(new CError("Semántico", "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + " = " + resultado.tipo.tipo, linea, columna));
+            System.out.println("Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + " = " + resultado.tipo.tipo + ". Línea: " + linea + " Columna: " + columna);
+        } else { //Si no se le asignó valor a la variable le pongo uno por defecto
+            switch (tipo.tipo) {
+                case entero:
+                    ent.insertar(id, new Simbolo(tipo, 0), linea, columna, "La variable");
+                    break;
+                case caracter:
+                    ent.insertar(id, new Simbolo(tipo, '\0'), linea, columna, "La variable");
+                    break;
+                case booleano:
+                    ent.insertar(id, new Simbolo(tipo, false), linea, columna, "La variable");
+                    break;
+                case doble:
+                    ent.insertar(id, new Simbolo(tipo, 0.0), linea, columna, "La variable");
+                    break;
+                case cadena:
+                    ent.insertar(id, new Simbolo(tipo, ""), linea, columna, "La variable");
+                    break;
+
+            }
         }
-        
         return null;
     }
-    
+
     
 }

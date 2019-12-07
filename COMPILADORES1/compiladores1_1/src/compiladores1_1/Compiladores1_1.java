@@ -22,7 +22,7 @@ public class Compiladores1_1 {
     
     public static fmrPrincipal fmrP ;
     public static void main(String[] args) {
-        interpretar("Entradas/entrada1.txt");
+        interpretar("Entradas/entrada2.txt");
     }
 
     private static void interpretar(String path) {

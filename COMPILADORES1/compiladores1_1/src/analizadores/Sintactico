@@ -2,12 +2,12 @@ package analizadores;
 
 import java_cup.runtime.*;
 import java.util.LinkedList;
-import java_cup.runtime.*;
-import java.util.LinkedList;
 import arbol.*;
 import arbol.expresiones.*;
+import arbol.expresiones.aritmeticos.*;
 import arbol.instrucciones.*;
 import arbol.entorno.*;
+
 
 parser code 
 {:   
@@ -73,49 +73,43 @@ INICIO::= L_INSTRUCCIONES:a
     {:
     //se guarda el AST, que es la lista principal de instrucciones en la variable
     //AST que se definió dentro del parser
+    
         parser.AST = new AST(a);
-        
     :}
 ;
 
 
-L_INSTRUCCIONES ::= L_INSTRUCCIONES:a INSTRUCCION:b {: RESULT=a ; RESULT.add(b); :}
+L_INSTRUCCIONES ::= L_INSTRUCCIONES:a INSTRUCCION:b {: RESULT = a; RESULT.add(b); :}
                             | INSTRUCCION:a {: RESULT = new LinkedList<>(); RESULT.add(a); :}
 ;
 
-INSTRUCCION ::= DECLARACION:a puntoycoma {:  :}
-            | ASIGNACION:a puntoycoma {:  :}
-            | IMPRIMIR:a puntoycoma{:  :}
+INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
+            | ASIGNACION:a puntoycoma {: RESULT = a; :}
+            | IMPRIMIR:a puntoycoma{: RESULT = a; :}
 ;
 
 
 
 DECLARACION ::= 
-        T:a id:b igual E:c {: RESULT = new Declaracion( a, b, c, bleft, bright);  :}
-        | T:a id:b {: RESULT= new Declaracion ( a, b, bleft, bright);  :}
+        T:a id:b igual E:c {: RESULT = new Declaracion(a, b, c, bleft, bright); :}
+        | T:a id:b {: RESULT = new Declaracion(a, b, bleft, bright); :}
 ;
 
 ASIGNACION ::= 
-                id:a igual E:b {: RESULT = new Asignacion (a , b , aleft, aright); :}
+                id:a igual E:b {: RESULT = new Asignacion(a,aleft,aright ,b); :}
                 //| id:a L_DIMENSIONES_EXPRESION:b igual E:c {: RESULT = new AsignacionArreglo(a,aleft,aright,b,c); :}
 ;
 
-T ::= rint:a {: RESULT = new Tipo (Tipo.EnumTipo.entero) ; :}
-    | rchar {: RESULT = new Tipo (Tipo.EnumTipo.caracter) ; :}
-    | rboolean {:RESULT = new Tipo (Tipo.EnumTipo.booleano) ;  :}
-    | rdouble {: RESULT = new Tipo (Tipo.EnumTipo.doble) ; :}
-    | rstring {: RESULT = new Tipo (Tipo.EnumTipo.cadena) ; :}
+T ::= rint:a {: RESULT = new Tipo(Tipo.EnumTipo.entero); :}
+    | rchar {: RESULT = new Tipo(Tipo.EnumTipo.caracter); :}
+    | rboolean {: RESULT = new Tipo(Tipo.EnumTipo.booleano); :}
+    | rdouble {: RESULT = new Tipo(Tipo.EnumTipo.doble); :}
+    | rstring {: RESULT = new Tipo(Tipo.EnumTipo.cadena); :}
 ;
 
-IMPRIMIR ::= rprintln parizquierdo E:a parderecho {: RESULT = new Imprimir( a, true); :}
-    | rprint parizquierdo E:a parderecho {: RESULT = new Imprimir(a, false); :}
+IMPRIMIR ::= rprintln parizquierdo E:a parderecho {: RESULT = new Imprimir(a,true); :}
+    | rprint parizquierdo E:a parderecho {: RESULT = new Imprimir(a,false); :}
 ;
-
-
-
-
-
-
 
 E ::= 
         entero:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.entero), a); :}
@@ -125,8 +119,12 @@ E ::=
         | rfalse {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.booleano), false); :}
         | doble:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.doble), a); :}
         | cadena:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.cadena), a.replace("\"","")); :}
-        //| cadena:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.cadena), a); :}
+        //| cadena:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.cadena), a); :} este no quita las comillas
+        | E:a mas:b E:c {: RESULT = new Suma(aleft, aright, a, c) ; :}
+        | E:a menos:b E:c {: RESULT = new Resta (a,c, aleft, aright) ;:}
         
 
         | id:a {: RESULT = new Id(a, aleft,aright); :}
 ;
+
+
