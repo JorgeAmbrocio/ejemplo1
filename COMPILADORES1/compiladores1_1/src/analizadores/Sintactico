@@ -122,7 +122,8 @@ E ::=
         //| cadena:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.cadena), a); :} este no quita las comillas
         | E:a mas:b E:c {: RESULT = new Suma(aleft, aright, a, c) ; :}
         | E:a menos:b E:c {: RESULT = new Resta (a,c, aleft, aright) ;:}
-        
+        | E:a por:b E:c {: RESULT = new Multiplicacion(a,c, aleft, aright);:}
+        | E:a division:b E:c {: RESULT = new Division(a,c,aleft,aright); :}
 
         | id:a {: RESULT = new Id(a, aleft,aright); :}
 ;
