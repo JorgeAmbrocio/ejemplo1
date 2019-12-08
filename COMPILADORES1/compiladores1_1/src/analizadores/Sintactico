@@ -132,6 +132,9 @@ E ::=
         | E:a menorque:b E:c {: RESULT = new Menor(a,c,aleft, aright);:}
         | E:a mayorigualque:b E:c {: RESULT = new MayorIgual(a,c,aleft, aright);:}
         | E:a menorigualque:b E:c {: RESULT = new MenorIgual(a,c,aleft, aright);:}
+        | E:a igualigual:b E:c {: RESULT = new Igual(a,c,aleft, aright);:}
+        | E:a diferenteque:b E:c {: RESULT = new Diferente(a,c,aleft, aright);:}
+        
 ;
 
 
