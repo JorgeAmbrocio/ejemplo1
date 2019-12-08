@@ -76,6 +76,18 @@ public class Igual extends Expresion {
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                 }
                 break;
+            case cadena:
+                switch (e2.tipo.tipo) {
+                    case cadena:
+                        mayor = str1.equals(str2);
+                        return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
+                }
+            case booleano:
+                switch (e2.tipo.tipo){
+                    case booleano:
+                        mayor = str1.equals(str2);
+                        return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
+                }
         }
         
         

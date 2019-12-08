@@ -76,6 +76,12 @@ public class Diferente extends Expresion {
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                 }
                 break;
+            case booleano:
+                switch (e2.tipo.tipo) {
+                    case booleano:
+                        mayor = !str1.equals(str2);
+                        return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
+                }
         }
         
         

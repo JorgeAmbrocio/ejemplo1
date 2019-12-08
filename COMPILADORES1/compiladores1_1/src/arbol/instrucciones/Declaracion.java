@@ -96,7 +96,6 @@ public class Declaracion extends Instruccion {
                             return null;
                     }
                     break;
-
             }
 
             //Si llega aquí es porque hubo error de tipos
@@ -119,7 +118,6 @@ public class Declaracion extends Instruccion {
                 case cadena:
                     ent.insertar(id, new Simbolo(tipo, ""), linea, columna, "La variable");
                     break;
-
             }
         }
         return null;

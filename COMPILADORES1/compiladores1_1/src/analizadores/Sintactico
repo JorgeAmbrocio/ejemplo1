@@ -6,6 +6,7 @@ import arbol.*;
 import arbol.expresiones.*;
 import arbol.expresiones.aritmeticos.*;
 import arbol.expresiones.relacionales.*;
+import arbol.expresiones.logicas.*;
 import arbol.instrucciones.*;
 import arbol.entorno.*;
 
@@ -134,6 +135,10 @@ E ::=
         | E:a menorigualque:b E:c {: RESULT = new MenorIgual(a,c,aleft, aright);:}
         | E:a igualigual:b E:c {: RESULT = new Igual(a,c,aleft, aright);:}
         | E:a diferenteque:b E:c {: RESULT = new Diferente(a,c,aleft, aright);:}
+        | E:a or:b E:c {: RESULT = new O(a,c,aleft,aright);:}
+        | E:a and:b E:c {: RESULT = new Y(a,c,aleft,aright);:}
+        | E:a xor:b E:c {: RESULT = new Xor(a,c,aleft,aright);:}
+        | not:a E:b {: RESULT =new Not(b, aleft,aright);:}
         
 ;
 
