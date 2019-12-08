@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import arbol.*;
 import arbol.expresiones.*;
 import arbol.expresiones.aritmeticos.*;
+import arbol.expresiones.relacionales.*
 import arbol.instrucciones.*;
 import arbol.entorno.*;
 
@@ -32,7 +33,7 @@ parser code
     }  
 :} 
 
-terminal String mas,menos,por,division,parizquierdo,parderecho,igual,puntoycoma,llaveizq,llaveder,rint,rdouble,rchar,rboolean,rstring,rclass,coma,rvoid;
+terminal String mas,menos,por,division,potencia,parizquierdo,parderecho,igual,puntoycoma,llaveizq,llaveder,rint,rdouble,rchar,rboolean,rstring,rclass,coma,rvoid;
 terminal String entero,doble,rtrue,rfalse,cadena,caracter,id,rprintln,rprint,rprinttabla;
 terminal String menorque,mayorque,menorigualque,mayorigualque,igualigual,diferenteque,or,and,xor,not,rif,relse,rwhile,rbreak,rcontinue,modulo,rfor,rdo,rswitch,rcase,rdefault,dospuntos,interrogacion,masmas,menosmenos,rpow,rreturn,corizquierdo,corderecho,rnew,rpublic,rprotected,rprivate,rabstract,rstatic,rfinal,rstr,rtoDouble,rtoInt,rtoChar,rextends,punto,rthis,rnull,rimport,
 rgraph,rsuper,rread_file,rwrite_file,rinstanceof,rread;
@@ -60,14 +61,14 @@ precedence left menorque,menorigualque,mayorque,mayorigualque,igualigual,diferen
 
 precedence left mas,menos;
 precedence left por,division,modulo;
-//precedence left potencia;
+precedence left potencia;
 //precedence left masmas,menosmenos; //Así lo tenía antes
 
 precedence left punto; //Para los accesos
 
 precedence left umenos;
 
-start with INICIO; 
+start with INICIO;
 
 INICIO::= L_INSTRUCCIONES:a
     {:
@@ -124,8 +125,13 @@ E ::=
         | E:a menos:b E:c {: RESULT = new Resta (a,c, aleft, aright) ;:}
         | E:a por:b E:c {: RESULT = new Multiplicacion(a,c, aleft, aright);:}
         | E:a division:b E:c {: RESULT = new Division(a,c,aleft,aright); :}
-
+        | E:a potencia:b E:c {: RESULT = new Potencia(a,c,aleft,aright);:}
+        | E:a modulo:b E:c {: RESULT  = new Modulo(a,c,aleft,aright);:}
         | id:a {: RESULT = new Id(a, aleft,aright); :}
+        | E:a OPREL:b E:c {::}
 ;
+
+OPREL ::= 
+        
 
 

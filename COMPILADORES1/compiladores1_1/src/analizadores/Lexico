@@ -56,7 +56,8 @@ BLANCOS=[ \r\t]+
 <YYINITIAL> "+" {return new Symbol(sym.mas,yyline,yychar, yytext());}
 <YYINITIAL> "-" {return new Symbol(sym.menos,yyline,yychar, yytext());}
 <YYINITIAL> "*" {return new Symbol(sym.por,yyline,yychar, yytext());}
-<YYINITIAL> "/" {return new Symbol(sym.division,yyline,yychar, yytext());}
+<YYINITIAL> "/" {return new Symbol(sym.division,yyline,yychar,yytext());}
+<YYINITIAL> "**" {return new Symbol(sym.potencia,yyline,yychar,yytext());}
 <YYINITIAL> "%" {return new Symbol(sym.modulo,yyline,yychar, yytext());}
 <YYINITIAL> "(" {return new Symbol(sym.parizquierdo,yyline,yychar, yytext());}
 <YYINITIAL> ")" {return new Symbol(sym.parderecho,yyline,yychar, yytext());}
