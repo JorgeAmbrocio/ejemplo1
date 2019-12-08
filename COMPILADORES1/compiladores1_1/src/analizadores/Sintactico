@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import arbol.*;
 import arbol.expresiones.*;
 import arbol.expresiones.aritmeticos.*;
-import arbol.expresiones.relacionales.*
+import arbol.expresiones.relacionales.*;
 import arbol.instrucciones.*;
 import arbol.entorno.*;
 
@@ -128,10 +128,12 @@ E ::=
         | E:a potencia:b E:c {: RESULT = new Potencia(a,c,aleft,aright);:}
         | E:a modulo:b E:c {: RESULT  = new Modulo(a,c,aleft,aright);:}
         | id:a {: RESULT = new Id(a, aleft,aright); :}
-        | E:a OPREL:b E:c {::}
+        | E:a mayorque:b E:c {: RESULT = new Mayor(a,c,aleft, aright);:}
+        | E:a menorque:b E:c {: RESULT = new Menor(a,c,aleft, aright);:}
+        | E:a mayorigualque:b E:c {: RESULT = new MayorIgual(a,c,aleft, aright);:}
+        | E:a menorigualque:b E:c {: RESULT = new MenorIgual(a,c,aleft, aright);:}
 ;
 
-OPREL ::= 
-        
+
 
 

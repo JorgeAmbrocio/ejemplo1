@@ -62,7 +62,6 @@ public class Suma extends Expresion {
                         String sumaCadena  = strS1 + strS2;
                         return new Literal (new Tipo(Tipo.EnumTipo.cadena), sumaCadena);
                     
-                    
                 }
                 
                 

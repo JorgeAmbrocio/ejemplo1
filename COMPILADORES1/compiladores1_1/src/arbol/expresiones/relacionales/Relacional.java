@@ -11,6 +11,13 @@ package arbol.expresiones.relacionales;
  */
 public class Relacional {
     
+    public EnumRelacional relacional;
+    public String tr;
+
+    public Relacional(EnumRelacional relacional) {
+        this.relacional = relacional;
+    }
+    
     
     
     public enum EnumRelacional {

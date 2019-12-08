@@ -14,23 +14,19 @@ import arbol.expresiones.Literal;
  *
  * @author David Ventura
  */
-public class Mayor extends Expresion {
+public class Menor extends Expresion {
     
-    Expresion izquierdo;
-    Expresion derecho ;
-    
+    Expresion izquierdo, derecho;
 
-    public Mayor(  Expresion izquierdo, Expresion derecho , int linea , int columna) {
-        this.izquierdo = izquierdo;
-        this.derecho = derecho;
-        this.columna= columna;
-        this.linea = linea;
+    public Menor(Expresion izquierda, Expresion derecha, int linea, int columna) {
+        this.izquierdo = izquierda;
+        this.derecho = derecha;
+        this.linea  = linea;
+        this.columna =columna;
     }
-    
     
     @Override
     public Expresion getValor(Entorno ent) {
-        
         Expresion e1 = this.izquierdo.getValor(ent);
         Expresion e2 = this.derecho.getValor(ent);
         
@@ -43,26 +39,26 @@ public class Mayor extends Expresion {
             case entero:
                 switch (e2.tipo.tipo) {
                     case entero:
-                        mayor = Integer.parseInt(str1) > Integer.parseInt(str2);
+                        mayor = Integer.parseInt(str1) < Integer.parseInt(str2);
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                     case doble:
-                        mayor = Double.parseDouble(str1) > Double.parseDouble(str2);
+                        mayor = Double.parseDouble(str1) < Double.parseDouble(str2);
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                     case caracter:
-                        mayor = Integer.parseInt(str1) > (int) str2.charAt(0);
+                        mayor = Integer.parseInt(str1) < (int) str2.charAt(0);
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                 }
                 break;
             case doble:
                 switch (e2.tipo.tipo) {
                     case entero:
-                        mayor = Integer.parseInt(str1) > Integer.parseInt(str2);
+                        mayor = Integer.parseInt(str1) < Integer.parseInt(str2);
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                     case doble:
-                        mayor = Double.parseDouble(str1) > Double.parseDouble(str2);
+                        mayor = Double.parseDouble(str1) < Double.parseDouble(str2);
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                     case caracter:
-                        mayor = Integer.parseInt(str1) > (int) str2.charAt(0);
+                        mayor = Integer.parseInt(str1) < (int) str2.charAt(0);
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                 }
                 
@@ -70,13 +66,13 @@ public class Mayor extends Expresion {
             case caracter:
                 switch (e2.tipo.tipo) {
                     case entero:
-                        mayor = (int) str1.charAt(0) > Integer.parseInt(str2);
+                        mayor = (int) str1.charAt(0) < Integer.parseInt(str2);
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                     case doble:
-                        mayor = (int) str1.charAt(0) > Double.parseDouble(str2);
+                        mayor = (int) str1.charAt(0) < Double.parseDouble(str2);
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                     case caracter:
-                        mayor = (int) str1.charAt(0) > (int) str2.charAt(0);
+                        mayor = (int) str1.charAt(0) < (int) str2.charAt(0);
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                 }
                 break;
