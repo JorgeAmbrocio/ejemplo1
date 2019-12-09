@@ -1,7 +1,7 @@
 // comentario 
 
-boolean var1 = true;
-boolean var2 = true;
+boolean var1 = 1011;
+boolean var2 = 455;
 
 println (!!var2);
 

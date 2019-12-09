@@ -9,6 +9,8 @@ import arbol.AST;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.StringReader;
+import interfaz.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,8 +23,12 @@ public class Compiladores1_1 {
      */
     
     public static fmrPrincipal fmrP ;
+    public static ArrayList <pnlHoja> hojas;
     public static void main(String[] args) {
-        interpretar("Entradas/entrada2.txt");
+        //interpretar("Entradas/entrada2.txt");
+        hojas = new ArrayList();
+        fmrP =new fmrPrincipal();
+        fmrP.show();
     }
 
     private static void interpretar(String path) {
@@ -49,6 +55,13 @@ public class Compiladores1_1 {
         
         
         
+    }
+    
+    
+    public static void InsertarHoja () {
+        pnlHoja pnl = new pnlHoja ();
+        hojas.add(pnl);
+        fmrP.addHoja(pnl);
     }
     
 }
