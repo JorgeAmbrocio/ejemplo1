@@ -8,6 +8,7 @@ import arbol.expresiones.aritmeticos.*;
 import arbol.expresiones.relacionales.*;
 import arbol.expresiones.logicas.*;
 import arbol.instrucciones.*;
+import arbol.instrucciones.sentencias.*;
 import arbol.entorno.*;
 
 
@@ -43,9 +44,12 @@ terminal umenos; //Para manejar el - E
 
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
-non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR;
+non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR, SENTENCIA_IF;
 non terminal Expresion E;
 non terminal Tipo T;
+non terminal LinkedList<CondicionIf> L_IF;
+non terminal Bloque BLOQUE ;
+
 
 
 //Operaciones numericas
@@ -63,7 +67,7 @@ precedence left menorque,menorigualque,mayorque,mayorigualque,igualigual,diferen
 precedence left mas,menos;
 precedence left por,division,modulo;
 precedence left potencia;
-//precedence left masmas,menosmenos; //Así lo tenía antes
+precedence left masmas,menosmenos; //Así lo tenía antes
 
 precedence left punto; //Para los accesos
 
@@ -88,9 +92,20 @@ L_INSTRUCCIONES ::= L_INSTRUCCIONES:a INSTRUCCION:b {: RESULT = a; RESULT.add(b)
 INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | ASIGNACION:a puntoycoma {: RESULT = a; :}
             | IMPRIMIR:a puntoycoma{: RESULT = a; :}
+            | SENTENCIA_IF:a puntoycoma {: RESULT = a; :}
 ;
 
+SENTENCIA_IF ::= L_IF:a relse:b BLOQUE:c  {:RESULT = new If (a,c);:} // nuevo if con lista de condiciones con bloque de else
+        | L_IF:a {: RESULT = new If (a);:} // crear un nuevo if con lista de condiciones sin bloque de else
+;
 
+L_IF ::= L_IF:a relse:z rif:y parizquierdo:x E:b parderecho:w BLOQUE:c {: RESULT.add(new CondicionIf (b, c)); :} // crear linked list y añadir a la lista
+        | rif:z parizquierdo:x E:a parderecho:y BLOQUE:b {: RESULT = new LinkedList<>(); RESULT.add(new CondicionIf (a, b));:} // crear linkedlist de condiciones 
+;
+
+BLOQUE ::= llaveizq:z llaveder:y     {: RESULT = new Bloque(); :}
+        | llaveizq:z L_INSTRUCCIONES:a llaveder:y {: RESULT = new Bloque(a); :}
+;
 
 DECLARACION ::= 
         T:a id:b igual E:c {: RESULT = new Declaracion(a, b, c, bleft, bright); :}

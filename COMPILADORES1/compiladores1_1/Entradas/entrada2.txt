@@ -1,7 +1,8 @@
 // comentario 
 
-boolean var1 = 1011;
-boolean var2 = 455;
-
-println (!!var2);
+if ( true ) {
+	println("hola");
+} else {
+	print("no hola");
+};
 

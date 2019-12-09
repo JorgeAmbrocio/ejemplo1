@@ -25,10 +25,10 @@ public class Compiladores1_1 {
     public static fmrPrincipal fmrP ;
     public static ArrayList <pnlHoja> hojas;
     public static void main(String[] args) {
-        //interpretar("Entradas/entrada2.txt");
-        hojas = new ArrayList();
-        fmrP =new fmrPrincipal();
-        fmrP.show();
+        interpretar("Entradas/entrada2.txt");
+        //hojas = new ArrayList();
+        //fmrP =new fmrPrincipal();
+        //fmrP.show();
     }
 
     private static void interpretar(String path) {
