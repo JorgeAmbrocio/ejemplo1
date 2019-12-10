@@ -41,8 +41,10 @@ public class If extends Instruccion {
             }   
         }
         
-        Entorno nuevo  = new Entorno (ent);
-        bloqueElse.ejecutar(nuevo);
+        if (this.bloqueElse != null) {
+            Entorno nuevo  = new Entorno (ent);
+            bloqueElse.ejecutar(nuevo);
+        }
         
         return null;
     }

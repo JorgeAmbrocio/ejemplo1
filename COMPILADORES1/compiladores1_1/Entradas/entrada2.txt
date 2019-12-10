@@ -1,8 +1,8 @@
 // comentario 
 
-if ( true ) {
-	println("hola");
-} else {
-	print("no hola");
-};
+int a = 3;
 
+while (a <= 5) {
+	println("Soy un " + a);
+	a = a + 1;
+};

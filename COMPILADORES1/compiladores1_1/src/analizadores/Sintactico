@@ -44,7 +44,7 @@ terminal umenos; //Para manejar el - E
 
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
-non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR, SENTENCIA_IF;
+non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR, SENTENCIA_IF, SENTENCIA_WHILE;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
@@ -93,6 +93,10 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | ASIGNACION:a puntoycoma {: RESULT = a; :}
             | IMPRIMIR:a puntoycoma{: RESULT = a; :}
             | SENTENCIA_IF:a puntoycoma {: RESULT = a; :}
+            | SENTENCIA_WHILE:a puntoycoma {: RESULT = a; :}
+;
+
+SENTENCIA_WHILE ::= rwhile:z parizquierdo:x E:a parderecho:y BLOQUE:b {: RESULT = new While (a, b) ;:} // crear nueva instruccion
 ;
 
 SENTENCIA_IF ::= L_IF:a relse:b BLOQUE:c  {:RESULT = new If (a,c);:} // nuevo if con lista de condiciones con bloque de else

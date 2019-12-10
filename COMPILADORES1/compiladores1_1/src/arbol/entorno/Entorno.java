@@ -22,7 +22,6 @@ public class Entorno {
     
     
     // nombre : nombre de la variable a insertar
-    
     public void insertar (String nombre, Simbolo sim, int linea, int columna, String cadenaError) {
         if (tabla.containsKey(nombre)) {
             System.out.println("Error semántico: " + cadenaError + " '" + nombre + "' ya existe. Línea:" + linea+ " Columna:" + columna);
