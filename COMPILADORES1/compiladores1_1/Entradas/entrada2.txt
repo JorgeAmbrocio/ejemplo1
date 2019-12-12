@@ -2,7 +2,16 @@
 
 int a = 3;
 
+break;
+
 while (a <= 5) {
 	println("Soy un " + a);
-	a = a + 1;
+	
+	a = a + 1;	
+
+	if (a == 4) {
+		continue;
+	};
+	println ("esto no existe en " + a);
+	
 };

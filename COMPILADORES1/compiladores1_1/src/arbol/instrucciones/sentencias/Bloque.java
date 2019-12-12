@@ -7,6 +7,8 @@ package arbol.instrucciones.sentencias;
 
 import arbol.Instruccion;
 import arbol.entorno.Entorno;
+import arbol.instrucciones.Break;
+import arbol.instrucciones.Continue;
 import java.util.LinkedList;
 
 /**
@@ -30,7 +32,28 @@ public class Bloque extends Instruccion {
     public Object ejecutar(Entorno ent) {
         
         for (Instruccion instruccion : instrucciones) {
-            instruccion.ejecutar(ent);
+            Object retorno = instruccion.ejecutar(ent);
+            
+            if (retorno != null ) {
+                // si retorna un objeto de tipo break, entonces se deja de ejecutar el bloque
+                
+                if (compiladores1_1.Compiladores1_1.estoyDentro() && retorno.getClass() == Break.class) {
+                    return retorno;
+                }else {
+                    System.out.println("Se esperaba break dentro de un ciclo o un switch.\n");
+                }
+                
+                if (compiladores1_1.Compiladores1_1.estoyDentro() && retorno.getClass() == Continue.class) {
+                    return retorno;
+                }else {
+                    System.out.println("Se esperaba continue dentro de un ciclo o un switch.\n");
+                }
+
+            }else {
+                
+            }
+            
+            
         }
         
         return null;

@@ -9,6 +9,8 @@ import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import static arbol.entorno.Tipo.EnumTipo.booleano;
+import arbol.instrucciones.Break;
+import arbol.instrucciones.Continue;
 
 /**
  *
@@ -38,7 +40,8 @@ public class CondicionIf extends Instruccion  {
             if (ejecutar) {
                 this.ejecutado = true;
                 Entorno nuevo = new Entorno(ent);
-                this.bloque.ejecutar(nuevo);
+                Object retorno = this.bloque.ejecutar(nuevo);
+                return retorno;
             }   
         }    
         return null;

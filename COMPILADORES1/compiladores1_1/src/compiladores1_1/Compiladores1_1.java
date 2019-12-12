@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.StringReader;
 import interfaz.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -24,14 +25,21 @@ public class Compiladores1_1 {
     
     public static fmrPrincipal fmrP ;
     public static ArrayList <pnlHoja> hojas;
+    public static LinkedList <enumCiclo> pilaCiclos;
     public static void main(String[] args) {
+        
+        
+        pilaCiclos = new LinkedList();
+        hojas = new ArrayList();
+        
         interpretar("Entradas/entrada2.txt");
-        //hojas = new ArrayList();
         //fmrP =new fmrPrincipal();
         //fmrP.show();
     }
 
     private static void interpretar(String path) {
+        
+        
         analizadores.parser pars;
 //        Instruccion bloque;
         AST arbol;
@@ -50,11 +58,6 @@ public class Compiladores1_1 {
             System.out.println(ex);
             System.out.println("Error fatal en compilación de entrada.");
         }
-        
-        
-        
-        
-        
     }
     
     
@@ -62,6 +65,14 @@ public class Compiladores1_1 {
         pnlHoja pnl = new pnlHoja ();
         hojas.add(pnl);
         fmrP.addHoja(pnl);
+    }
+    
+    public static enum enumCiclo {
+        Switch, Ciclo
+    }
+    
+    public static boolean estoyDentro() {
+        return !pilaCiclos.isEmpty();
     }
     
 }

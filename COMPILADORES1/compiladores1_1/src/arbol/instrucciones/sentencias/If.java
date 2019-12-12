@@ -34,10 +34,10 @@ public class If extends Instruccion {
     public Object ejecutar(Entorno ent) {
         
         for (CondicionIf condicion : condiciones) {
-            condicion.ejecutar(ent);
+            Object retorno = condicion.ejecutar(ent);
             
             if (condicion.ejecutado) {
-                return null;
+                return retorno;
             }   
         }
         
