@@ -25,7 +25,7 @@ public class Switch extends Instruccion {
     LinkedList <CondicionSwitch> condiciones;
     boolean ejecutado;
     public Switch(Expresion valor, LinkedList<CondicionSwitch> condiciones) {
-        compiladores1_1.Compiladores1_1.pilaCiclos.add(Compiladores1_1.enumCiclo.Switch);
+        
         this.valor = valor;
         this.condiciones = condiciones;
         this.ejecutado = false;
@@ -34,7 +34,8 @@ public class Switch extends Instruccion {
     
     @Override
     public Object ejecutar(Entorno ent) {
-        
+        compiladores1_1.Compiladores1_1.pilaCiclos.add(Compiladores1_1.enumCiclo.Switch);
+        Object retorno=null;
         for (CondicionSwitch condicion : this.condiciones) {
             // recorre todos los casos
             
@@ -54,18 +55,18 @@ public class Switch extends Instruccion {
                     if (blnIgual ) {
                         // si la condición es real, se ejecuta
                         this.ejecutado  = true;
-                        Object retorno = condicion.ejecutar(new Entorno(ent));
+                        retorno = condicion.ejecutar(new Entorno(ent));
                         
                         if (retorno != null) {
                             // encontró un break o un continue
                             if(retorno.getClass() == Break.class) {
                                 // retornar null
-                                compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-                                return null;
+                       
+                                break;
                             }else if (retorno.getClass() == Continue.class) {
                                 // si es contienue retorna el continue
-                                compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-                                return retorno;
+                       
+                                break;
                             }
                         }
                     }
@@ -74,19 +75,19 @@ public class Switch extends Instruccion {
             }else if ( this.ejecutado)  {
                 // si es un default
                 // pero ya se ejecutó algun case
-                Object retorno = condicion.ejecutar(new Entorno(ent));
+                retorno = condicion.ejecutar(new Entorno(ent));
                 
                 if (retorno != null) {
                     // significa que encontró n brreak o un continue
                     
                     if (retorno.getClass() == Break.class) {
                         // el switch nunca retorna un break
-                        compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-                        return null;
+               
+                        break;
                     }else if (retorno.getClass() == Continue.class) {
                         // si viene un continue, se sale del switch
-                        compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-                        return retorno;
+                        
+                        break;
                     }   
                 }
             }
@@ -102,47 +103,40 @@ public class Switch extends Instruccion {
                 if (condicion.valorCaso == null) {
                     // es un default
                     this.ejecutado = true;
-                    Object retorno = condicion.ejecutar(new Entorno(ent));
+                    retorno = condicion.ejecutar(new Entorno(ent));
                     if (retorno != null) {
                            // significa que encontró n brreak o un continue
 
                         if (retorno.getClass() == Break.class) {
                             // el switch nunca retorna un break
-                            compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-                            return null;
+                            break;
                         }else if (retorno.getClass() == Continue.class) {
                             // si viene un continue, se sale del switch
-                            compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-                            return retorno;
+                            break;
                         }   
                     } 
                 }else if (this.ejecutado) {
                     // ya tengo que ejecutar todo
-                    Object retorno = condicion.ejecutar(new Entorno(ent));
+                    retorno = condicion.ejecutar(new Entorno(ent));
                     if (retorno != null) {
                            // significa que encontró n brreak o un continue
 
                         if (retorno.getClass() == Break.class) {
                             // el switch nunca retorna un break
-                            compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-                            return null;
+                   
+                            break;
                         }else if (retorno.getClass() == Continue.class) {
                             // si viene un continue, se sale del switch
-                            compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-                            return retorno;
-                        }   
+                            break;
+                        }
                     }
-                }
-                
-                
+                }   
             }
-            
         }
         
         
-        
         compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-        return null;
+        return retorno;
     }
     
     
