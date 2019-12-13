@@ -36,24 +36,8 @@ public class Bloque extends Instruccion {
             
             if (retorno != null ) {
                 // si retorna un objeto de tipo break, entonces se deja de ejecutar el bloque
-                
-                if (compiladores1_1.Compiladores1_1.estoyDentro() && retorno.getClass() == Break.class) {
-                    return retorno;
-                }else {
-                    System.out.println("Se esperaba break dentro de un ciclo o un switch.\n");
-                }
-                
-                if (compiladores1_1.Compiladores1_1.estoyDentro() && retorno.getClass() == Continue.class) {
-                    return retorno;
-                }else {
-                    System.out.println("Se esperaba continue dentro de un ciclo o un switch.\n");
-                }
-
-            }else {
-                
+                return retorno;
             }
-            
-            
         }
         
         return null;

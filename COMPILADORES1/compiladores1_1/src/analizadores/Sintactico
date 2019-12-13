@@ -44,11 +44,12 @@ terminal umenos; //Para manejar el - E
 
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
-non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE;
+non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
-non terminal Bloque BLOQUE ;
+non terminal LinkedList<CondicionSwitch> L_CASOS;
+non terminal Bloque BLOQUE;
 
 
 
@@ -96,7 +97,19 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | CONTINUE:a puntoycoma {: RESULT = a;:}
             | SENTENCIA_IF:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_WHILE:a puntoycoma {: RESULT = a; :}
+            | SENTENCIA_SWITCH:a puntoycoma {: RESULT = a ;:}
 ;
+
+SENTENCIA_SWITCH ::= rswitch parizquierdo E:a parderecho llaveizq L_CASOS:b llaveder {:RESULT =new Switch(a,b);:}
+            
+;
+
+L_CASOS ::= L_CASOS:a rcase E:b dospuntos L_INSTRUCCIONES:c {: a.add(new CondicionSwitch(b,c)) ; RESULT= a; :}
+            |L_CASOS:a rdefault dospuntos L_INSTRUCCIONES:c {: a.add(new CondicionSwitch(c)) ;RESULT = a;:}
+            |rcase E:b dospuntos L_INSTRUCCIONES:c {:RESULT = new LinkedList<>(); RESULT.add(new CondicionSwitch(b,c));:}
+            |rdefault dospuntos L_INSTRUCCIONES:c {:RESULT = new LinkedList<>(); RESULT.add(new CondicionSwitch(c));:}
+;
+
 
 BREAK ::= rbreak:a {:RESULT = new Break(aleft, aright);:}
 ;

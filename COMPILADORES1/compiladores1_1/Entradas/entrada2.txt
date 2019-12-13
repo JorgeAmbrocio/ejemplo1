@@ -1,17 +1,18 @@
 // comentario 
 
-int a = 3;
-
 break;
 
-while (a <= 5) {
-	println("Soy un " + a);
+switch ("hola") {
 	
-	a = a + 1;	
-
-	if (a == 4) {
-		continue;
-	};
-	println ("esto no existe en " + a);
-	
+	case 5:
+		println("5");
+	case "holax": 
+		println("hola");
+		break;
+	default:
+		print("esto es un default");
+		break;	
+	case "no entrar":
+		print("no entrar");
 };
+

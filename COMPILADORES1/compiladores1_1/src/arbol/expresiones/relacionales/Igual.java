@@ -24,6 +24,11 @@ public class Igual extends Expresion {
         this.linea  = linea;
         this.columna =columna;
     }
+
+    public Igual(Expresion izquierdo, Expresion derecho) {
+        this.izquierdo = izquierdo;
+        this.derecho = derecho;
+    }
     
     @Override
     public Expresion getValor(Entorno ent) {
