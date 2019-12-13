@@ -74,9 +74,7 @@ public class For  extends Instruccion{
                 // revalidar la condicion
                 condicion_ = this.condicion.getValor(entCondiciones);
                 condicion__ = Boolean.parseBoolean(condicion_.valor.toString());
-                
             }
-            
         }else {
             System.out.println("Se esperaba una expresion booleana en la condición del for");
         }
