@@ -1,18 +1,13 @@
 // comentario 
 
-break;
+int a ;
 
-switch ("hola") {
+for (a = 3; a < 8 ; a = a +  1) {
 	
-	case 5:
-		println("5");
-	case "holax": 
-		println("hola");
+	
+	if (a == 5) {
 		break;
-	default:
-		print("esto es un default");
-		break;	
-	case "no entrar":
-		print("no entrar");
-};
+	};
+	println("soy un for " + a);
 
+};

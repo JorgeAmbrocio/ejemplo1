@@ -44,7 +44,7 @@ terminal umenos; //Para manejar el - E
 
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
-non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH;
+non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
@@ -98,6 +98,14 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_IF:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_WHILE:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_SWITCH:a puntoycoma {: RESULT = a ;:}
+            | SENTENCIA_FOR:a puntoycoma {: RESULT = a ;:}
+;
+
+SENTENCIA_FOR ::= rfor parizquierdo ASIGNACION_DECLARACION:a puntoycoma E:b puntoycoma ASIGNACION:c parderecho BLOQUE:d {: RESULT = new For(a,b,c,d); :}
+;
+
+ASIGNACION_DECLARACION ::= ASIGNACION:a {: RESULT = a; :}
+            | DECLARACION:a {: RESULT = a; :}
 ;
 
 SENTENCIA_SWITCH ::= rswitch parizquierdo E:a parderecho llaveizq L_CASOS:b llaveder {:RESULT =new Switch(a,b);:}
