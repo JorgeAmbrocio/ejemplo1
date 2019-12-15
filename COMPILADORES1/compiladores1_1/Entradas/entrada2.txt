@@ -1,13 +1,15 @@
 // comentario 
-
-int a ;
-
-for (a = 3; a < 8 ; a = a +  1) {
+int a = 1;
+while ( a!= 5) {
 	
-	
-	if (a == 5) {
-		break;
-	};
-	println("soy un for " + a);
+	println("hola " + a);
+	a = a + 1;
+}
 
-};
+a = 1;
+
+do {
+	
+	println("hola " + a);
+	a  = a+ 1;
+} while (a != 5);

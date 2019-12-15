@@ -9,20 +9,20 @@ import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Tipo;
-import arbol.instrucciones.*;
+import arbol.instrucciones.Break;
+import arbol.instrucciones.Continue;
 import compiladores1_1.Compiladores1_1;
-import java.util.LinkedList;
 
 /**
  *
  * @author David Ventura
  */
-public class While extends Instruccion {
+public class Do extends Instruccion {
 
     Bloque bloque;
     Expresion valorWhile;
 
-    public While(Expresion valorWhile , Bloque bloque) {
+    public Do(Expresion valorWhile , Bloque bloque) {
         this.bloque = bloque;
         this.valorWhile = valorWhile;
     }
@@ -38,7 +38,7 @@ public class While extends Instruccion {
             
             boolean condicion = Boolean.parseBoolean(valorWhile_.valor.toString());
             
-            do {
+            while (condicion) {
                 Entorno entornoWhile = new Entorno (ent);
                 Object retorno = bloque.ejecutar(entornoWhile);
                 
@@ -57,7 +57,7 @@ public class While extends Instruccion {
                 
                 valorWhile_  = this.valorWhile.getValor(ent);
                 condicion = Boolean.parseBoolean(valorWhile_.valor.toString());
-            } while (condicion);
+            }
             
         } else {
             System.out.println("Error sintáctico: se esperaba valro booleano");

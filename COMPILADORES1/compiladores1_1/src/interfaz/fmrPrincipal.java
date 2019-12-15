@@ -47,8 +47,12 @@ public class fmrPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,12 +102,32 @@ public class fmrPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Reportes");
+
+        jMenuItem7.setText("Reporte AST");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem7);
+
+        jMenuItem8.setText("Reporte de errores");
+        jMenu2.add(jMenuItem8);
+
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Analizar");
+        jMenu3.setText("Ejecución");
+
+        jMenuItem6.setText("Ejecutar");
+        jMenu3.add(jMenuItem6);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Acerca de");
+
+        jMenuItem9.setText("aiuda pofavó");
+        jMenu4.add(jMenuItem9);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -144,6 +168,7 @@ public class fmrPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -154,6 +179,10 @@ public class fmrPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Compiladores1_1.InsertarHoja();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,6 +237,10 @@ public class fmrPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane tbt;
     private javax.swing.JTextArea txtInput;

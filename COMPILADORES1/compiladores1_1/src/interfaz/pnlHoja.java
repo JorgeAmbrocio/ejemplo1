@@ -64,7 +64,7 @@ public class pnlHoja extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        JOptionPane.showMessageDialog(null, "Est es un mensaje");
+        compiladores1_1.Compiladores1_1.interpretar_(this.txt.getText());
     }
     
     

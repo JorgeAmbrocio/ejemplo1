@@ -44,7 +44,7 @@ terminal umenos; //Para manejar el - E
 
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
-non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION;
+non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
@@ -95,10 +95,14 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | IMPRIMIR:a puntoycoma{: RESULT = a; :}
             | BREAK:a puntoycoma {: RESULT = a ;:}
             | CONTINUE:a puntoycoma {: RESULT = a;:}
-            | SENTENCIA_IF:a puntoycoma {: RESULT = a; :}
-            | SENTENCIA_WHILE:a puntoycoma {: RESULT = a; :}
-            | SENTENCIA_SWITCH:a puntoycoma {: RESULT = a ;:}
-            | SENTENCIA_FOR:a puntoycoma {: RESULT = a ;:}
+            | SENTENCIA_IF:a  {: RESULT = a; :}
+            | SENTENCIA_WHILE:a  {: RESULT = a; :}
+            | SENTENCIA_SWITCH:a  {: RESULT = a ;:}
+            | SENTENCIA_FOR:a  {: RESULT = a ;:}
+            | SENTENCIA_DO:a puntoycoma {: RESULT = a;:}
+;
+
+SENTENCIA_DO ::= rdo BLOQUE:a rwhile parizquierdo E:b parderecho {: RESULT = new Do (b,a); :} 
 ;
 
 SENTENCIA_FOR ::= rfor parizquierdo ASIGNACION_DECLARACION:a puntoycoma E:b puntoycoma ASIGNACION:c parderecho BLOQUE:d {: RESULT = new For(a,b,c,d); :}
