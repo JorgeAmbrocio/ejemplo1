@@ -44,7 +44,7 @@ terminal umenos; //Para manejar el - E
 
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
-non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO;
+non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
@@ -99,7 +99,11 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_WHILE:a  {: RESULT = a; :}
             | SENTENCIA_SWITCH:a  {: RESULT = a ;:}
             | SENTENCIA_FOR:a  {: RESULT = a ;:}
-            | SENTENCIA_DO:a puntoycoma {: RESULT = a;:}
+            | SENTENCIA_DO:a puntoycoma {: RESULT = a; :}
+            | SENTENCIA_INCREMENTO:a {: RESULT = a; :}
+;
+
+SENTENCIA_INCREMENTO ::= id:a masmas puntoycoma {: RESULT = new InsIncremento( a, aleft, aright) ; :}
 ;
 
 SENTENCIA_DO ::= rdo BLOQUE:a rwhile parizquierdo E:b parderecho {: RESULT = new Do (b,a); :} 
@@ -112,8 +116,7 @@ ASIGNACION_DECLARACION ::= ASIGNACION:a {: RESULT = a; :}
             | DECLARACION:a {: RESULT = a; :}
 ;
 
-SENTENCIA_SWITCH ::= rswitch parizquierdo E:a parderecho llaveizq L_CASOS:b llaveder {:RESULT =new Switch(a,b);:}
-            
+SENTENCIA_SWITCH ::= rswitch parizquierdo E:a parderecho llaveizq L_CASOS:b llaveder {:RESULT =new Switch(a,b);:}       
 ;
 
 L_CASOS ::= L_CASOS:a rcase E:b dospuntos L_INSTRUCCIONES:c {: a.add(new CondicionSwitch(b,c)) ; RESULT= a; :}
@@ -181,6 +184,7 @@ E ::=
         | E:a potencia:b E:c {: RESULT = new Potencia(a,c,aleft,aright);:}
         | E:a modulo:b E:c {: RESULT  = new Modulo(a,c,aleft,aright);:}
         | id:a {: RESULT = new Id(a, aleft,aright); :}
+        | id:a masmas {: RESULT = new ExpIncremento ( a, aleft,aright) ;:}
         | E:a mayorque:b E:c {: RESULT = new Mayor(a,c,aleft, aright);:}
         | E:a menorque:b E:c {: RESULT = new Menor(a,c,aleft, aright);:}
         | E:a mayorigualque:b E:c {: RESULT = new MayorIgual(a,c,aleft, aright);:}

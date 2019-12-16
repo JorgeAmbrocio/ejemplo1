@@ -16,7 +16,7 @@ import arbol.entorno.Tipo;
  */
 public class Id extends Expresion {
     
-    String id; // nombre de la variable que quiero buscar
+    public String id; // nombre de la variable que quiero buscar
 
     public Id(String id ,int linea, int columna) {
         this.id = id;

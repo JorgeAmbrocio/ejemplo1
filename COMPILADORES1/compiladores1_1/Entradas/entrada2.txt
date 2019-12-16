@@ -1,15 +1,6 @@
 // comentario 
-int a = 1;
-while ( a!= 5) {
-	
-	println("hola " + a);
-	a = a + 1;
-}
 
-a = 1;
-
-do {
-	
-	println("hola " + a);
-	a  = a+ 1;
-} while (a != 5);
+char a ;
+a = 'a';
+println(a ++);
+println(a);

@@ -9,6 +9,7 @@ import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
+import arbol.expresiones.Id;
 
 /**
  *
@@ -25,7 +26,8 @@ public class Asignacion extends Instruccion {
         this.columna = columna;
         this.linea = linea;
     }
-
+    
+    
     @Override
     public Object ejecutar(Entorno ent) {
         Simbolo sim = ent.buscar(id, linea, columna, "La variable"); //Busco la variable en la tabla de símbolos
