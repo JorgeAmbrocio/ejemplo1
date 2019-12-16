@@ -44,7 +44,7 @@ terminal umenos; //Para manejar el - E
 
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
-non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO;
+non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
@@ -101,9 +101,13 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_FOR:a  {: RESULT = a ;:}
             | SENTENCIA_DO:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_INCREMENTO:a {: RESULT = a; :}
+            | SENTENCIA_DECREMENTO:a {: RESULT = a; :}
 ;
 
 SENTENCIA_INCREMENTO ::= id:a masmas puntoycoma {: RESULT = new InsIncremento( a, aleft, aright) ; :}
+;
+
+SENTENCIA_DECREMENTO ::= id:a menosmenos puntoycoma {: RESULT = new InsDecremento( a, aleft, aright) ; :}
 ;
 
 SENTENCIA_DO ::= rdo BLOQUE:a rwhile parizquierdo E:b parderecho {: RESULT = new Do (b,a); :} 
@@ -185,6 +189,7 @@ E ::=
         | E:a modulo:b E:c {: RESULT  = new Modulo(a,c,aleft,aright);:}
         | id:a {: RESULT = new Id(a, aleft,aright); :}
         | id:a masmas {: RESULT = new ExpIncremento ( a, aleft,aright) ;:}
+        | id:a menosmenos {: RESULT = new ExpDecremento( a, aleft,aright) ;:}
         | E:a mayorque:b E:c {: RESULT = new Mayor(a,c,aleft, aright);:}
         | E:a menorque:b E:c {: RESULT = new Menor(a,c,aleft, aright);:}
         | E:a mayorigualque:b E:c {: RESULT = new MayorIgual(a,c,aleft, aright);:}
