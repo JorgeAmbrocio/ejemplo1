@@ -36,6 +36,7 @@ public class Switch extends Instruccion {
     public Object ejecutar(Entorno ent) {
         compiladores1_1.Compiladores1_1.pilaCiclos.add(Compiladores1_1.enumCiclo.Switch);
         Object retorno=null;
+        this.ejecutado = false;
         for (CondicionSwitch condicion : this.condiciones) {
             // recorre todos los casos
             
@@ -61,11 +62,11 @@ public class Switch extends Instruccion {
                             // encontró un break o un continue
                             if(retorno.getClass() == Break.class) {
                                 // retornar null
-                       
+                                retorno = null;
                                 break;
                             }else if (retorno.getClass() == Continue.class) {
                                 // si es contienue retorna el continue
-                       
+                                
                                 break;
                             }
                         }
@@ -82,7 +83,7 @@ public class Switch extends Instruccion {
                     
                     if (retorno.getClass() == Break.class) {
                         // el switch nunca retorna un break
-               
+                        retorno = null;
                         break;
                     }else if (retorno.getClass() == Continue.class) {
                         // si viene un continue, se sale del switch
@@ -109,6 +110,7 @@ public class Switch extends Instruccion {
 
                         if (retorno.getClass() == Break.class) {
                             // el switch nunca retorna un break
+                            retorno = null;
                             break;
                         }else if (retorno.getClass() == Continue.class) {
                             // si viene un continue, se sale del switch
@@ -123,10 +125,11 @@ public class Switch extends Instruccion {
 
                         if (retorno.getClass() == Break.class) {
                             // el switch nunca retorna un break
-                   
+                            retorno = null;
                             break;
                         }else if (retorno.getClass() == Continue.class) {
                             // si viene un continue, se sale del switch
+                            
                             break;
                         }
                     }

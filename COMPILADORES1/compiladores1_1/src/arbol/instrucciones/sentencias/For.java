@@ -22,10 +22,11 @@ public class For  extends Instruccion{
 
     Instruccion inicializacion;
     Expresion condicion;
-    Instruccion actualizacion;
+    //Instruccion actualizacion;
+    Expresion actualizacion;
     Bloque bloque;
 
-    public For(Instruccion inicializacion, Expresion condicion, Instruccion actualizacion, Bloque bloque) {
+    public For(Instruccion inicializacion, Expresion condicion, Expresion actualizacion, Bloque bloque) {
         this.inicializacion = inicializacion;
         this.condicion = condicion;
         this.actualizacion = actualizacion;
@@ -69,7 +70,7 @@ public class For  extends Instruccion{
                 
                 // luego de ejecutar el bloque
                 // ejecutar la actualización en el entorno de condiciones
-                this.actualizacion.ejecutar(entCondiciones);
+                this.actualizacion.getValor(entCondiciones);
                 
                 // revalidar la condicion
                 condicion_ = this.condicion.getValor(entCondiciones);

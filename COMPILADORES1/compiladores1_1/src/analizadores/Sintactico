@@ -113,7 +113,7 @@ SENTENCIA_DECREMENTO ::= id:a menosmenos puntoycoma {: RESULT = new InsDecrement
 SENTENCIA_DO ::= rdo BLOQUE:a rwhile parizquierdo E:b parderecho {: RESULT = new Do (b,a); :} 
 ;
 
-SENTENCIA_FOR ::= rfor parizquierdo ASIGNACION_DECLARACION:a puntoycoma E:b puntoycoma ASIGNACION:c parderecho BLOQUE:d {: RESULT = new For(a,b,c,d); :}
+SENTENCIA_FOR ::= rfor parizquierdo ASIGNACION_DECLARACION:a puntoycoma E:b puntoycoma E:c parderecho BLOQUE:d {: RESULT = new For(a,b,c,d); :}
 ;
 
 ASIGNACION_DECLARACION ::= ASIGNACION:a {: RESULT = a; :}
@@ -139,11 +139,11 @@ CONTINUE ::= rcontinue:a {:RESULT = new Continue(aleft, aright);:}
 SENTENCIA_WHILE ::= rwhile:z parizquierdo:x E:a parderecho:y BLOQUE:b {: RESULT = new While (a, b) ;:} // crear nueva instruccion
 ;
 
-SENTENCIA_IF ::= L_IF:a relse:b BLOQUE:c  {:RESULT = new If (a,c);:} // nuevo if con lista de condiciones con bloque de else
+SENTENCIA_IF ::= L_IF:a relse BLOQUE:c  {:RESULT = new If (a,c);:} // nuevo if con lista de condiciones con bloque de else
         | L_IF:a {: RESULT = new If (a);:} // crear un nuevo if con lista de condiciones sin bloque de else
 ;
 
-L_IF ::= L_IF:a relse:z rif:y parizquierdo:x E:b parderecho:w BLOQUE:c {: RESULT.add(new CondicionIf (b, c)); :} // crear linked list y añadir a la lista
+L_IF ::= L_IF:a relse:z rif:y parizquierdo:x E:b parderecho:w BLOQUE:c {: a.add(new CondicionIf (b, c)); RESULT = a ; :} // crear linked list y añadir a la lista
         | rif:z parizquierdo:x E:a parderecho:y BLOQUE:b {: RESULT = new LinkedList<>(); RESULT.add(new CondicionIf (a, b));:} // crear linkedlist de condiciones 
 ;
 
@@ -200,8 +200,10 @@ E ::=
         | E:a and:b E:c {: RESULT = new Y(a,c,aleft,aright);:}
         | E:a xor:b E:c {: RESULT = new Xor(a,c,aleft,aright);:}
         | not:a E:b {: RESULT =new Not(b, aleft,aright);:}
+        | parizquierdo E:a parderecho {:RESULT = a;:}
         
 ;
+
 
 
 

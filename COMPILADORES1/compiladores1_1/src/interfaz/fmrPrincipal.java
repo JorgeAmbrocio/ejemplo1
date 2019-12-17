@@ -184,6 +184,9 @@ public class fmrPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    public void setData (String a) {
+        this.txtInput.setText(this.txtInput.getText() + a);
+    }
     /**
      * @param args the command line arguments
      */

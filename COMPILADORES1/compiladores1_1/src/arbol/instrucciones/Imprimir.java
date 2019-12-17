@@ -37,6 +37,7 @@ public class Imprimir extends Instruccion{
         
         if (resultado.tipo.tipo != Tipo.EnumTipo.error) {
             System.out.print(resultado.valor + auxiliar);
+            //compiladores1_1.Compiladores1_1.fmrP.setData(resultado.valor + auxiliar);
         }
         
         return null;
