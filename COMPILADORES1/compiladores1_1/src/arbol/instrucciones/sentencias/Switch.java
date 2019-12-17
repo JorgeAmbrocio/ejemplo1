@@ -13,6 +13,7 @@ import arbol.expresiones.relacionales.Igual;
 import arbol.instrucciones.Break;
 import arbol.instrucciones.Continue;
 import compiladores1_1.Compiladores1_1;
+import interfaz.Errores;
 import java.util.LinkedList;
 
 /**
@@ -29,6 +30,7 @@ public class Switch extends Instruccion {
         this.valor = valor;
         this.condiciones = condiciones;
         this.ejecutado = false;
+        
     }
     
     
@@ -71,6 +73,9 @@ public class Switch extends Instruccion {
                             }
                         }
                     }
+                } else {
+                    System.out.println("Se esperaba valor booleano en el switch\n");
+                    Errores e = new Errores (Errores.enumTipoError.semantico , "Se esperaba valor booleano en el switch");
                 }
                 
             }else if ( this.ejecutado)  {

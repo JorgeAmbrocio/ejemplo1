@@ -14,8 +14,8 @@ import arbol.entorno.Entorno;
 import java.util.LinkedList;
 public class AST {
     
-    LinkedList<Instruccion> lista_instrucciones;
-    Entorno tablaGlobal;
+    public LinkedList<Instruccion> lista_instrucciones;
+    public Entorno tablaGlobal;
 
     public AST(LinkedList<Instruccion> lista_instrucciones) {
         this.lista_instrucciones = lista_instrucciones;

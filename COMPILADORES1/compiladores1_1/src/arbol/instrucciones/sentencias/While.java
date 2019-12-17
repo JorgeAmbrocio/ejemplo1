@@ -11,6 +11,7 @@ import arbol.entorno.Entorno;
 import arbol.entorno.Tipo;
 import arbol.instrucciones.*;
 import compiladores1_1.Compiladores1_1;
+import interfaz.Errores;
 import java.util.LinkedList;
 
 /**
@@ -21,10 +22,12 @@ public class While extends Instruccion {
 
     Bloque bloque;
     Expresion valorWhile;
-
-    public While(Expresion valorWhile , Bloque bloque) {
+    
+    public While(Expresion valorWhile , Bloque bloque, int fila, int columna) {
         this.bloque = bloque;
         this.valorWhile = valorWhile;
+        this.linea = fila;
+        this.columna  = columna;
     }
     
     @Override
@@ -61,6 +64,7 @@ public class While extends Instruccion {
             
         } else {
             System.out.println("Error sintáctico: se esperaba valro booleano");
+            Errores e = new Errores(Errores.enumTipoError.sintactico , " se esperaba valor boleano en la condicion while. Fila " + this.linea );
         }
         
         /// verificar si pooll funciona igual que el pop

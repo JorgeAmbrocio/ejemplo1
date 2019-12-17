@@ -26,9 +26,10 @@ public class Compiladores1_1 {
     public static fmrPrincipal fmrP ;
     public static ArrayList <pnlHoja> hojas;
     public static LinkedList <enumCiclo> pilaCiclos;
+    public static LinkedList <Errores> errores ;
     public static void main(String[] args) {
         
-        
+        errores  = new LinkedList();
         pilaCiclos = new LinkedList();
         hojas = new ArrayList();
         
@@ -85,7 +86,32 @@ public class Compiladores1_1 {
         }
     }
     
-    
+    public static AST obtenerArbol  (String contenido) {
+        analizadores.parser pars;
+//        Instruccion bloque;
+        AST arbol;
+        try {
+            BufferedReader bf ;
+            bf = new BufferedReader (new StringReader (contenido));
+            pars = new analizadores.parser(new analizadores.Lexico(bf));
+            pars.parse();
+            arbol = pars.AST;
+
+            if (arbol != null) { //Si no existió un error en el análisis
+                arbol.Ejecutar();
+            } else {
+                System.out.println("<----------> Existió un error en el análisis, no se pudo construir el árbol <---------->");
+            }
+            
+            return arbol; // retorna el arbol
+            
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("Error fatal en compilación de entrada.");
+        }
+        
+        return null;
+    }
     
     
     public static void InsertarHoja () {
@@ -100,6 +126,20 @@ public class Compiladores1_1 {
     
     public static boolean estoyDentro() {
         return !pilaCiclos.isEmpty();
+    
+    }
+    
+    public static String getContenidoHoja (String nombre) {
+        
+        for (pnlHoja hoja : hojas) {
+            if (hoja.nombreArchivo.equals(nombre)) {
+                // si existe una hoja con el nombre indicado,
+                // devuelve el contenido texto de la hoja
+                return hoja.txt.getText();
+            }
+        }
+        
+        return "";
     }
     
 }

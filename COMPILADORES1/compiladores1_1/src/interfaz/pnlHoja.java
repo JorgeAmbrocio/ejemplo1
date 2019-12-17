@@ -20,12 +20,12 @@ import javax.swing.JTextArea;
  */
 public class pnlHoja extends JPanel implements ActionListener {
     
-    String rutaGuardar;
-    String nombreArchivo;
-    JTextArea txt;
-    JPopupMenu menu;
-    JMenuItem itemGuardar;
-    JMenuItem itemCorrer;
+    public String rutaGuardar;
+    public String nombreArchivo;
+    public JTextArea txt;
+    public JPopupMenu menu;
+    public JMenuItem itemGuardar;
+    public JMenuItem itemCorrer;
     
     public pnlHoja () {
         this.setBounds(0,0,1000,455);
@@ -64,7 +64,20 @@ public class pnlHoja extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        compiladores1_1.Compiladores1_1.interpretar_(this.txt.getText());
+        
+        if (ae.getSource() == this.itemCorrer) {
+            compiladores1_1.Compiladores1_1.interpretar_(this.txt.getText());
+        }else if (ae.getSource() == this.itemGuardar) {
+            // guardar
+            if (this.rutaGuardar.equals("")) {
+                // si la ruta es en blanco, obtiene la ruta con la que desea guardar el archivo
+                
+            }
+            
+            // guardar en la ruta indicada
+            
+            
+        }
     }
     
     
