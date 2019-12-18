@@ -1,5 +1,6 @@
 package analizadores;
 import java_cup.runtime.Symbol; 
+import interfaz.*;
 
 
 public class Lexico implements java_cup.runtime.Scanner {
@@ -637,6 +638,7 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case 5:
 						{
     System.err.println("Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
+    Errores errrores = new Errores(Errores.enumTipoError.lexico , "Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
     //Interfaz.lista_errores.add(new CError("Léxico", "Caractér incorrecto '" + yytext() + "'", yyline, yychar));
 }
 					case -6:
@@ -992,6 +994,7 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case 94:
 						{
     System.err.println("Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
+    Errores errrores = new Errores(Errores.enumTipoError.lexico , "Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
     //Interfaz.lista_errores.add(new CError("Léxico", "Caractér incorrecto '" + yytext() + "'", yyline, yychar));
 }
 					case -94:
@@ -1015,6 +1018,7 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case 100:
 						{
     System.err.println("Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
+    Errores errrores = new Errores(Errores.enumTipoError.lexico , "Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
     //Interfaz.lista_errores.add(new CError("Léxico", "Caractér incorrecto '" + yytext() + "'", yyline, yychar));
 }
 					case -99:
@@ -1026,6 +1030,7 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case 103:
 						{
     System.err.println("Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
+    Errores errrores = new Errores(Errores.enumTipoError.lexico , "Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
     //Interfaz.lista_errores.add(new CError("Léxico", "Caractér incorrecto '" + yytext() + "'", yyline, yychar));
 }
 					case -101:
@@ -1037,6 +1042,7 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case 106:
 						{
     System.err.println("Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
+    Errores errrores = new Errores(Errores.enumTipoError.lexico , "Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
     //Interfaz.lista_errores.add(new CError("Léxico", "Caractér incorrecto '" + yytext() + "'", yyline, yychar));
 }
 					case -103:

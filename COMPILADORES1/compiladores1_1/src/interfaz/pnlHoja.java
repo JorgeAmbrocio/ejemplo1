@@ -88,13 +88,13 @@ public class pnlHoja extends JPanel implements ActionListener {
             if (this.rutaGuardar.equals("")) {
                 // si la ruta es en blanco, obtiene la ruta con la que desea guardar el archivo
                 compiladores1_1.Compiladores1_1.mensaje("Selecciona la carpeta en la que deseas guardar el archivo");
-                this.rutaGuardar = compiladores1_1.Compiladores1_1.getFolder();
+                this.rutaGuardar = compiladores1_1.Compiladores1_1.getFolder() + "\\" + this.nombreArchivo + ".NM"; 
             }
             
             // guardar en la ruta indicada
             // crear archivo 
             try {
-                FileWriter archivo = new FileWriter (this.rutaGuardar + "\\" + this.nombreArchivo + ".NM");
+                FileWriter archivo = new FileWriter (this.rutaGuardar );
                 PrintWriter pw = new PrintWriter(archivo) ;
                 pw.print(this.txt.getText());
                 pw.close();

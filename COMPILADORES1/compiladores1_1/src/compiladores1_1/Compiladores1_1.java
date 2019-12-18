@@ -34,6 +34,7 @@ public class Compiladores1_1 {
     public static LinkedList <enumCiclo> pilaCiclos;
     public static LinkedList <Errores> errores ;
     public static Entorno general;
+    public static String rutaReportes = "";
     
     public static void main(String[] args) {
         
@@ -188,7 +189,7 @@ public class Compiladores1_1 {
         return ruta ;
     }
     
-    public static String getContenidoArchivo (){
+    public static String[] getContenidoArchivo (){
         mensaje("Selecciona el archivo a leer.");
         String ruta = getArchivo ();
         
@@ -206,8 +207,8 @@ public class Compiladores1_1 {
             Errores ee = new Errores(Errores.enumTipoError.ejecucion, "No se ha podido leer el archivo " + ruta);
         }
         
-        
-        return contenido;
+        String s[] = {ruta,contenido}; 
+        return s;
     }
     
     public static void mensaje(String contenido) {
@@ -216,8 +217,52 @@ public class Compiladores1_1 {
     
     public static void abrirHoja () {
         
+        String contenido [] = getContenidoArchivo();
+        pnlHoja pnl = new pnlHoja();
+        pnl.txt.setText(contenido [1]);
+        pnl.rutaGuardar = contenido[0];
+        hojas.add(pnl);
+        fmrP.addHoja(pnl);
+        
+    }
+    
+    public static void generarErrores () {
+        
+    }
+    
+    public static void generarArbol (){
+        
+    }
+    
+    public static String getContenidoHTML () {
+        String c = "";
+        
+        c += "<html>\n";
+        c += "  <head>\n";
+        c += "      <title>\n";
+        c += "          REPORTE DE ERRORES\n";
+        c += "      </title>\n";
+        c += "  </head>\n";
+        c += "  <body>\n";
+        c += "      <h1 align=center>\n";
+        c += "          <font color=black> TABLA REPORTE DE ERRORES <br></font>\n";
+        c += "      </h1>\n";
+        c += "      <hr>\n";
+        c += "      <table align=\"center\">\n";
+        c += "          <tr>\n";
+        c += "              <th>Tipo Error</th>\n";
+        c += "              <th>Descripción de error</th>\n";
+        c += "          </tr>\n";
         
         
+        
+        
+        c += "      </table>\n";
+        c += "  </body>\n";
+        c += "</html>\n";
+        
+        
+        return c;
     }
     
 }

@@ -1,5 +1,6 @@
 package analizadores;
 import java_cup.runtime.Symbol; 
+import interfaz.*;
 
 
 %% 
@@ -19,6 +20,7 @@ import java_cup.runtime.Symbol;
  
 %{
 	String aux = "";
+        
 %}
 
 
@@ -158,6 +160,7 @@ BLANCOS=[ \r\t]+
 
 . {
     System.err.println("Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
+    Errores errrores = new Errores(Errores.enumTipoError.lexico , "Este es un error lexico: en la linea: "+yyline+", en la columna: "+yychar);
     //Interfaz.lista_errores.add(new CError("Léxico", "Caractér incorrecto '" + yytext() + "'", yyline, yychar));
     
 
