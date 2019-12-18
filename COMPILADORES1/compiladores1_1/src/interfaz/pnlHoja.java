@@ -6,6 +6,7 @@
 package interfaz;
 
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
@@ -14,6 +15,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
@@ -29,6 +31,7 @@ public class pnlHoja extends JPanel implements ActionListener {
     public JMenuItem itemGuardar;
     public JMenuItem itemGuardarComo;
     public JMenuItem itemCorrer;
+    public JScrollPane pn;
     
     public pnlHoja () {
         this.setBounds(0,0,1000,455);
@@ -53,13 +56,20 @@ public class pnlHoja extends JPanel implements ActionListener {
         this.menu.add(itemCorrer);
         this.menu.add(this.itemGuardarComo);
         
-        this.txt.setBounds(this.getBounds());
+        
+        
+        this.txt.setBounds(0,0,1000,400);
+        this.txt.setText("este es un texo");
         this.txt.setLineWrap(true);
         this.txt.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         this.txt.setComponentPopupMenu(menu);
+        this.txt.setRows(5);
+        this.pn = new JScrollPane();
+        this.pn.setBounds(this.txt.getBounds());
+        this.pn.setViewportView(this.txt);
         
-        
-        this.add(this.txt);
+        this.add(this.pn);
+        //this.add(this.txt);
         
     }
         

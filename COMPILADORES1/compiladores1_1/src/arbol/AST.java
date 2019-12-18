@@ -11,6 +11,7 @@ package arbol;
  * @author David Ventura
  */
 import arbol.entorno.Entorno;
+import arbol.instrucciones.Import;
 import java.util.LinkedList;
 public class AST {
     
@@ -23,8 +24,19 @@ public class AST {
     }
     
     public void Ejecutar () {
+        
         for (Instruccion instruccion : lista_instrucciones) {
-            instruccion.ejecutar(tablaGlobal);
+            if (instruccion.getClass() == Import.class) {
+                // ejecutar todos los imports
+                instruccion.ejecutar(tablaGlobal);
+            }
+        }
+        
+        for (Instruccion instruccion : lista_instrucciones) {
+            if (instruccion.getClass() != Import.class) {
+                // ejecutar todos los imports
+                instruccion.ejecutar(tablaGlobal);
+            }
         }
     }
     
