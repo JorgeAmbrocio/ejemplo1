@@ -35,13 +35,14 @@ public class Import extends Instruccion {
             // se debe analizar priemro esa hoja
             AST arbol =compiladores1_1.Compiladores1_1.obtenerArbol(contenidoHoja);
             this.e = arbol.tablaGlobal;
+            
         }
     }
     
     @Override
     public Object ejecutar(Entorno ent) {
         Entorno aux = ent;
-        while (aux.anterior == null) {
+        while (aux.anterior != null) {
             aux = aux.anterior;
         }
         

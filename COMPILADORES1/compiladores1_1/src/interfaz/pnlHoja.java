@@ -8,6 +8,8 @@ package interfaz;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,11 +22,12 @@ import javax.swing.JTextArea;
  */
 public class pnlHoja extends JPanel implements ActionListener {
     
-    public String rutaGuardar;
-    public String nombreArchivo;
+    public String rutaGuardar= "";
+    public String nombreArchivo="";
     public JTextArea txt;
     public JPopupMenu menu;
     public JMenuItem itemGuardar;
+    public JMenuItem itemGuardarComo;
     public JMenuItem itemCorrer;
     
     public pnlHoja () {
@@ -38,13 +41,17 @@ public class pnlHoja extends JPanel implements ActionListener {
         this.itemGuardar.addActionListener(this);
         
         this.itemCorrer = new JMenuItem();
-        this.itemCorrer.setText("Correr archivo");
+        this.itemCorrer.setText("Ejecutar");
         this.itemCorrer.addActionListener(this);
+        
+        this.itemGuardarComo = new JMenuItem();
+        this.itemGuardarComo.setText("Guardar como");
+        this.itemGuardarComo.addActionListener(this);
         
         this.menu = new JPopupMenu ();
         this.menu.add(itemGuardar);
         this.menu.add(itemCorrer);
-        
+        this.menu.add(this.itemGuardarComo);
         
         this.txt.setBounds(this.getBounds());
         this.txt.setLineWrap(true);
@@ -56,7 +63,6 @@ public class pnlHoja extends JPanel implements ActionListener {
         
     }
         
-    
     
     public void Guardar () {
         
@@ -71,10 +77,41 @@ public class pnlHoja extends JPanel implements ActionListener {
             // guardar
             if (this.rutaGuardar.equals("")) {
                 // si la ruta es en blanco, obtiene la ruta con la que desea guardar el archivo
-                
+                compiladores1_1.Compiladores1_1.mensaje("Selecciona la carpeta en la que deseas guardar el archivo");
+                this.rutaGuardar = compiladores1_1.Compiladores1_1.getFolder();
             }
             
             // guardar en la ruta indicada
+            // crear archivo 
+            try {
+                FileWriter archivo = new FileWriter (this.rutaGuardar + "\\" + this.nombreArchivo + ".NM");
+                PrintWriter pw = new PrintWriter(archivo) ;
+                pw.print(this.txt.getText());
+                pw.close();
+                archivo.close();
+            } catch (Exception e) {Errores rr = new Errores(Errores.enumTipoError.ejecucion, "No se ha podido guardar el archivo " + this.nombreArchivo);}
+            
+
+        }else if (this.itemGuardarComo == ae.getSource()) {
+            
+            // guardar
+            
+            // obtiene una nueva ruta para guardar los datos
+            compiladores1_1.Compiladores1_1.mensaje("Selecciona la carpeta en la que deseas guardar el archivo");
+            this.rutaGuardar = compiladores1_1.Compiladores1_1.getFolder();
+
+            
+            // guardar en la ruta indicada
+            // crear archivo 
+            try {
+                FileWriter archivo = new FileWriter (this.rutaGuardar + "\\" + this.nombreArchivo + ".NM");
+                PrintWriter pw = new PrintWriter(archivo) ;
+                pw.print(this.txt.getText());
+                pw.close();
+                archivo.close();
+            } catch (Exception e) {Errores rr = new Errores(Errores.enumTipoError.ejecucion, "No se ha podido guardar el archivo " + this.nombreArchivo);}
+            
+
             
             
         }

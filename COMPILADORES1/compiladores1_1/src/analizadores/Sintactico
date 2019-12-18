@@ -33,7 +33,7 @@ parser code
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
             System.err.println("Error síntactico irrecuperable en la Línea " + (s.left)+ " Columna "+s.right+". Componente " + s.value + " no reconocido."); 
     }  
-:} 
+:}
 
 terminal String mas,menos,por,division,potencia,parizquierdo,parderecho,igual,puntoycoma,llaveizq,llaveder,rint,rdouble,rchar,rboolean,rstring,rclass,coma,rvoid;
 terminal String entero,doble,rtrue,rfalse,cadena,caracter,id,rprintln,rprint,rprinttabla;
@@ -102,7 +102,7 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_DO:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_INCREMENTO:a {: RESULT = a; :}
             | SENTENCIA_DECREMENTO:a {: RESULT = a; :}
-            | SENTENCIA_IMPORT:a {: RESULT = a ;:}
+            | SENTENCIA_IMPORT:a puntoycoma {: RESULT = a ;:}
 ;
 
 SENTENCIA_IMPORT ::= rimport id:a {: RESULT = new Import (a , aleft , aright); :}
@@ -147,8 +147,8 @@ SENTENCIA_IF ::= L_IF:a relse BLOQUE:c  {:RESULT = new If (a,c);:} // nuevo if c
         | L_IF:a {: RESULT = new If (a);:} // crear un nuevo if con lista de condiciones sin bloque de else
 ;
 
-L_IF ::= L_IF:a relse:z rif:y parizquierdo:x E:b parderecho:w BLOQUE:c {: a.add(new CondicionIf (b, c)); RESULT = a ; :} // crear linked list y añadir a la lista
-        | rif:z parizquierdo:x E:a parderecho:y BLOQUE:b {: RESULT = new LinkedList<>(); RESULT.add(new CondicionIf (a, b));:} // crear linkedlist de condiciones 
+L_IF ::= L_IF:a relse:z rif:y parizquierdo:x E:b parderecho:w BLOQUE:c {: a.add(new CondicionIf (b, c, bleft, bright)); RESULT = a ; :} // crear linked list y añadir a la lista
+        | rif:z parizquierdo:x E:a parderecho:y BLOQUE:b {: RESULT = new LinkedList<>(); RESULT.add(new CondicionIf (a, b, aleft , aright));:} // crear linkedlist de condiciones 
 ;
 
 BLOQUE ::= llaveizq:z llaveder:y     {: RESULT = new Bloque(); :}

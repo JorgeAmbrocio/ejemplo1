@@ -6,12 +6,18 @@
 package compiladores1_1;
 
 import arbol.AST;
+import arbol.entorno.Entorno;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.StringReader;
 import interfaz.*;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java_cup.runtime.Scanner;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,15 +33,18 @@ public class Compiladores1_1 {
     public static ArrayList <pnlHoja> hojas;
     public static LinkedList <enumCiclo> pilaCiclos;
     public static LinkedList <Errores> errores ;
+    public static Entorno general;
+    
     public static void main(String[] args) {
         
         errores  = new LinkedList();
         pilaCiclos = new LinkedList();
         hojas = new ArrayList();
         
-        interpretar("Entradas/entrada2.txt");
-        //fmrP =new fmrPrincipal();
-        //fmrP.show();
+        
+        //interpretar("Entradas/entrada2.txt");
+        fmrP =new fmrPrincipal();
+        fmrP.show();
     }
 
     public static void interpretar(String path) {
@@ -48,6 +57,7 @@ public class Compiladores1_1 {
             pars = new analizadores.parser(new analizadores.Lexico(new FileInputStream(path)));
             pars.parse();
             arbol = pars.AST;
+            
 
             if (arbol != null) { //Si no existió un error en el análisis
                 arbol.Ejecutar();
@@ -140,6 +150,74 @@ public class Compiladores1_1 {
         }
         
         return "";
+    }
+    
+    public static String getFolder () {
+        String ruta = "";
+        
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(1);
+        int seleccion = fc.showOpenDialog(null);
+        
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            FileReader fr;
+            ruta = fc.getSelectedFile().getAbsolutePath();
+        }else {
+            // hubo error
+            Errores e = new Errores(Errores.enumTipoError.ejecucion, "No se pudo obtener la ruta para guardar los archivos.");
+        }
+        
+        
+        return ruta;
+    }
+    
+    public static String getArchivo () {
+        String ruta = "";
+        
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(0);
+        int seleccion = fc.showOpenDialog(null);
+        
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            FileReader fr;
+            ruta = fc.getSelectedFile().getAbsolutePath();
+        }else {
+            // hubo error
+            Errores e = new Errores(Errores.enumTipoError.ejecucion, "No se pudo obtener la ruta del archivo.");
+        }
+        return ruta ;
+    }
+    
+    public static String getContenidoArchivo (){
+        mensaje("Selecciona el archivo a leer.");
+        String ruta = getArchivo ();
+        
+        String contenido ="";
+        try {
+            File archivo = new File (ruta);
+            FileReader reader = new FileReader(archivo);
+            BufferedReader bf = new BufferedReader(reader);
+            String linea;
+            while ((linea = bf.readLine()) !=  null){
+                contenido += linea + "\n";
+            }
+            
+        } catch (Exception e) {
+            Errores ee = new Errores(Errores.enumTipoError.ejecucion, "No se ha podido leer el archivo " + ruta);
+        }
+        
+        
+        return contenido;
+    }
+    
+    public static void mensaje(String contenido) {
+        JOptionPane.showMessageDialog(null, contenido);
+    }
+    
+    public static void abrirHoja () {
+        
+        
+        
     }
     
 }

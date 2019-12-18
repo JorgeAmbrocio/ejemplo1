@@ -11,6 +11,7 @@ import arbol.entorno.Entorno;
 import static arbol.entorno.Tipo.EnumTipo.booleano;
 import arbol.instrucciones.Break;
 import arbol.instrucciones.Continue;
+import interfaz.Errores;
 
 /**
  *
@@ -22,9 +23,11 @@ public class CondicionIf extends Instruccion  {
     Bloque bloque;
     boolean ejecutado;
     
-    public CondicionIf(Expresion condicion, Bloque bloque) {
+    public CondicionIf(Expresion condicion, Bloque bloque, int linea, int columna) {
         this.condicion = condicion;
         this.bloque = bloque;
+        this.linea = linea;
+        this.columna  = columna;
     }
     
     
@@ -43,7 +46,9 @@ public class CondicionIf extends Instruccion  {
                 Object retorno = this.bloque.ejecutar(nuevo);
                 return retorno;
             }   
-        }    
+        }else {
+            Errores e = new Errores(Errores.enumTipoError.sintactico , "Se esperaba expresión booleana en la condición del if.") ;
+        } 
         return null;
     }
     
