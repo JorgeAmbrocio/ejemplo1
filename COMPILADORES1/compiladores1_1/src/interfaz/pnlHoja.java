@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 /**
  *
@@ -57,7 +59,26 @@ public class pnlHoja extends JPanel implements ActionListener {
         this.menu.add(this.itemGuardarComo);
         
         
-        
+        this.txt.addCaretListener(new CaretListener () {
+            @Override
+            public void caretUpdate(CaretEvent ce) {
+                JTextArea tx = (JTextArea) ce.getSource();
+                int linea = 1;
+                int columna = 1;
+                
+                try {
+                    int caretpos = tx.getCaretPosition();
+                    linea = tx.getLineOfOffset(caretpos);
+                    columna = caretpos - tx.getLineStartOffset(linea);
+                    linea ++;
+                    
+                    compiladores1_1.Compiladores1_1.fmrP.setCursor(linea, columna);
+                } catch (Exception e) {
+                    
+                }
+                
+            }
+        } );
         this.txt.setBounds(0,0,1000,400);
         this.txt.setText("este es un texo");
         this.txt.setLineWrap(true);
