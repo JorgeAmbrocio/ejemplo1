@@ -9,6 +9,7 @@ import arbol.Expresion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Tipo;
 import arbol.expresiones.Literal;
+import interfaz.Errores;
 
 /**
  *
@@ -45,6 +46,8 @@ public class Y extends Expresion{
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), resultado.toString());
                 }
         }
+        Errores errr = new Errores(Errores.enumTipoError.semantico , "No se pueden ejecutar Y con los tipos " + e1.tipo.tipo.toString() + "-" + e2.tipo.tipo.toString() + " Linea " + this.linea + "Columan " +  this.columna);
+        
         return new Literal(new Tipo(Tipo.EnumTipo.error) , "@Error@");
     }
     

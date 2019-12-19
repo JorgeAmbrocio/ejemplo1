@@ -10,6 +10,7 @@ import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.entorno.Tipo;
 import arbol.expresiones.Literal;
+import interfaz.Errores;
 
 /**
  *
@@ -53,6 +54,8 @@ public class InsDecremento extends Instruccion {
         }
         
         System.out.println("error");
+        Errores errr = new Errores(Errores.enumTipoError.semantico , "Error Semántico: " + "no se puede realizar decremento al tipo " + e.tipo.tipo.toString() + ". Línea: " + linea + " Columna: " + columna);
+        
         return null;
     }
 }

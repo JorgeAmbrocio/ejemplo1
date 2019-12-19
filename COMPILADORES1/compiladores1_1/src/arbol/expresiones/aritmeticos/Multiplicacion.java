@@ -77,7 +77,7 @@ public class Multiplicacion extends Expresion {
                 break;
             
         }
-        Errores errr = new Errores(Errores.enumTipoError.semantico , "No se pueden ejecutar la multiplicación con los tipos " + e1.tipo.tipo.toString() + "/" + e2.tipo.tipo.toString() + " Linea " + this.linea + " Columna " +  this.columna);
+        Errores errr = new Errores(Errores.enumTipoError.semantico , "No se pueden ejecutar la multiplicación con los tipos " + e1.tipo.tipo.toString() + "-" + e2.tipo.tipo.toString() + " Linea " + this.linea + " Columna " +  this.columna);
         return new Literal (new Tipo(Tipo.EnumTipo.error ) , "@Error@");
     }
     

@@ -10,6 +10,7 @@ import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.entorno.Tipo;
+import interfaz.Errores;
 
 /**
  *
@@ -101,6 +102,8 @@ public class Declaracion extends Instruccion {
             //Si llega aquí es porque hubo error de tipos
 //            proyecto1.Interfaz.lista_errores.add(new CError("Semántico", "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + " = " + resultado.tipo.tipo, linea, columna));
             System.out.println("Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + " = " + resultado.tipo.tipo + ". Línea: " + linea + " Columna: " + columna);
+            Errores errr = new Errores(Errores.enumTipoError.semantico , "Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + " = " + resultado.tipo.tipo + ". Línea: " + linea + " Columna: " + columna);
+        
         } else { //Si no se le asignó valor a la variable le pongo uno por defecto
             switch (tipo.tipo) {
                 case entero:

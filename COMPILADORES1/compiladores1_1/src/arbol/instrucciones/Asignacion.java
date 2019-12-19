@@ -10,6 +10,7 @@ import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.expresiones.Id;
+import interfaz.Errores;
 
 /**
  *
@@ -85,7 +86,8 @@ public class Asignacion extends Instruccion {
 
             //Si llega aquí el tipo de dato que se le quiere asignar a la variable es incorrecto
             System.out.println("El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + sim.tipo.tipo + " = " + resultado.tipo.tipo + ". Línea: " + linea + " Columna: " + columna);
-
+            Errores errr = new Errores(Errores.enumTipoError.semantico , "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + sim.tipo.tipo + " = " + resultado.tipo.tipo + ". Línea: " + linea + " Columna: " + columna);
+        
         } //Si la variable NO existe ya se marcó el error
         return null;
     }

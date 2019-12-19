@@ -150,7 +150,7 @@ public class Suma extends Expresion {
         }
         
         
-        Errores errr = new Errores(Errores.enumTipoError.semantico , "No se pueden ejecutar la suma con los tipos " + s1.tipo.tipo.toString() + "/" + s2.tipo.tipo.toString() + " Linea " + this.linea + " Columna " +  this.columna);
+        Errores errr = new Errores(Errores.enumTipoError.semantico , "No se pueden ejecutar la suma con los tipos " + s1.tipo.tipo.toString() + "-" + s2.tipo.tipo.toString() + " Linea " + this.linea + " Columna " +  this.columna);
         return new Literal ( new Tipo (Tipo.EnumTipo.error) , "@Error@") ;
     }
     
