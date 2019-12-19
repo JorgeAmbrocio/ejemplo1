@@ -112,6 +112,11 @@ public class fmrPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem7);
 
         jMenuItem8.setText("Reporte de errores");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
@@ -184,6 +189,11 @@ public class fmrPrincipal extends javax.swing.JFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        compiladores1_1.Compiladores1_1.generarErrores();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     public void setData (String a) {
         this.txtInput.setText(this.txtInput.getText() + a);

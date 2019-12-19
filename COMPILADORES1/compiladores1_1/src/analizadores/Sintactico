@@ -10,6 +10,7 @@ import arbol.expresiones.logicas.*;
 import arbol.instrucciones.*;
 import arbol.instrucciones.sentencias.*;
 import arbol.entorno.*;
+import interfaz.*;
 
 
 parser code 

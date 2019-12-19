@@ -15,6 +15,7 @@ import arbol.expresiones.logicas.*;
 import arbol.instrucciones.*;
 import arbol.instrucciones.sentencias.*;
 import arbol.entorno.*;
+import interfaz.*;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -531,8 +532,8 @@ public class parser extends java_cup.runtime.lr_parser {
      **/ 
     public void syntax_error(Symbol s){ 
             System.err.println("Error Sintáctico en la Línea " + (s.left) +" Columna "+s.right+ ". No se esperaba este componente: " +s.value+".");
-
-            //Interfaz.lista_errores.add(new CError("Sintáctico", "No se esperaba este componente '" + s.value + "'", s.left, s.right));
+            Errores errrores = new Errores(Errores.enumTipoError.sintactico , "No se esperaba este componente ' en la línea" +s.left+", en la columna: "+s.right);
+    //Interfaz.lista_errores.add(new CError("Sintáctico", "No se esperaba este componente '" + s.value + "'", s.left, s.right));
     
     } 
     /**

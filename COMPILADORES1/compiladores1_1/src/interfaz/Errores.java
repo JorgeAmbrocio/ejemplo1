@@ -13,9 +13,9 @@ import java.util.LinkedList;
  */
 public class Errores {
     
-    enumTipoError error;
-    String strError;
-    String descripcion;
+    public enumTipoError error;
+    public String strError;
+    public String descripcion;
 
     public Errores(enumTipoError error, String descripcion) {
         this.error = error;

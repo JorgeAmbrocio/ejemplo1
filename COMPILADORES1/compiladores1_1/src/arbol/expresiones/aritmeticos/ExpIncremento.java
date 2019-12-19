@@ -12,6 +12,7 @@ import arbol.entorno.Tipo;
 import arbol.expresiones.Id;
 import arbol.expresiones.Literal;
 import arbol.instrucciones.Asignacion;
+import interfaz.Errores;
 
 /**
  *
@@ -60,6 +61,8 @@ public class ExpIncremento extends Expresion {
         
         if (retorno == null) {
             System.out.println("Error");
+            Errores errr = new Errores(Errores.enumTipoError.semantico , "No se pueden ejecutar el incremento con los tipos " + e.tipo.tipo.toString()  + " Linea " + this.linea + " Columna " +  this.columna);
+        
         }
         
         return retorno;

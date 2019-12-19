@@ -13,6 +13,8 @@ import java.io.StringReader;
 import interfaz.*;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java_cup.runtime.Scanner;
@@ -50,7 +52,7 @@ public class Compiladores1_1 {
 
     public static void interpretar(String path) {
         
-        
+        errores.clear();
         analizadores.parser pars;
 //        Instruccion bloque;
         AST arbol;
@@ -74,6 +76,7 @@ public class Compiladores1_1 {
     
     public static void interpretar_(String contenido) {
         
+        errores.clear();
         
         analizadores.parser pars;
 //        Instruccion bloque;
@@ -123,7 +126,6 @@ public class Compiladores1_1 {
         
         return null;
     }
-    
     
     public static void InsertarHoja () {
         pnlHoja pnl = new pnlHoja ();
@@ -227,10 +229,29 @@ public class Compiladores1_1 {
     }
     
     public static void generarErrores () {
+        String contenido = getContenidoHTML();
         
+        if (rutaReportes.equals("")) {
+            // buscar nueva ruta
+            rutaReportes = getFolder();
+        }
+        
+        try {
+            FileWriter f =new FileWriter (rutaReportes + "\\ReporteErrores.html");
+            PrintWriter pw = new PrintWriter (f);
+            pw.print(contenido);
+            
+            pw.close();
+            f.close();
+            
+        } catch(Exception e) {
+            Errores errr = new Errores(Errores.enumTipoError.ejecucion, "No se ha podido generar el reporte de errores");
+        }
     }
     
     public static void generarArbol (){
+        
+        
         
     }
     
@@ -254,8 +275,12 @@ public class Compiladores1_1 {
         c += "              <th>Descripción de error</th>\n";
         c += "          </tr>\n";
         
-        
-        
+        for (Errores error : errores) {
+            c += "          <tr>\n";
+            c += "              <th>" + error.strError + "</th>\n";
+            c += "              <th>" + error.descripcion + "</th>\n";
+            c += "          </tr>\n";
+        }
         
         c += "      </table>\n";
         c += "  </body>\n";

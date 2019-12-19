@@ -9,6 +9,7 @@ import arbol.Expresion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Tipo;
 import arbol.expresiones.Literal;
+import interfaz.Errores;
 
 /**
  *
@@ -78,7 +79,7 @@ public class Resta extends Expresion {
         }
         
         
-        
+        Errores errr = new Errores(Errores.enumTipoError.semantico , "No se pueden ejecutar la división con los tipos " + ei.tipo.tipo.toString() + "/" + ed.tipo.tipo.toString() + " Linea " + this.linea + " Columna " +  this.columna);
         return new Literal (new Tipo(Tipo.EnumTipo.error ) , "@Error@");
     }
     
