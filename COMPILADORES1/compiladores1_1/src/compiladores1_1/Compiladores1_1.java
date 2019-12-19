@@ -250,7 +250,27 @@ public class Compiladores1_1 {
     }
     
     public static void generarArbol (){
+        String contenido = getContenidoAST();
         
+        if (rutaReportes.equals("")) {
+            // buscar nueva ruta
+            rutaReportes = getFolder();
+        }
+        
+        try {
+            FileWriter f =new FileWriter (rutaReportes + "\\ReporteAST.dot");
+            PrintWriter pw = new PrintWriter (f);
+            pw.print(contenido);
+            
+            pw.close();
+            f.close();
+            
+            String comando = "dot " + rutaReportes + "ReporteAST.dot -o " + rutaReportes + "ReporteAST.png -Tpng";
+            Runtime.getRuntime().exec(comando);
+            
+        } catch(Exception e) {
+            Errores errr = new Errores(Errores.enumTipoError.ejecucion, "No se ha podido generar el reporte de errores");
+        }
         
         
     }
@@ -289,5 +309,24 @@ public class Compiladores1_1 {
         
         return c;
     }
+    
+    public static String getContenidoAST () {
+        String c = "";
+        
+        c += "digraph G {\n";
+        c += "  node[shape = record];\n";
+        c += "  \n";
+        c += "  \n";
+        c += "  \n";
+        c += "  \n";
+        c += "  \n";
+        c += "  \n";
+        c += "  \n";
+        c += "\n}";
+        
+        
+        return c;
+    }
+    
     
 }

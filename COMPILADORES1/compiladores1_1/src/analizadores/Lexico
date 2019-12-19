@@ -30,7 +30,7 @@ import interfaz.*;
 id=([A-ZÑa-zñ]["_"0-9A-ZÑa-zñ]*)|(["_"]+[0-9A-ZÑa-zñ]["_"0-9A-ZÑa-zñ]*)
 
 entero= "-"?[0-9]+
-doble=[0-9]+"."[0-9]+
+doble= "-"?[0-9]+"."[0-9]+
 caracter='.'
 comentario_linea=("//".*\r\n)|("//".*\n)|("//".*\r)
 BLANCOS=[ \r\t]+

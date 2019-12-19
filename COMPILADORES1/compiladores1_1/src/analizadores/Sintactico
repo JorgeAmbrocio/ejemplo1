@@ -206,6 +206,7 @@ E ::=
         | E:a xor:b E:c {: RESULT = new Xor(a,c,aleft,aright);:}
         | not:a E:b {: RESULT =new Not(b, aleft,aright);:}
         | parizquierdo E:a parderecho {:RESULT = a;:}
+        //| menos E:a {:RESULT = a :}
         
 ;
 
