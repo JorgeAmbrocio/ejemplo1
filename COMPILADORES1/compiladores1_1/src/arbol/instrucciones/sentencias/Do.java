@@ -38,7 +38,7 @@ public class Do extends Instruccion {
             
             boolean condicion = Boolean.parseBoolean(valorWhile_.valor.toString());
             
-            while (condicion) {
+            do {
                 Entorno entornoWhile = new Entorno (ent);
                 Object retorno = bloque.ejecutar(entornoWhile);
                 
@@ -57,7 +57,7 @@ public class Do extends Instruccion {
                 
                 valorWhile_  = this.valorWhile.getValor(ent);
                 condicion = Boolean.parseBoolean(valorWhile_.valor.toString());
-            }
+            } while (condicion);
             
         } else {
             System.out.println("Error sintáctico: se esperaba valro booleano");

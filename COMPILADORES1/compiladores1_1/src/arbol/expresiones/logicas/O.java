@@ -41,6 +41,11 @@ public class O extends Expresion {
         
         switch (e1.tipo.tipo) {
             case booleano:
+                Boolean resultado1 = Boolean.parseBoolean(str1);
+                if (resultado1) {
+                    // si el lado izquierdo es verdadero, no analizamos el resto
+                    return new Literal (new Tipo (Tipo.EnumTipo.booleano), resultado1.toString());
+                }
                 switch (e2.tipo.tipo) {
                     case booleano:
                         resultado = Boolean.parseBoolean(str1) || Boolean.parseBoolean(str2);

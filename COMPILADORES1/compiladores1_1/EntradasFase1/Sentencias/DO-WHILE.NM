@@ -12,10 +12,10 @@
 
 			do{
 
-				//do{
+				do{
 					print("%");
 					j++;
-				//}while(100 != 100);
+				}while(100 != 100);
 				
 			}while(j < asteriscos);
 

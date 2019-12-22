@@ -49,6 +49,18 @@ BLANCOS=[ \r\t]+
 
 <YYINITIAL> "\"" {yybegin(ESTADO_CADENA); aux = ""; }
 <ESTADO_CADENA> "\"" {yybegin(YYINITIAL); return new Symbol(sym.cadena,yyline,yychar,aux);}
+<ESTADO_CADENA> "\'" {aux = aux + "\'"; }
+<ESTADO_CADENA> "\\"" {aux = aux + "\""; }
+<ESTADO_CADENA> "\?" {aux = aux + "?"; }
+<ESTADO_CADENA> "\n" {aux = aux + "\n"; }
+<ESTADO_CADENA> \\\\ {aux = aux + "\\"; }
+<ESTADO_CADENA> "\0" {aux = aux + '\0'; }
+
+<ESTADO_CADENA> "\b" {aux = aux + '\b'; }
+<ESTADO_CADENA> "\f" {aux = aux + '\f'; }
+<ESTADO_CADENA> "\r" {aux = aux + '\r'; }
+<ESTADO_CADENA> "\t" {aux = aux + '\t'; }
+
 <ESTADO_CADENA> . {aux = aux + yytext(); }
 
 

@@ -44,7 +44,6 @@ public class Compiladores1_1 {
         pilaCiclos = new LinkedList();
         hojas = new ArrayList();
         
-        
         //interpretar("Entradas/entrada2.txt");
         fmrP =new fmrPrincipal();
         fmrP.show();

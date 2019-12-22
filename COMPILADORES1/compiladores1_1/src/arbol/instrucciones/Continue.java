@@ -7,6 +7,7 @@ package arbol.instrucciones;
 
 import arbol.Instruccion;
 import arbol.entorno.Entorno;
+import interfaz.Errores;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Continue extends Instruccion {
             return this;
         }else {
             System.out.println("Se esperaba continue dentro de un ciclo o switch");
+            Errores ee = new Errores(Errores.enumTipoError.semantico  , "Se esperaba continue dentro de un ciclo o switch. Línea " + this.linea + " Columna " + this.columna);
         }
         
         return null;
