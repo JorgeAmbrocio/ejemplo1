@@ -127,6 +127,34 @@ public class Compiladores1_1 {
         return null;
     }
     
+    
+    public static AST obtenerArbol_  (String ruta) {
+        analizadores.parser pars;
+//        Instruccion bloque;
+        AST arbol;
+        try {
+            
+            pars = new analizadores.parser(new analizadores.Lexico(new FileInputStream(ruta)));
+            pars.parse();
+            arbol = pars.AST;
+
+            if (arbol != null) { //Si no existió un error en el análisis
+                arbol.Ejecutar();
+            } else {
+                System.out.println("<----------> Existió un error en el análisis, no se pudo construir el árbol <---------->");
+            }
+            
+            return arbol; // retorna el arbol
+            
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("Error fatal en compilación de entrada.");
+        }
+        
+        return null;
+    }
+    
+    
     public static void InsertarHoja () {
         pnlHoja pnl = new pnlHoja ();
         hojas.add(pnl);

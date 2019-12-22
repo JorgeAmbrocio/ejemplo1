@@ -24,19 +24,8 @@ public class Import extends Instruccion {
         this.columna = columna;
         
         // verificar si el nombre del archivo existe
-        String contenidoHoja = compiladores1_1.Compiladores1_1.getContenidoHoja(archivo);
-        
-        if (contenidoHoja.equals("")) {
-            // si el contenido de lahoja es vacío, lo indica como errror
-            System.out.println("No se ha encontrado el contenido de la hoja a importar\n");
-            Errores e = new Errores(Errores.enumTipoError.ejecucion , "No se ha encontrado el contenido de la hoja a importar " + this.archivo);
-        }else {
-            // en caso de que exista la hoja que contiene el import
-            // se debe analizar priemro esa hoja
-            AST arbol =compiladores1_1.Compiladores1_1.obtenerArbol(contenidoHoja);
-            this.e = arbol.tablaGlobal;
-            
-        }
+        AST arbol =compiladores1_1.Compiladores1_1.obtenerArbol_(this.archivo);
+        this.e = arbol.tablaGlobal;
     }
     
     @Override

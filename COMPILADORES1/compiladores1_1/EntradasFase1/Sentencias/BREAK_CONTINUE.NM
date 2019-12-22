@@ -1,0 +1,79 @@
+
+		println("/********** SENTENCIA BREAKCONTINUE **********/");
+		
+		int i = 0;
+
+		while(true){
+
+			if(i <= 100){
+				if(i >= 50 && i < 53){
+					if(false){
+
+					}else{
+						println(i);
+						i++;
+						continue;
+					}
+				}
+			}else if(i <= 200){
+
+				if(i >= 150 && i < 153){
+					if(false){
+
+					}else{
+						println(i);
+						i++;
+						continue;
+					}
+				}
+
+			}else if(i <= 300){
+				if(i >= 250 && i < 253){
+					if(false){
+
+					}else{
+						println(i);
+						i++;
+						continue;
+					}
+				}
+			}else if(i <= 400){
+				if(i >= 350 && i < 353){
+					if(false){
+
+					}else{
+						println(i);
+						i++;
+						continue;
+					}
+				}
+			}else if(i <= 500){
+				if(i >= 450 && i < 453){
+					if(false){
+
+					}else{
+						println(i);
+						i++;
+						continue;
+					}
+				}
+			}else{
+				if(true){
+					if(false){
+
+					}else{
+						if(i == 550){
+							break; //Me salgo del ciclo
+						}
+					}
+				}
+			}
+
+			i++;
+
+		}
+		
+
+		print("***********************************************");
+		print("\n\n");
+

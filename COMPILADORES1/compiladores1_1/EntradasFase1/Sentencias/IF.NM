@@ -1,0 +1,52 @@
+
+		println("/********** SENTENCIA IF **********/");
+		int x = 200;
+		int y = -40;
+		char operador;
+
+		if(x == y){
+			operador = '=';
+			println(x + " " + operador + " " + y);
+		}else if(x > y){
+			operador = '>';
+			println(x + " " + operador + " " + y);
+		}else if(x > y){
+			println("------> 3 puntos menos");
+		}else{
+			operador = '<';
+			println(x + " " + operador + " " + y);
+		}
+
+		x = 15;
+		y = x;
+		if(x == y){
+			operador = '=';
+			println(x + " " + operador + " " + y);
+		}else if(x > y){
+			operador = '>';
+			println(x + " " + operador + " " + y);
+		}else if(x > y){
+			println("------> 3 puntos menos");
+		}else{
+			operador = '<';
+			println(x + " " + operador + " " + y);
+		}
+
+		x = 15;
+		y = x + 1;
+		if(x == y){
+			operador = '=';
+			println(x + " " + operador + " " + y);
+		}else if(x > y){
+			operador = '>';
+			println(x + " " + operador + " " + y);
+		}else if(x > y){
+			println("------> 3 puntos menos");
+		}else{
+			operador = '<';
+			println(x + " " + operador + " " + y);
+		}
+
+		print("**************************************");
+		print("\n\n");
+

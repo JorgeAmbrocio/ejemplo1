@@ -1,0 +1,71 @@
+
+		println("/********** SENTENCIA SWITCH **********/");
+		
+		String control = "compi1";
+
+		switch(control){
+
+			case "Compi1":
+				println("2 puntos menos");
+				break;
+			case "compi2":
+				println("2 puntos menos");
+				break;
+			case "arqui1":
+				println("2 puntos menos");
+				break;
+			case "compi1":
+				println("Correcto 1");
+				break;
+			case "estructuras":
+				println("2 puntos menos");
+				break;
+		}
+
+
+		switch(control){
+
+			case "Compi1":
+				println("2 puntos menos");
+				break;
+			case "compi2":
+				println("2 puntos menos");
+				break;
+			case "compi1":
+				println("Correcto 2.0");
+			default:
+				println("Correcto 2.1");
+			case "arqui1":
+				println("Correcto 2.2");
+			case "estructuras":
+				println("Correcto 2.3");
+
+		}
+
+		control = "COMPI1";
+		switch(control){
+
+			case "Compi1":
+				println("2 puntos menos");
+				break;
+			case "compi2":
+				println("2 puntos menos");
+				break;
+			default:
+				println("Correcto 3.0");
+			case "compi1":
+				println("Correcto 3.1");
+				break;
+			default:
+				println("2 puntos menos");
+			case "arqui1":
+				println("2 puntos menos");
+			case "estructuras":
+				println("2 puntos menos");
+
+		}
+
+
+		print("******************************************");
+		print("\n\n");
+

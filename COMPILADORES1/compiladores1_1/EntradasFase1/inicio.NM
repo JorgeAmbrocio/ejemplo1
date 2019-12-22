@@ -1,0 +1,32 @@
+/*******************************************
+*	Desde este archivo se va a ejecutar todo
+********************************************/
+
+//Llamo al archivo de las expresiones
+import "EntradasFase1/Expresiones/expresiones.NM";
+
+
+//Llamo al archivo de las sentencias
+import "EntradasFase1/Sentencias/IF.NM";
+import "EntradasFase1/Sentencias/SWITCH.NM";
+import "EntradasFase1/Sentencias/FOR.NM";
+import "EntradasFase1/Sentencias/WHILE.NM";
+import "EntradasFase1/Sentencias/DO-WHILE.NM";
+import "EntradasFase1/Sentencias/BREAK_CONTINUE.NM";
+import "EntradasFase1/Sentencias/CONJUNTAS.NM";
+
+//Llamo al archivo de los errores
+//import "EntradasFase1/Errores/errores.NM";
+
+
+
+		EXPRESIONES EXPRESIONES = new EXPRESIONES();
+		IF IF = new IF();
+		SWITCH SWITCH = new SWITCH();
+		FOR FOR = new FOR();
+		WHILE WHILE = new WHILE();
+		DOWHILE DOWHILE = new DOWHILE();
+		BREAKCONTINUE BREAKCONTINUE = new BREAKCONTINUE();
+		CONJUNTAS CONJUNTAS = new CONJUNTAS();
+
+

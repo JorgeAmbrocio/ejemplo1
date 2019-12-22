@@ -1,0 +1,60 @@
+
+		Println(("hola" / 100) + (true + 1) + ('a' + false || true));
+		Println((100 + 4 * 4) / 0);
+
+		Println("hola" < 100);
+
+		Println(-501 && "Compi1");
+
+		boolean error1 = "Commpi" + "1" + 100;
+		String error2 = 'N';
+
+		if(false){
+
+		}else if("compi1"){}
+
+		switch(true){
+			case "Compi1":
+				break;
+		}
+
+		for(char i = '1'; 100; i = i + 1){}
+
+		while(5+45+4){}
+
+		do{
+
+		}while('M');
+
+		if(true){
+			while(true){
+				if(true){
+					if(true){
+						while(true){
+							break;
+						}
+					}
+				}
+				break;
+			}
+			continue;//Error continue
+		}
+
+
+		if(true){
+			if(false){
+
+			}else if(true){
+				switch("Compi1"){
+					case "Compi1":
+						Print("");
+					default :
+						Print("");
+				}
+			}
+			break; //Error break
+		}
+		
+
+
+	

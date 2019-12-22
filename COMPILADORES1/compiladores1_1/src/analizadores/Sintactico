@@ -24,7 +24,7 @@ parser code
      **/ 
     public void syntax_error(Symbol s){ 
             System.err.println("Error Sintáctico en la Línea " + (s.left) +" Columna "+s.right+ ". No se esperaba este componente: " +s.value+".");
-            Errores errrores = new Errores(Errores.enumTipoError.sintactico , "No se esperaba este componente ' en la línea" +s.left+", en la columna: "+s.right);
+            Errores errrores = new Errores(Errores.enumTipoError.sintactico , "Error Sintáctico en la Línea " + (s.left) +" Columna "+s.right+ ". No se esperaba este componente: " +s.value+".");
     //Interfaz.lista_errores.add(new CError("Sintáctico", "No se esperaba este componente '" + s.value + "'", s.left, s.right));
     
     } 
@@ -106,7 +106,7 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_IMPORT:a puntoycoma {: RESULT = a ;:}
 ;
 
-SENTENCIA_IMPORT ::= rimport id:a {: RESULT = new Import (a , aleft , aright); :}
+SENTENCIA_IMPORT ::= rimport cadena:a {: RESULT = new Import (a , aleft , aright); :}
 ;
 
 SENTENCIA_INCREMENTO ::= id:a masmas puntoycoma {: RESULT = new InsIncremento( a, aleft, aright) ; :}
@@ -205,8 +205,8 @@ E ::=
         | E:a and:b E:c {: RESULT = new Y(a,c,aleft,aright);:}
         | E:a xor:b E:c {: RESULT = new Xor(a,c,aleft,aright);:}
         | not:a E:b {: RESULT =new Not(b, aleft,aright);:}
+        | menos E:a {:RESULT = new Negativo (a, aleft, aright); :}
         | parizquierdo E:a parderecho {:RESULT = a;:}
-        //| menos E:a {:RESULT = a :}
         
 ;
 

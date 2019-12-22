@@ -1,0 +1,28 @@
+
+		println("/********** SENTENCIA DOWHILE **********/");
+		
+
+		int i = 0;
+		int asteriscos = 10;
+
+		do{
+			print(i + 1 + ") ");
+			int j;
+			j = i;
+
+			do{
+
+				//do{
+					print("%");
+					j++;
+				//}while(100 != 100);
+				
+			}while(j < asteriscos);
+
+			println("");
+			i++;
+		}while(i < asteriscos);
+
+		print("*******************************************");
+		print("\n\n");
+
