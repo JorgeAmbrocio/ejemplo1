@@ -107,6 +107,7 @@ BLANCOS=[ \r\t]+
 <YYINITIAL> "boolean" {return new Symbol(sym.rboolean,yyline,yychar, yytext());}
 <YYINITIAL> "String" {return new Symbol(sym.rstring,yyline,yychar, yytext());}
 
+
 <YYINITIAL> "class" {return new Symbol(sym.rclass,yyline,yychar, yytext());}
 <YYINITIAL> "extends" {return new Symbol(sym.rextends,yyline,yychar, yytext());}
 <YYINITIAL> "void" {return new Symbol(sym.rvoid,yyline,yychar, yytext());}

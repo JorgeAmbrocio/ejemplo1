@@ -45,11 +45,12 @@ terminal umenos; //Para manejar el - E
 
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
-non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO, SENTENCIA_IMPORT;
+non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO, SENTENCIA_IMPORT, FUNCION, METODO;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
 non terminal LinkedList<CondicionSwitch> L_CASOS;
+non terminal LinkedList<Declaracion> PARAMETROS;
 non terminal Bloque BLOQUE;
 
 
@@ -104,6 +105,15 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_INCREMENTO:a {: RESULT = a; :}
             | SENTENCIA_DECREMENTO:a {: RESULT = a; :}
             | SENTENCIA_IMPORT:a puntoycoma {: RESULT = a ;:}
+            | METODO:a {: RESULT = a; :}
+;
+
+METODO ::= T:a id:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,c,d ); :}
+            |T:a id:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,d ); :}
+;
+
+PARAMETROS ::= PARAMETROS:a coma DECLARACION:b {: a.add((Declaracion)b); RESULT = a; :}
+            | DECLARACION:a {: RESULT = new LinkedList<>() ; RESULT.add((Declaracion)a); :}
 ;
 
 SENTENCIA_IMPORT ::= rimport cadena:a {: RESULT = new Import (a , aleft , aright); :}
@@ -171,6 +181,7 @@ T ::= rint:a {: RESULT = new Tipo(Tipo.EnumTipo.entero); :}
     | rboolean {: RESULT = new Tipo(Tipo.EnumTipo.booleano); :}
     | rdouble {: RESULT = new Tipo(Tipo.EnumTipo.doble); :}
     | rstring {: RESULT = new Tipo(Tipo.EnumTipo.cadena); :}
+    | rvoid {: RESULT = new Tipo(Tipo.EnumTipo.metodo); :}
 ;
 
 IMPRIMIR ::= rprintln parizquierdo E:a parderecho {: RESULT = new Imprimir(a,true); :}
@@ -184,7 +195,7 @@ E ::=
         | rtrue {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.booleano), true); :}
         | rfalse {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.booleano), false); :}
         | doble:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.doble), a); :}
-        | cadena:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.cadena), a.replace("\"","")); :}
+        | cadena:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.cadena), a ); :}
         //| cadena:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.cadena), a); :} este no quita las comillas
         | E:a mas:b E:c {: RESULT = new Suma(aleft, aright, a, c) ; :}
         | E:a menos:b E:c {: RESULT = new Resta (a,c, aleft, aright) ;:}

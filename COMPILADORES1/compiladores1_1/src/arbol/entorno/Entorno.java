@@ -5,6 +5,7 @@
  */
 package arbol.entorno;
  
+import interfaz.Errores;
 import java.util.HashMap;
 
 /**
@@ -25,6 +26,7 @@ public class Entorno {
     public void insertar (String nombre, Simbolo sim, int linea, int columna, String cadenaError) {
         if (tabla.containsKey(nombre)) {
             System.out.println("Error semántico: " + cadenaError + " '" + nombre + "' ya existe. Línea:" + linea+ " Columna:" + columna);
+            Errores errr = new Errores(Errores.enumTipoError.semantico , "Error semántico: " + cadenaError + " '" + nombre + "' ya existe. Línea:" + linea+ " Columna:" + columna);
             return;
         }
         
@@ -42,6 +44,7 @@ public class Entorno {
         }
         
         System.out.println("Error semántico: " + cadenaError + " '" + "' No existe en Linea:" + linea + " Columna:" + columna);
+        Errores errr = new Errores(Errores.enumTipoError.semantico , "Error semántico: " + cadenaError + " '" + "' No existe en Linea:" + linea + " Columna:" + columna);
         return null;
     }
     

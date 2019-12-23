@@ -47,6 +47,9 @@ public class Compiladores1_1 {
         //interpretar("Entradas/entrada2.txt");
         fmrP =new fmrPrincipal();
         fmrP.show();
+        
+        
+        
     }
 
     public static void interpretar(String path) {
