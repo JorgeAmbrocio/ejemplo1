@@ -6,6 +6,7 @@
 package arbol.entorno;
 
 import arbol.Instruccion;
+import arbol.instrucciones.Declaracion;
 import arbol.instrucciones.sentencias.Bloque;
 import java.util.LinkedList;
 
@@ -15,23 +16,23 @@ import java.util.LinkedList;
  */
 public class SimboloMF extends Simbolo {
     
-    LinkedList<Instruccion> parametros;
+    LinkedList<Declaracion> parametros;
     Bloque bloque;
     
     public SimboloMF(Tipo tipo, Object valor) {
         super(tipo, valor);
     }
     
-    public void setTipo (LinkedList<Instruccion> parametros, Bloque bloque){
+    public void setDatos (LinkedList<Declaracion> parametros, Bloque bloque){
         this.parametros = parametros;
         this.bloque = bloque;
     }
     
-    public void setTipo (Bloque bloque) {
+    public void setDatos (Bloque bloque) {
         this.bloque = bloque;
     }    
     
     public Bloque getBloque(){ return this.bloque;}
     
-    public LinkedList<Instruccion> getParametros () { return this.parametros;}
+    public LinkedList<Declaracion> getParametros () { return this.parametros;}
 }

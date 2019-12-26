@@ -43,6 +43,31 @@ public class DeclaraMetodoFuncion  extends Instruccion{
         // crear el objeto símbolo 
         SimboloMF s = new SimboloMF (this.tipo, this.nombre);
         
+        this.nombre = "#" +  nombre ;
+        
+        if (this.parametros != null) {
+           
+            // setear los datos
+            s.setDatos(this.parametros, this.bloque);
+           
+           // obtener el nombre completo de la fución
+           for (Declaracion declaracion : this.parametros) {
+               this.nombre += declaracion.tipo.tipo.toString();
+           }
+           
+           
+        } else {
+            s.setDatos(this.bloque);
+        }
+        
+        if (this.tipo.tipo == Tipo.EnumTipo.metodo) {
+            // si es un método
+            ent.insertar(this.nombre, s, linea, columna, "El metodo");
+        }else {
+            // si es una funcion
+            ent.insertar(this.nombre, s, linea, columna, "La funcion");
+        }
+        
         return null;
     }
     

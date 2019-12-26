@@ -44,12 +44,12 @@ public class Compiladores1_1 {
         pilaCiclos = new LinkedList();
         hojas = new ArrayList();
         
-        //interpretar("Entradas/entrada2.txt");
+        
         fmrP =new fmrPrincipal();
-        fmrP.show();
-        
-        
-        
+        //fmrP.show();
+        interpretar("Entradas/entrada2.txt");
+        fmrP.hide();
+        System.exit(0);
     }
 
     public static void interpretar(String path) {

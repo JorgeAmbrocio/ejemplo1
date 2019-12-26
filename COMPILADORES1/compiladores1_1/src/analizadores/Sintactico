@@ -45,12 +45,14 @@ terminal umenos; //Para manejar el - E
 
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
-non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO, SENTENCIA_IMPORT, FUNCION, METODO;
+non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO, SENTENCIA_IMPORT,  METODO;
+non terminal Instruccion RETURN , SENTENCIA_LLAMADA;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
 non terminal LinkedList<CondicionSwitch> L_CASOS;
 non terminal LinkedList<Declaracion> PARAMETROS;
+non terminal LinkedList<Expresion> PARAMETROS_LLAMADA;
 non terminal Bloque BLOQUE;
 
 
@@ -106,6 +108,15 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_DECREMENTO:a {: RESULT = a; :}
             | SENTENCIA_IMPORT:a puntoycoma {: RESULT = a ;:}
             | METODO:a {: RESULT = a; :}
+            | SENTENCIA_LLAMADA:a {: RESULT = a; :}
+;
+
+SENTENCIA_LLAMADA ::= id:a parizquierdo PARAMETROS_LLAMADA:b parderecho puntoycoma {: RESULT = new LlamadaMF(a, b); :}
+            | id:a parizquierdo  parderecho puntoycoma {: RESULT = new LlamadaMF(a); :}
+;
+
+PARAMETROS_LLAMADA ::= PARAMETROS_LLAMADA:a coma E:b {:a.add(b) ; RESULT = a; :}
+            | E:a {: RESULT = new LinkedList<>() ; RESULT.add (a);:}
 ;
 
 METODO ::= T:a id:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,c,d ); :}
