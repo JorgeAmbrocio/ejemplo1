@@ -23,12 +23,11 @@ public class Return extends Instruccion {
     
     public Return() {}
     
-    
-    
     @Override
     public Object ejecutar(Entorno ent) {
-        
-        return retorno;
+        // retorna la expresión ya con sus valores obtenidos en el entorno que trae
+        Expresion valorRetorno = this.retorno.getValor(ent);
+        return valorRetorno;
     }
     
 }

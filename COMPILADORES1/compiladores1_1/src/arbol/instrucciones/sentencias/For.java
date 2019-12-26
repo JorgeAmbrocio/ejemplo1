@@ -12,6 +12,7 @@ import arbol.entorno.Tipo;
 import arbol.instrucciones.Asignacion;
 import arbol.instrucciones.Break;
 import arbol.instrucciones.Continue;
+import arbol.instrucciones.Return;
 import compiladores1_1.Compiladores1_1;
 
 /**
@@ -38,7 +39,7 @@ public class For  extends Instruccion{
     public Object ejecutar(Entorno ent) {
         compiladores1_1.Compiladores1_1.pilaCiclos.addLast(Compiladores1_1.enumCiclo.Ciclo);
         Entorno entCondiciones = new Entorno (ent);
-        Object retorno;
+        Object retorno = null;
         
         // ejecutar la inicialización de ciclo for
         this.inicializacion.ejecutar(entCondiciones);
@@ -61,11 +62,15 @@ public class For  extends Instruccion{
                     
                     if (retorno.getClass() == Break.class) {
                         // si viene un break, se debe terminar el prceso del for
+                        retorno = null; // pero no retorna el break, pues ya se salió de un ciclo
                         break;
                     }else if (retorno.getClass() == Continue.class) {
                         // si viene un continue, no se hace nada
                         
-                    }        
+                    }else if (retorno.getClass() == Return.class) {
+                        // si viene un rturn, se termina el ciclo y se retorna el valor que trae
+                        break;
+                    }
                 }
                 
                 // luego de ejecutar el bloque
@@ -81,7 +86,7 @@ public class For  extends Instruccion{
         }
         
         compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-        return null;
+        return retorno;
     }
     
 }

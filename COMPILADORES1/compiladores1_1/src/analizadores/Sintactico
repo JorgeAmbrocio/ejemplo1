@@ -46,7 +46,7 @@ terminal umenos; //Para manejar el - E
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES;
 non terminal Instruccion INSTRUCCION,DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO, SENTENCIA_IMPORT,  METODO;
-non terminal Instruccion RETURN , SENTENCIA_LLAMADA;
+non terminal Instruccion RETURN , SENTENCIA_LLAMADA, RETORNO;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
@@ -109,6 +109,11 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_IMPORT:a puntoycoma {: RESULT = a ;:}
             | METODO:a {: RESULT = a; :}
             | SENTENCIA_LLAMADA:a {: RESULT = a; :}
+            | RETORNO:a {: RESULT =a; :}
+;
+
+RETORNO ::= rreturn puntoycoma {: RESULT = new Return(); :}
+            | rreturn E:a puntoycoma {: RESULT = new Return (a); :}
 ;
 
 SENTENCIA_LLAMADA ::= id:a parizquierdo PARAMETROS_LLAMADA:b parderecho puntoycoma {: RESULT = new LlamadaMF(a, b); :}

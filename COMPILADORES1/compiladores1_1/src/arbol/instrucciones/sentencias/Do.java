@@ -11,6 +11,7 @@ import arbol.entorno.Entorno;
 import arbol.entorno.Tipo;
 import arbol.instrucciones.Break;
 import arbol.instrucciones.Continue;
+import arbol.instrucciones.Return;
 import compiladores1_1.Compiladores1_1;
 
 /**
@@ -31,6 +32,8 @@ public class Do extends Instruccion {
     public Object ejecutar(Entorno ent) {
         compiladores1_1.Compiladores1_1.pilaCiclos.addLast(Compiladores1_1.enumCiclo.Ciclo);
         
+        Object retorno =null;
+        
         Expresion valorWhile_ = this.valorWhile.getValor(ent);
         
         if (valorWhile_.tipo.tipo == Tipo.EnumTipo.booleano) {
@@ -40,17 +43,21 @@ public class Do extends Instruccion {
             
             do {
                 Entorno entornoWhile = new Entorno (ent);
-                Object retorno = bloque.ejecutar(entornoWhile);
+                retorno = bloque.ejecutar(entornoWhile);
                 
                 if(retorno != null) {
                     
                     if (retorno.getClass() == Break.class) {
                         // si es de tipo break, se debe salir del while
+                        retorno = null; // pero no retorna el break, pues ya se salió de un ciclo
                         break;
                     }else if (retorno.getClass() == Continue.class)  {
                         // si es de tipo continue, se no se hace nada
                         // solo se deja cotinuar el programa
                         
+                    }else if (retorno.getClass() == Return.class) {
+                        // si el objeto es un return, se debe salir del ciclo y retornar el objeto
+                        break;
                     }
                 }
                 
@@ -65,7 +72,7 @@ public class Do extends Instruccion {
         
         /// verificar si pooll funciona igual que el pop
         compiladores1_1.Compiladores1_1.pilaCiclos.pollLast();
-        return null;
+        return retorno;
     }
     
 }

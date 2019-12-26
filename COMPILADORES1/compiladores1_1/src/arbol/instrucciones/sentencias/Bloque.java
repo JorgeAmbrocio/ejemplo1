@@ -35,7 +35,7 @@ public class Bloque extends Instruccion {
             Object retorno = instruccion.ejecutar(ent);
             
             if (retorno != null ) {
-                // si retorna un objeto de tipo break, entonces se deja de ejecutar el bloque
+                // si retorna un objeto de tipo break, continue o return , entonces se deja de ejecutar el bloque
                 return retorno;
             }
         }

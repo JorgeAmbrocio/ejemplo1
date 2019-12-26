@@ -12,6 +12,7 @@ import arbol.entorno.Tipo;
 import arbol.expresiones.relacionales.Igual;
 import arbol.instrucciones.Break;
 import arbol.instrucciones.Continue;
+import arbol.instrucciones.Return;
 import compiladores1_1.Compiladores1_1;
 import interfaz.Errores;
 import java.util.LinkedList;
@@ -68,7 +69,9 @@ public class Switch extends Instruccion {
                                 break;
                             }else if (retorno.getClass() == Continue.class) {
                                 // si es contienue retorna el continue
-                                
+                                break;
+                            }else if (retorno.getClass() == Return.class) {
+                                // si viene un return, salir del switch y retornar lo que trae
                                 break;
                             }
                         }
@@ -94,7 +97,10 @@ public class Switch extends Instruccion {
                         // si viene un continue, se sale del switch
                         
                         break;
-                    }   
+                    } else if (retorno.getClass() == Return.class) {
+                        // viene return, retornar lo que trae
+                        break;
+                    }
                 }
             }
         }
@@ -120,7 +126,10 @@ public class Switch extends Instruccion {
                         }else if (retorno.getClass() == Continue.class) {
                             // si viene un continue, se sale del switch
                             break;
-                        }   
+                        } else if (retorno.getClass() == Return.class) {
+                            // viene return, retornar lo que trae
+                            break;
+                        }
                     } 
                 }else if (this.ejecutado) {
                     // ya tengo que ejecutar todo
@@ -134,7 +143,9 @@ public class Switch extends Instruccion {
                             break;
                         }else if (retorno.getClass() == Continue.class) {
                             // si viene un continue, se sale del switch
-                            
+                            break;
+                        } else if (retorno.getClass() == Return.class) {
+                            // viene return, retornar lo que trae
                             break;
                         }
                     }
