@@ -1,11 +1,11 @@
 // este es un comentario muy chingón
 println("hola mundo");
 
-void soyFuncion (String datos) {
+String soyFuncion (String datos) {
 
 	println("este es un int" + datos);
 
-	
+	return "hola mundo";
 }
 
 String hola = "cadena de datos" ;

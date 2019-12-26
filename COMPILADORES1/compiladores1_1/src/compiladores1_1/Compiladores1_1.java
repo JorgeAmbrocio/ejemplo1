@@ -48,6 +48,7 @@ public class Compiladores1_1 {
         fmrP =new fmrPrincipal();
         //fmrP.show();
         interpretar("Entradas/entrada2.txt");
+        compiladores1_1.Compiladores1_1.generarErrores();
         fmrP.hide();
         System.exit(0);
     }

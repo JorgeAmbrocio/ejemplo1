@@ -116,8 +116,8 @@ RETORNO ::= rreturn puntoycoma {: RESULT = new Return(); :}
             | rreturn E:a puntoycoma {: RESULT = new Return (a); :}
 ;
 
-SENTENCIA_LLAMADA ::= id:a parizquierdo PARAMETROS_LLAMADA:b parderecho puntoycoma {: RESULT = new LlamadaMF(a, b); :}
-            | id:a parizquierdo  parderecho puntoycoma {: RESULT = new LlamadaMF(a); :}
+SENTENCIA_LLAMADA ::= id:a parizquierdo PARAMETROS_LLAMADA:b parderecho puntoycoma {: RESULT = new InsLlamadaMF(a, b,aleft, aright); :}
+            | id:a parizquierdo  parderecho puntoycoma {: RESULT = new LlamadaMF(a,aleft, aright); :}
 ;
 
 PARAMETROS_LLAMADA ::= PARAMETROS_LLAMADA:a coma E:b {:a.add(b) ; RESULT = a; :}
@@ -222,6 +222,7 @@ E ::=
         | id:a {: RESULT = new Id(a, aleft,aright); :}
         | id:a masmas {: RESULT = new ExpIncremento ( a, aleft,aright) ;:}
         | id:a menosmenos {: RESULT = new ExpDecremento( a, aleft,aright) ;:}
+        | id:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new ExpLlamadaMF(a, b, aleft,aright); :}
         | E:a mayorque:b E:c {: RESULT = new Mayor(a,c,aleft, aright);:}
         | E:a menorque:b E:c {: RESULT = new Menor(a,c,aleft, aright);:}
         | E:a mayorigualque:b E:c {: RESULT = new MayorIgual(a,c,aleft, aright);:}
@@ -234,6 +235,7 @@ E ::=
         | not:a E:b {: RESULT =new Not(b, aleft,aright);:}
         | menos E:a {:RESULT = new Negativo (a, aleft, aright); :}
         | parizquierdo E:a parderecho {:RESULT = a;:}
+        
         
 ;
 

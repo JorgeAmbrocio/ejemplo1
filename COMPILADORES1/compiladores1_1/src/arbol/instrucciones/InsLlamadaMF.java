@@ -10,6 +10,8 @@ import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.entorno.SimboloMF;
+import arbol.entorno.Tipo;
+import arbol.expresiones.Literal;
 import interfaz.Errores;
 import java.util.LinkedList;
 
@@ -17,24 +19,28 @@ import java.util.LinkedList;
  *
  * @author David Ventura
  */
-public class LlamadaMF extends Instruccion {
+public class InsLlamadaMF extends Instruccion {
 
     LinkedList <Expresion> e;
     String nombre;
 
-    public LlamadaMF(String nombre ,LinkedList<Expresion> e) {
+    public InsLlamadaMF(String nombre ,LinkedList<Expresion> e, int linea, int columna) {
         this.e = e;
         this.nombre = nombre;
+        this.linea = linea;
+        this.columna = columna;
     }
     
-    public LlamadaMF( String nombre) {
+    public InsLlamadaMF( String nombre, int linea , int columna) {
         this.nombre = nombre;
+        this.linea = linea;
+        this.columna = columna;
     }
     
     @Override
     public Object ejecutar(Entorno ent) {
         Entorno entornoNuevo = new Entorno(ent);
-        
+        Object retorno = null;
         // preprar el nombre
         String nombre_ =  "#" + this.nombre;
         
@@ -75,17 +81,25 @@ public class LlamadaMF extends Instruccion {
             }
             
             // ejecutar el bloque del metodo o funcion
-            Object retorno = ((SimboloMF)simbolo).getBloque().ejecutar(entornoNuevo);
+            retorno = ((SimboloMF)simbolo).getBloque().ejecutar(entornoNuevo);
             if (retorno != null) {
-                return retorno;
+                // el objeto sí retonó un objeto
+                Literal l = (Literal) retorno;
+                if (simbolo.tipo.tipo == Tipo.EnumTipo.metodo) {
+                    Errores eeee = new Errores(Errores.enumTipoError.semantico,"Error semántico, no se puede retornar un objeto desde el método: "  + nombre_ + " en la fila: " + this.linea + " columna: " + this.columna );
+                    retorno = null; // se evita el retorno del objeto
+                }else if (simbolo.tipo.tipo != l.tipo.tipo) {
+                    // los tipos del retorno y de la función no son los mismos
+                    Errores eeee = new Errores(Errores.enumTipoError.semantico,"Error semántico, no se puede retornar un casteo directo del tipo " + l.tipo.tipo.toString() + " a " + simbolo.tipo.tipo.toString() + " desde el método: "  + nombre_ + " en la fila: " + this.linea + " columna: " + this.columna );
+                    retorno = null; // se evita el retorno del objeto
+                }
             }
-            
         }else{
             // la el simbolo no existe
             Errores eeee = new Errores(Errores.enumTipoError.semantico,"No se ha declarado la propiedad utilizada: " + nombre_ + " en la fila " + this.linea + " columna: " + this.columna );
         }
         
-        return null;
+        return retorno;
     }
     
     
