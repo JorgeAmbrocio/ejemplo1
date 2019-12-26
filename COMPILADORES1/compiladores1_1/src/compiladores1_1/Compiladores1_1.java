@@ -49,9 +49,11 @@ public class Compiladores1_1 {
         //fmrP.show();
         interpretar("Entradas/entrada2.txt");
         compiladores1_1.Compiladores1_1.generarErrores();
-        fmrP.hide();
+        //fmrP.hide();
         System.exit(0);
     }
+    
+    
 
     public static void interpretar(String path) {
         

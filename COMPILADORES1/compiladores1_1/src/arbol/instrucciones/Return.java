@@ -31,11 +31,11 @@ public class Return extends Instruccion {
         
         if (this.retorno != null) {
             Expresion valorRetorno = this.retorno.getValor(ent);
-            System.out.println(" Se ha retornado un tipo: " + valorRetorno.tipo.tipo.toString() + " = " + valorRetorno.valor.toString());
+            //System.out.println(" Se ha retornado un tipo: " + valorRetorno.tipo.tipo.toString() + " = " + valorRetorno.valor.toString());
             return valorRetorno;
         }
         
-        System.out.println(" Se ha retornado un tipo null");
+        //System.out.println(" Se ha retornado un tipo null");
         //return new Literal (new Tipo (Tipo.EnumTipo.nulo) , "@null@") ;
         return null;
     }

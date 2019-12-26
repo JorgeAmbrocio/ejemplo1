@@ -7,6 +7,11 @@ package arbol.expresiones;
 
 import arbol.Expresion;
 import arbol.entorno.Entorno;
+import arbol.entorno.Simbolo;
+import arbol.entorno.SimboloMF;
+import arbol.entorno.Tipo;
+import arbol.instrucciones.Declaracion;
+import interfaz.Errores;
 import java.util.LinkedList;
 
 /**
@@ -34,7 +39,71 @@ public class ExpLlamadaMF extends Expresion {
     
     @Override
     public Expresion getValor(Entorno ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        Entorno entornoNuevo = new Entorno(ent);
+        Expresion retorno = new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@");
+        // preprar el nombre
+        String nombre_ =  "#" + this.nombre;
+        
+        if  (this.e != null) {
+            // sí tiene parámetros, crear nuevo nombre
+            for (Expresion expresion : this.e) {
+                Expresion expre = expresion.getValor(ent);
+                nombre_ += expre.tipo.tipo.toString();
+            }
+        }
+        
+        // buscar que exista la función o método creados
+        Simbolo simbolo = ent.buscar(nombre_, linea, columna, "El metodo");
+        
+        
+        // verifica rexistencia del simbolo
+        if (simbolo != null) {
+            // la el simbolo sí existe
+            
+            Simbolo prueba = new SimboloMF (null , null);
+            int iterador = 0 ;
+            prueba = simbolo;
+            
+            if (this.e != null  &&  ((SimboloMF) simbolo).getParametros() != null ) {
+                LinkedList<Expresion> resueltos = new LinkedList<>();
+                // resolver las asignaciones que se realizarán en la llamada
+                for(Expresion expresion : this.e) {
+                    resueltos.add(expresion.getValor(ent));
+                }
+                
+                // iniciar las declaraciones para la llamada con los valores resutletos 
+                for (Declaracion declaracion : ((SimboloMF)simbolo).getParametros() ) {
+                    // declarar cada parámetro
+                    declaracion.valor = resueltos.get(iterador);
+                    declaracion.ejecutar(entornoNuevo);
+                    iterador ++;
+                }
+            }
+            
+            // ejecutar el bloque del metodo o funcion
+            retorno =(Expresion) ((SimboloMF)simbolo).getBloque().ejecutar(entornoNuevo);
+            if (retorno != null) {
+                // el objeto sí retonó un objeto
+                Literal l = (Literal) retorno;
+                if (simbolo.tipo.tipo == Tipo.EnumTipo.metodo) {
+                    Errores eeee = new Errores(Errores.enumTipoError.semantico,"Error semántico, no se puede retornar un objeto desde el método: "  + nombre_ + " en la fila: " + this.linea + " columna: " + this.columna );
+                    retorno = new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@"); // se evita el retorno del objeto
+                }else if (simbolo.tipo.tipo != l.tipo.tipo) {
+                    // los tipos del retorno y de la función no son los mismos
+                    Errores eeee = new Errores(Errores.enumTipoError.semantico,"Error semántico, no se puede retornar un casteo directo del tipo " + l.tipo.tipo.toString() + " a " + simbolo.tipo.tipo.toString() + " desde el método: "  + nombre_ + " en la fila: " + this.linea + " columna: " + this.columna );
+                    retorno =new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@"); // se evita el retorno del objeto
+                }
+            }
+        }else{
+            // la el simbolo no existe
+            Errores eeee = new Errores(Errores.enumTipoError.semantico,"No se ha declarado la propiedad utilizada: " + nombre_ + " en la fila " + this.linea + " columna: " + this.columna );
+        }
+        
+        return retorno;
+        
+        //return new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@") ;
     }
     
 }

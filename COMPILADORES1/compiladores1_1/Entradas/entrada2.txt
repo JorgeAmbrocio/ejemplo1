@@ -1,17 +1,18 @@
 // este es un comentario muy chingón
 println("hola mundo");
 
-String soyFuncion (String datos) {
-
-	println("este es un int" + datos);
-
-	return "hola mundo";
+int soyFuncion (int contador) {
+	
+	if (contador != 1) {
+		
+        return contador * soyFuncion(contador - 1 ) ;
+	}else if (contador == 1) {
+            // sí es igual que uno
+        
+		return 1 ;
+	}
 }
 
-String hola = "cadena de datos" ;
-println(hola);
+int hola  = soyFuncion(5);
 
-soyFuncion(" cadena" + hola);
-
-
-
+println("El valor es: " + hola);

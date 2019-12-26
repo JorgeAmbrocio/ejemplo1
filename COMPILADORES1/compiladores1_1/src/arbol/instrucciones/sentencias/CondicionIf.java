@@ -43,7 +43,9 @@ public class CondicionIf extends Instruccion  {
             if (ejecutar) {
                 this.ejecutado = true;
                 Entorno nuevo = new Entorno(ent);
+                this.ejecutado = true;
                 Object retorno = this.bloque.ejecutar(nuevo);
+                this.ejecutado = true;
                 return retorno;
             }   
         }else {
