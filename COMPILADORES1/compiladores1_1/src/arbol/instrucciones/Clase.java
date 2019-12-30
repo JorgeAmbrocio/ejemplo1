@@ -5,10 +5,17 @@
  */
 package arbol.instrucciones;
 
+import arbol.Instruccion;
+import arbol.instrucciones.sentencias.BloqueClase;
+import java.util.LinkedList;
+
 /**
  *
  * @author David Ventura
  */
-public class Objeto  {
+public class Clase  {
+    
+    String nombre;
+    LinkedList<Instruccion> bloque ;
     
 }

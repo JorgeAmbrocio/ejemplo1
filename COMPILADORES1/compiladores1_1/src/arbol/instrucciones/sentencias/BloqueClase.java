@@ -7,23 +7,20 @@ package arbol.instrucciones.sentencias;
 
 import arbol.Instruccion;
 import arbol.entorno.Entorno;
-import arbol.instrucciones.Break;
-import arbol.instrucciones.Continue;
 import java.util.LinkedList;
 
 /**
  *
  * @author David Ventura
  */
-public class Bloque extends Instruccion {
-    
-    public LinkedList <Instruccion> instrucciones;
+public class BloqueClase extends Instruccion {
+    public  LinkedList <Instruccion> instrucciones;
 
-    public Bloque(LinkedList<Instruccion> instrucciones) {
+    public BloqueClase(LinkedList<Instruccion> instrucciones) {
         this.instrucciones = instrucciones;
     }
 
-    public Bloque() {
+    public BloqueClase() {
         this.instrucciones = new LinkedList();
     }
 
@@ -43,6 +40,5 @@ public class Bloque extends Instruccion {
         return null;
     }
     
-    
-    
+
 }

@@ -97,12 +97,22 @@ public class Declaracion extends Instruccion {
                             return null;
                     }
                     break;
+                case objeto:
+                    switch (resultado.tipo.tipo) {
+                        case objeto:
+                            if (this.tipo.tr.equals(resultado.tipo.tr)) {
+                                simbolo = new Simbolo(tipo, resultado.valor);
+                                ent.insertar(id, simbolo, linea, columna, "La variable");
+                                return null;
+                            }
+                    }
+                    break;
             }
 
             //Si llega aquí es porque hubo error de tipos
 //            proyecto1.Interfaz.lista_errores.add(new CError("Semántico", "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + " = " + resultado.tipo.tipo, linea, columna));
-            System.out.println("Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + " = " + resultado.tipo.tipo + ". Línea: " + linea + " Columna: " + columna);
-            Errores errr = new Errores(Errores.enumTipoError.semantico , "Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + " = " + resultado.tipo.tipo + ". Línea: " + linea + " Columna: " + columna);
+            System.out.println("Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + "-" + tipo.tr + " = " + resultado.tipo.tipo + "-" + resultado.tipo.tr + ". Línea: " + linea + " Columna: " + columna);
+            Errores errr = new Errores(Errores.enumTipoError.semantico , "Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + "-" + tipo.tr + " = " + resultado.tipo.tipo + "-" + resultado.tipo.tr + ". Línea: " + linea + " Columna: " + columna);
         
         } else { //Si no se le asignó valor a la variable le pongo uno por defecto
             switch (tipo.tipo) {
@@ -120,6 +130,9 @@ public class Declaracion extends Instruccion {
                     break;
                 case cadena:
                     ent.insertar(id, new Simbolo(tipo, ""), linea, columna, "La variable");
+                    break;
+                case objeto:
+                    ent.insertar(id, new Simbolo(tipo, Tipo.EnumTipo.nulo), linea, columna, "La variable");
                     break;
             }
         }

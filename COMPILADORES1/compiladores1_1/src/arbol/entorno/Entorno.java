@@ -13,7 +13,7 @@ import java.util.HashMap;
  * @author David Ventura
  */
 public class Entorno {
-    public Entorno anterior;
+    public Entorno anterior, global;
     public HashMap <String , Simbolo> tabla;
     
     public Entorno (Entorno anterior) {
@@ -21,6 +21,11 @@ public class Entorno {
         this.tabla = new HashMap<>();
     }
     
+    public Entorno (Entorno anterior, Entorno global) {
+        this.anterior = anterior;
+        this.global = global;
+        this.tabla = new HashMap<>();
+    }
     
     // nombre : nombre de la variable a insertar
     public void insertar (String nombre, Simbolo sim, int linea, int columna, String cadenaError) {

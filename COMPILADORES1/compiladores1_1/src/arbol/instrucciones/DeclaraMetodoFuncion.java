@@ -12,6 +12,7 @@ import arbol.entorno.Tipo;
 import arbol.instrucciones.sentencias.Bloque;
 import java.util.LinkedList;
 
+
 /**
  *
  * @author David Ventura
@@ -54,7 +55,6 @@ public class DeclaraMetodoFuncion  extends Instruccion{
            for (Declaracion declaracion : this.parametros) {
                this.nombre += declaracion.tipo.tipo.toString();
            }
-           
            
         } else {
             s.setDatos(this.bloque);

@@ -30,7 +30,7 @@ public class SimboloMF extends Simbolo {
     
     public void setDatos (Bloque bloque) {
         this.bloque = bloque;
-    }    
+    } 
     
     public Bloque getBloque(){ return this.bloque;}
     
