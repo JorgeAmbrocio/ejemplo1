@@ -10,6 +10,7 @@ import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.entorno.Tipo;
+import arbol.expresiones.Acceso;
 import arbol.expresiones.Id;
 import arbol.expresiones.Literal;
 
@@ -20,6 +21,8 @@ import arbol.expresiones.Literal;
 public class InsIncremento extends Instruccion {
 
     String id;
+    
+    Acceso id_;
 
     public InsIncremento(String id, int linea, int columna) {
         this.id = id;
@@ -27,6 +30,11 @@ public class InsIncremento extends Instruccion {
         this.columna= columna;
     }
     
+    public InsIncremento(Acceso id, int linea, int columna) {
+        this.id_ = id;
+        this.linea = linea;
+        this.columna= columna;
+    }
     
     @Override
     public Object ejecutar(Entorno ent) {

@@ -29,9 +29,15 @@ class hola2 {
 
 println("adiós mundo");
 
-hola h  = new hola2() ;
+hola h  = new hola() ;
 
 println(h);
+
+
+int var = hola.hola;
+
+
+println("todo ha salido bien");
 
 
 /* 

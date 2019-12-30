@@ -23,8 +23,8 @@ parser code
      * Método al que se llama automáticamente ante algún error sintactico.
      **/ 
     public void syntax_error(Symbol s){ 
-            System.err.println("Error Sintáctico en la Línea " + (s.left) +" Columna "+s.right+ ". No se esperaba este componente: " +s.value+".");
-            Errores errrores = new Errores(Errores.enumTipoError.sintactico , "Error Sintáctico en la Línea " + (s.left) +" Columna "+s.right+ ". No se esperaba este componente: " +s.value+".");
+            System.err.println("Error Sintáctico en la Línea " + (s.left) +" Columna "+s.right+ ". No se esperaba este componente: " + s.value + ".");
+            Errores errrores = new Errores(Errores.enumTipoError.sintactico , "Error Sintáctico en la Línea " + (s.left) +" Columna " + s.right + ". No se esperaba este componente: " +s.value+".");
     //Interfaz.lista_errores.add(new CError("Sintáctico", "No se esperaba este componente '" + s.value + "'", s.left, s.right));
     
     } 
@@ -46,13 +46,14 @@ terminal umenos; //Para manejar el - E
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES, L_INSTRUCCIONES_CLASE;
 non terminal Instruccion INSTRUCCION, INSTRUCCION_CLASE, DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO, SENTENCIA_IMPORT,  METODO;
-non terminal Instruccion RETURN , SENTENCIA_LLAMADA, RETORNO, DECLARACION_CLASE;
+non terminal Instruccion  SENTENCIA_LLAMADA, RETORNO, DECLARACION_CLASE;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
 non terminal LinkedList<CondicionSwitch> L_CASOS;
 non terminal LinkedList<Declaracion> PARAMETROS;
 non terminal LinkedList<Expresion> PARAMETROS_LLAMADA;
+non terminal LinkedList<Id> ID;
 non terminal Bloque BLOQUE;
 non terminal Bloque BLOQUE_CLASE;
 
@@ -226,6 +227,9 @@ IMPRIMIR ::= rprintln parizquierdo E:a parderecho {: RESULT = new Imprimir(a,tru
     | rprint parizquierdo E:a parderecho {: RESULT = new Imprimir(a,false); :}
 ;
 
+ID ::= ID:a punto id:b {: a.add(new Id(b, bleft,bright)); RESULT = a; :}
+        | id:a {: RESULT  = new LinkedList<>(); RESULT.add(new Id(a, aleft,aright)); :}
+;
 
 E ::= 
         entero:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.entero), a); :}
@@ -242,7 +246,7 @@ E ::=
         | E:a division:b E:c {: RESULT = new Division(a,c,aleft,aright); :}
         | E:a potencia:b E:c {: RESULT = new Potencia(a,c,aleft,aright);:}
         | E:a modulo:b E:c {: RESULT  = new Modulo(a,c,aleft,aright);:}
-        | id:a {: RESULT = new Id(a, aleft,aright); :}
+        //| id:a {: RESULT = new Id(a, aleft,aright); :}
         | id:a masmas {: RESULT = new ExpIncremento ( a, aleft,aright) ;:}
         | id:a menosmenos {: RESULT = new ExpDecremento( a, aleft,aright) ;:}
         | id:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new ExpLlamadaMF(a, b, aleft,aright); :}
@@ -260,7 +264,7 @@ E ::=
         | parizquierdo E:a parderecho {:RESULT = a;:}
         | rnew id:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new Objeto(a, b , aleft, aright); :}
         | rnew id:a parizquierdo  parderecho {: RESULT = new Objeto(a,  aleft, aright); :}
-        
+        | ID:a {: RESULT = new Id("est", aleft,aright); :}
         
 ;
 

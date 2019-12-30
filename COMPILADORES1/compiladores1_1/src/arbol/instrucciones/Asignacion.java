@@ -9,8 +9,10 @@ import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
+import arbol.expresiones.Acceso;
 import arbol.expresiones.Id;
 import interfaz.Errores;
+import java.util.LinkedList;
 
 /**
  *
@@ -19,6 +21,7 @@ import interfaz.Errores;
 public class Asignacion extends Instruccion {
     
     String id;
+    Acceso id_;
     Expresion valor;
 
     public Asignacion(String id, int linea, int columna, Expresion valor) {
@@ -28,6 +31,12 @@ public class Asignacion extends Instruccion {
         this.linea = linea;
     }
     
+    public Asignacion(Acceso id, int linea, int columna, Expresion valor) {
+        this.id_ = id;
+        this.valor = valor;
+        this.columna = columna;
+        this.linea = linea;
+    }
     
     @Override
     public Object ejecutar(Entorno ent) {

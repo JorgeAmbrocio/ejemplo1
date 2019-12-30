@@ -9,6 +9,7 @@ import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.entorno.Tipo;
+import arbol.expresiones.Acceso;
 import arbol.expresiones.Literal;
 import interfaz.Errores;
 
@@ -18,9 +19,16 @@ import interfaz.Errores;
  */
 public class InsDecremento extends Instruccion {
     String id;
+    Acceso id_;
 
     public InsDecremento(String id, int linea, int columna) {
         this.id = id;
+        this.linea = linea;
+        this.columna= columna;
+    }
+    
+    public InsDecremento(Acceso id, int linea, int columna) {
+        this.id_ = id;
         this.linea = linea;
         this.columna= columna;
     }

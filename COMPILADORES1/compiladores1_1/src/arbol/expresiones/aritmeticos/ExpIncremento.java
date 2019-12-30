@@ -9,6 +9,7 @@ import arbol.Expresion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.entorno.Tipo;
+import arbol.expresiones.Acceso;
 import arbol.expresiones.Id;
 import arbol.expresiones.Literal;
 import arbol.instrucciones.Asignacion;
@@ -21,6 +22,7 @@ import interfaz.Errores;
 public class ExpIncremento extends Expresion {
 
     String id;
+    Acceso id_;
 
     public ExpIncremento(String id, int linea, int columna) {
         this.id = id;
@@ -28,6 +30,11 @@ public class ExpIncremento extends Expresion {
         this.columna= columna;
     }
     
+    public ExpIncremento(Acceso id, int linea, int columna) {
+        this.id_ = id;
+        this.linea = linea;
+        this.columna= columna;
+    }
     
     @Override
     public Expresion getValor(Entorno ent) {

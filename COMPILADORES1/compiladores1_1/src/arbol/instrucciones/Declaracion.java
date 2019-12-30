@@ -10,7 +10,10 @@ import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.entorno.Tipo;
+import arbol.expresiones.Acceso;
+import arbol.expresiones.Id;
 import interfaz.Errores;
+import java.util.LinkedList;
 
 /**
  *
@@ -20,6 +23,7 @@ public class Declaracion extends Instruccion {
 
     public Tipo tipo;
     public String id;
+    public Acceso id_;
     public Expresion valor;
 
     public Declaracion(Tipo tipo, String id, Expresion valor, int linea, int columna) {
@@ -34,6 +38,14 @@ public class Declaracion extends Instruccion {
         this.tipo = tipo;
         this.id = id;
         this.valor = null;
+        this.linea = linea;
+        this.columna = columna;
+    }
+    
+    public Declaracion(Tipo tipo, Acceso id, Expresion valor, int linea, int columna) {
+        this.tipo = tipo;
+        this.id_ = id;
+        this.valor = valor;
         this.linea = linea;
         this.columna = columna;
     }

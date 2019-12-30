@@ -11,6 +11,7 @@ import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.entorno.SimboloMF;
 import arbol.entorno.Tipo;
+import arbol.expresiones.Acceso;
 import arbol.expresiones.Literal;
 import interfaz.Errores;
 import java.util.LinkedList;
@@ -23,6 +24,8 @@ public class InsLlamadaMF extends Instruccion {
 
     LinkedList <Expresion> e;
     String nombre;
+    
+    Acceso id_;
 
     public InsLlamadaMF(String nombre ,LinkedList<Expresion> e, int linea, int columna) {
         this.e = e;
@@ -33,6 +36,19 @@ public class InsLlamadaMF extends Instruccion {
     
     public InsLlamadaMF( String nombre, int linea , int columna) {
         this.nombre = nombre;
+        this.linea = linea;
+        this.columna = columna;
+    }
+    
+    public InsLlamadaMF(Acceso nombre ,LinkedList<Expresion> e, int linea, int columna) {
+        this.e = e;
+        this.id_ = nombre;
+        this.linea = linea;
+        this.columna = columna;
+    }
+    
+    public InsLlamadaMF( Acceso nombre, int linea , int columna) {
+        this.id_ = nombre;
         this.linea = linea;
         this.columna = columna;
     }

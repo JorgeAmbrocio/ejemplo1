@@ -22,6 +22,7 @@ public class ExpLlamadaMF extends Expresion {
 
     LinkedList <Expresion> e;
     String nombre;
+    Acceso id_;
 
     public ExpLlamadaMF(String nombre ,LinkedList<Expresion> e, int linea, int columna) {
         this.e = e;
@@ -32,6 +33,19 @@ public class ExpLlamadaMF extends Expresion {
     
     public ExpLlamadaMF( String nombre, int linea , int columna) {
         this.nombre = nombre;
+        this.linea = linea;
+        this.columna = columna;
+    }
+    
+    public ExpLlamadaMF(Acceso nombre ,LinkedList<Expresion> e, int linea, int columna) {
+        this.e = e;
+        this.id_ = nombre;
+        this.linea = linea;
+        this.columna = columna;
+    }
+    
+    public ExpLlamadaMF( Acceso nombre, int linea , int columna) {
+        this.id_ = nombre;
         this.linea = linea;
         this.columna = columna;
     }
