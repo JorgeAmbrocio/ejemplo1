@@ -5,8 +5,14 @@
  */
 package arbol.entorno;
  
+import arbol.Expresion;
+import arbol.expresiones.Acceso;
+import arbol.expresiones.Id;
+import arbol.expresiones.Literal;
+import arbol.expresiones.Objeto;
 import interfaz.Errores;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  *
@@ -54,6 +60,41 @@ public class Entorno {
     }
     
     
-    
+    public Simbolo buscar (Acceso nombre, int linea, int columna, String cadenaError) {
+        
+        Simbolo retorno = null;
+        
+        LinkedList<Id> aux = nombre.accesos;
+        
+        Entorno busqueda = this;
+        
+        // recorrer todos los id
+        for (Id id : aux){
+            Simbolo l = id.getSimbolo(busqueda); // obtiene el objeto en el entorno indicado
+            //aux.pollFirst();
+            
+            //verificar si es el último elemento
+            if (id == aux.getLast()) {
+                // estamos en el ùltimo id
+                // no debe ser un objeto
+                retorno = l; // retorno del ojeto final
+                break;
+            }else { 
+                // no es el último id
+                // verifica sea de tipo objeto
+                if (l.tipo.tipo != Tipo.EnumTipo.objeto) {
+                    // eeror
+                    Errores  err = new Errores(Errores.enumTipoError.semantico , "El valor del id " + id.id + " ya es de tipo primitivo no se le pueden adjudicar más capas de id.");
+                    break;
+                }
+                
+                // sí es de tipo objeto, ahora vamos a buscar en el entorno del objeto
+                busqueda = ((Objeto)l.valor).global;
+            }
+            
+        }
+        
+        return retorno;
+    }
     
 }

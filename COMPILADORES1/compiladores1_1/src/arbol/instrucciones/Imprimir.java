@@ -9,6 +9,7 @@ import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Tipo;
+import arbol.expresiones.Acceso;
 
 /**
  *
@@ -28,7 +29,11 @@ public class Imprimir extends Instruccion{
     
     @Override
     public Object ejecutar(Entorno ent) {
+        
         Expresion resultado = valor.getValor(ent);
+        
+        
+        
         String auxiliar = "";
         
         if (this.salto) {

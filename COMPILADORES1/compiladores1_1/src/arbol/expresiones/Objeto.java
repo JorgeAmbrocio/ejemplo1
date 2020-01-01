@@ -23,9 +23,9 @@ import java.util.LinkedList;
  * @author David Ventura
  */
 public class Objeto extends Expresion {
-    Entorno global;
-    Entorno anterior;
-    LinkedList<Expresion> parametros;
+    public Entorno global;
+    public Entorno anterior;
+    public LinkedList<Expresion> parametros;
 
     public Objeto(String id, LinkedList<Expresion> parametros, int linea, int columna) {
         this.tipo = new Tipo(Tipo.EnumTipo.objeto,id );

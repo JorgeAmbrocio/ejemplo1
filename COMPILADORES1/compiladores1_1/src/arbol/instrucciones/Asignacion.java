@@ -40,8 +40,10 @@ public class Asignacion extends Instruccion {
     
     @Override
     public Object ejecutar(Entorno ent) {
-        Simbolo sim = ent.buscar(id, linea, columna, "La variable"); //Busco la variable en la tabla de símbolos
-
+        Simbolo sim = ent.buscar(id_, linea, columna, "La variable"); //Busco la variable en la tabla de símbolos
+        
+        //Simbolo sim = (Simbolo) this.id_.getValor(ent).valor;
+        
         if (sim != null) { //Si la variable existe
 
             Expresion resultado = valor.getValor(ent);
@@ -91,10 +93,19 @@ public class Asignacion extends Instruccion {
                             return null;
                     }
                     break;
+                case objeto:
+                    switch (resultado.tipo.tipo) {
+                        case objeto:
+                            //verificar que sean el mismo tipo de objeto
+                            if (sim.tipo.tr.equals(resultado.tipo.tr)) {
+                                // sí son del mismo tipo
+                                sim.valor = resultado.valor;
+                            }
+                    }
             }
 
             //Si llega aquí el tipo de dato que se le quiere asignar a la variable es incorrecto
-            System.out.println("El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + sim.tipo.tipo + " = " + resultado.tipo.tipo + ". Línea: " + linea + " Columna: " + columna);
+            System.out.println("El tipo de dato que se le quiere asignar a la variable '" + id  + "' es incorrecto. " + sim.tipo.tipo + " " + sim.tipo.tr  + " = " + resultado.tipo.tipo + " " + resultado.tipo.tr + ". Línea: " + linea + " Columna: " + columna);
             Errores errr = new Errores(Errores.enumTipoError.semantico , "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + sim.tipo.tipo + " = " + resultado.tipo.tipo + ". Línea: " + linea + " Columna: " + columna);
         
         } //Si la variable NO existe ya se marcó el error
