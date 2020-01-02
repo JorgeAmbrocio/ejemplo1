@@ -153,10 +153,10 @@ PARAMETROS ::= PARAMETROS:a coma DECLARACION:b {: a.add((Declaracion)b); RESULT 
 SENTENCIA_IMPORT ::= rimport cadena:a {: RESULT = new Import (a , aleft , aright); :}
 ;
 
-SENTENCIA_INCREMENTO ::= id:a masmas puntoycoma {: RESULT = new InsIncremento( a, aleft, aright) ; :}
+SENTENCIA_INCREMENTO ::= ID:a masmas puntoycoma {: RESULT = new InsIncremento( new Acceso(a), aleft, aright) ; :}
 ;
 
-SENTENCIA_DECREMENTO ::= id:a menosmenos puntoycoma {: RESULT = new InsDecremento( a, aleft, aright) ; :}
+SENTENCIA_DECREMENTO ::= ID:a menosmenos puntoycoma {: RESULT = new InsDecremento( new Acceso(a), aleft, aright) ; :}
 ;
 
 SENTENCIA_DO ::= rdo BLOQUE:a rwhile parizquierdo E:b parderecho {: RESULT = new Do (b,a); :} 
@@ -242,8 +242,8 @@ E ::=
         //| cadena:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.cadena), a); :} este no quita las comillas
         | ID:a {: RESULT = new Acceso(a); :}
         | ID:a masmas {: RESULT = new ExpIncremento ( new Acceso(a), aleft,aright) ;:}
-        //| id:a menosmenos {: RESULT = new ExpDecremento( a, aleft,aright) ;:}
-        //| id:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new ExpLlamadaMF(a, b, aleft,aright); :}
+        | ID:a menosmenos {: RESULT = new ExpDecremento( new Acceso(a), aleft,aright) ;:}
+        | ID:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new ExpLlamadaMF(new Acceso(a), b, aleft,aright); :}
         | E:a mas:b E:c {: RESULT = new Suma(aleft, aright, a, c) ; :}
         | E:a menos:b E:c {: RESULT = new Resta (a,c, aleft, aright) ;:}
         | E:a por:b E:c {: RESULT = new Multiplicacion(a,c, aleft, aright);:}

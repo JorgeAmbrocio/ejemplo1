@@ -40,25 +40,25 @@ public class InsIncremento extends Instruccion {
     public Object ejecutar(Entorno ent) {
         
         Object retorno  = null;
-        Simbolo e = ent.buscar(id, linea, columna, "La variable"); //Busco la variable en la tabla de símbolos
+        Simbolo e = ent.buscar(id_, linea, columna, "La variable"); //Busco la variable en la tabla de símbolos
         Asignacion a;
         switch (e.tipo.tipo) {
             case entero:
                int valor = Integer.parseInt(e.valor.toString());
                valor++;
-               a = new Asignacion (this.id , this.linea , this.columna , new Literal(new Tipo (Tipo.EnumTipo.entero) , valor ));
+               a = new Asignacion (this.id_ , this.linea , this.columna , new Literal(new Tipo (Tipo.EnumTipo.entero) , valor ));
                a.ejecutar(ent);
                return null;
             case doble:
                 double valor2 = Double.parseDouble(e.valor.toString());
                 valor2++; 
-                a = new Asignacion (this.id , this.linea , this.columna , new Literal(new Tipo (Tipo.EnumTipo.doble) , valor2 ));
+                a = new Asignacion (this.id_ , this.linea , this.columna , new Literal(new Tipo (Tipo.EnumTipo.doble) , valor2 ));
                 a.ejecutar(ent);
                 return null;
             case caracter:
                 char valor3 = e.valor.toString().charAt(0);
                 valor3 ++ ;
-                a = new Asignacion (this.id , this.linea , this.columna , new Literal(new Tipo (Tipo.EnumTipo.caracter) , valor3 ));
+                a = new Asignacion (this.id_ , this.linea , this.columna , new Literal(new Tipo (Tipo.EnumTipo.caracter) , valor3 ));
                 a.ejecutar(ent);
                 return null;
         }

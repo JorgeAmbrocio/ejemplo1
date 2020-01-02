@@ -57,19 +57,28 @@ public class ExpLlamadaMF extends Expresion {
         
         Entorno entornoNuevo = new Entorno(ent);
         Expresion retorno = new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@");
+        
+        LinkedList<Expresion> resueltos = new LinkedList<>();
+                
+        
         // preprar el nombre
-        String nombre_ =  "#" + this.nombre;
+        String nombre_ =  "#" + this.id_.accesos.getLast().id;
         
         if  (this.e != null) {
             // sí tiene parámetros, crear nuevo nombre
             for (Expresion expresion : this.e) {
                 Expresion expre = expresion.getValor(ent);
                 nombre_ += expre.tipo.tipo.toString();
+                resueltos.add(expre);
             }
         }
         
+        // adjuntar el último valor modificado para el método
+        Id id = this.id_.accesos.pollLast();
+        this.id_.accesos.addLast(new Id (nombre_ , id.linea, id.columna));
+        
         // buscar que exista la función o método creados
-        Simbolo simbolo = ent.buscar(nombre_, linea, columna, "El metodo");
+        Simbolo simbolo = ent.buscar(this.id_, linea, columna, "El metodo");
         
         
         // verifica rexistencia del simbolo
@@ -81,11 +90,7 @@ public class ExpLlamadaMF extends Expresion {
             prueba = simbolo;
             
             if (this.e != null  &&  ((SimboloMF) simbolo).getParametros() != null ) {
-                LinkedList<Expresion> resueltos = new LinkedList<>();
-                // resolver las asignaciones que se realizarán en la llamada
-                for(Expresion expresion : this.e) {
-                    resueltos.add(expresion.getValor(ent));
-                }
+                
                 
                 // iniciar las declaraciones para la llamada con los valores resutletos 
                 for (Declaracion declaracion : ((SimboloMF)simbolo).getParametros() ) {

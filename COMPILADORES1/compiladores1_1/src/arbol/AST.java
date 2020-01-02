@@ -39,6 +39,9 @@ public class AST {
                 instruccion.ejecutar(tablaGlobal);
             }
         }
+        
+        
+        
     }
     
     
