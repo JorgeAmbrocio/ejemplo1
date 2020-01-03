@@ -56,7 +56,7 @@ public class InsLlamadaMF extends Instruccion {
     
     @Override
     public Object ejecutar(Entorno ent) {
-        Entorno entornoNuevo = new Entorno(ent);
+        Entorno entornoNuevo = new Entorno(ent, ent.global);
         Object retorno = null;
         
         LinkedList<Expresion> resueltos = new LinkedList<>();
@@ -81,7 +81,7 @@ public class InsLlamadaMF extends Instruccion {
         Simbolo simbolo = ent.buscar(this.id_, linea, columna, "El metodo");
         
         
-        // verifica rexistencia del simbolo
+        // verifica rexistencia del simbolo metodo funcion
         if (simbolo != null) {
             // la el simbolo sí existe
             
@@ -98,6 +98,14 @@ public class InsLlamadaMF extends Instruccion {
                     declaracion.valor = resueltos.get(iterador);
                     declaracion.ejecutar(entornoNuevo);
                     iterador ++;
+                }
+            }
+            
+            // obtener el entorno global del objeto con elque se ejecutará la llamada
+            if (this.id_.accesos.size() > 1) {
+                Entorno entorno = ent.getEntornoAcceso(id_);
+                if (entorno != null) {
+                    entornoNuevo.global = entorno;
                 }
             }
             

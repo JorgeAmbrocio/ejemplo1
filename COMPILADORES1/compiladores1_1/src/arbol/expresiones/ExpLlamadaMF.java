@@ -54,12 +54,10 @@ public class ExpLlamadaMF extends Expresion {
     @Override
     public Expresion getValor(Entorno ent) {
         
-        
-        Entorno entornoNuevo = new Entorno(ent);
+        Entorno entornoNuevo = new Entorno(ent, ent.global);
         Expresion retorno = new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@");
         
         LinkedList<Expresion> resueltos = new LinkedList<>();
-                
         
         // preprar el nombre
         String nombre_ =  "#" + this.id_.accesos.getLast().id;
@@ -81,7 +79,8 @@ public class ExpLlamadaMF extends Expresion {
         Simbolo simbolo = ent.buscar(this.id_, linea, columna, "El metodo");
         
         
-        // verifica rexistencia del simbolo
+        
+        // verifica rexistencia del simbolo metodo funcion
         if (simbolo != null) {
             // la el simbolo sí existe
             
@@ -98,6 +97,15 @@ public class ExpLlamadaMF extends Expresion {
                     declaracion.valor = resueltos.get(iterador);
                     declaracion.ejecutar(entornoNuevo);
                     iterador ++;
+                }
+            }
+            
+            // obtener el entorno global del objeto con elque se ejecutará la llamada
+            
+            if (this.id_.accesos.size() > 1) {
+                Entorno entorno = ent.getEntornoAcceso(id_);
+                if (entorno != null) {
+                    entornoNuevo.global = entorno;
                 }
             }
             

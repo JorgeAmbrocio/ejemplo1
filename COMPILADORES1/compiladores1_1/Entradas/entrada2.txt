@@ -26,11 +26,18 @@ class hola {
 		}
 	}
 
+	void main () {
+
+		println(" soy un main ");
+		int resultado = multi( 5 , 6) ;
+		println(resultado);
+	}
+
 }
 
+
 hola h = new hola();
-hola hh = new hola();
-
-int resultado = h.factorial(2);
-
-println(resultado);
+h.main();
+/*
+// int resultado =  h.factorial(5);
+// println(resultado); */

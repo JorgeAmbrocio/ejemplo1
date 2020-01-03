@@ -63,7 +63,7 @@ public class Objeto extends Expresion {
                 // sí es una clase
                 
                 this.global = new Entorno(null); // crea un entorno blobal de la clase
-                this.anterior = ent;
+                //this.anterior = ent;
                 
                 // obtener el bloque de datps y declaraciones del objeto
                 DeclaracionClase dclase  = (DeclaracionClase) simbolo.valor;

@@ -54,7 +54,7 @@ public class Entorno {
             }
         }
         
-        System.out.println("Error semántico: " + cadenaError + " '" + "' No existe en Linea:" + linea + " Columna:" + columna);
+        System.out.println("Error semántico: " + cadenaError + " '" + nombre + "' No existe en Linea:" + linea + " Columna:" + columna);
         Errores errr = new Errores(Errores.enumTipoError.semantico , "Error semántico: " + cadenaError + " '" + "' No existe en Linea:" + linea + " Columna:" + columna);
         return null;
     }
@@ -70,7 +70,7 @@ public class Entorno {
         
         // recorrer todos los id
         for (Id id : aux){
-            Simbolo l = id.getSimbolo(busqueda); // obtiene el objeto en el entorno indicado
+            Simbolo l = id.getSimbolo(this); // obtiene el objeto en el entorno indicado
             //aux.pollFirst();
             
             //verificar si es el último elemento
@@ -78,6 +78,46 @@ public class Entorno {
                 // estamos en el ùltimo id
                 // no debe ser un objeto
                 retorno = l; // retorno del ojeto final
+                break;
+            }else { 
+                // no es el último id
+                // verifica sea de tipo objeto
+                if (l.tipo.tipo != Tipo.EnumTipo.objeto) {
+                    // eeror
+                    Errores  err = new Errores(Errores.enumTipoError.semantico , "El valor del id " + id.id + " ya es de tipo primitivo no se le pueden adjudicar más capas de id.");
+                    break;
+                }
+                
+                // sí es de tipo objeto, ahora vamos a buscar en el entorno del objeto
+                busqueda = ((Objeto)l.valor).global;
+            }
+            
+        }
+        
+        return retorno;
+    }
+    
+    public Entorno getEntornoAcceso (Acceso nombre) {
+        Entorno retorno = null;
+        
+        LinkedList<Id> aux = nombre.accesos;
+        
+        if (aux.size() > 1) {
+            aux.removeLast(); // elimina el último elemento
+        }        
+        
+        Entorno busqueda = this;
+        
+        // recorrer todos los id
+        for (Id id : aux){
+            Simbolo l = id.getSimbolo(busqueda); // obtiene el objeto en el entorno indicado
+            //aux.pollFirst();
+            
+            //verificar si es el último elemento
+            if (id == aux.getLast()) {
+                // estamos en el ùltimo id
+                // no debe ser un objeto
+                retorno = ((Objeto)l.valor).global; // retorno del ojeto final
                 break;
             }else { 
                 // no es el último id

@@ -134,8 +134,8 @@ RETORNO ::= rreturn puntoycoma {: RESULT = new Return(); :}
             | rreturn E:a puntoycoma {: RESULT = new Return (a); :}
 ;
 
-SENTENCIA_LLAMADA ::= id:a parizquierdo PARAMETROS_LLAMADA:b parderecho puntoycoma {: RESULT = new InsLlamadaMF(a, b,aleft, aright); :}
-            | id:a parizquierdo  parderecho puntoycoma {: RESULT = new InsLlamadaMF(a,aleft, aright); :}
+SENTENCIA_LLAMADA ::= ID:a parizquierdo PARAMETROS_LLAMADA:b parderecho puntoycoma {: RESULT = new InsLlamadaMF(new Acceso(a), b,aleft, aright); :}
+            | ID:a parizquierdo  parderecho puntoycoma {: RESULT = new InsLlamadaMF(new Acceso(a),aleft, aright); :}
 ;
 
 PARAMETROS_LLAMADA ::= PARAMETROS_LLAMADA:a coma E:b {:a.add(b) ; RESULT = a; :}

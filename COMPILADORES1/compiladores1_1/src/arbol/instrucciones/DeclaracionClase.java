@@ -22,6 +22,8 @@ public class DeclaracionClase extends Instruccion {
     public String nombre;
     public Bloque bloque;
     
+    public Entorno imports;
+    
     public DeclaracionClase(String nombre, Bloque bloque,int linea , int columna) {
         this.nombre = nombre;
         this.bloque = bloque;
@@ -40,6 +42,10 @@ public class DeclaracionClase extends Instruccion {
     
     @Override
     public Object ejecutar(Entorno ent) {
+        
+        // ejecutar los imports del archivo para enlazar el entorno
+        
+        
     
         // crear un un nuevo simbolo que contiene un objeto clase
         
