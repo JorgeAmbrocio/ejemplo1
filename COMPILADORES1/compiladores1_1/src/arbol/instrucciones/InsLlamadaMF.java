@@ -62,7 +62,15 @@ public class InsLlamadaMF extends Instruccion {
         LinkedList<Expresion> resueltos = new LinkedList<>();
         
         // preprar el nombre
-        String nombre_ =  "#" + this.id_.accesos.getLast().id;
+        
+        String aux = "";
+        String strId = this.id_.accesos.getLast().id;
+        String lastLetter = strId.substring(0,1);
+        if ( !lastLetter.equals("#")) {
+            aux = "#";
+        }
+        
+        String nombre_ =  aux + this.id_.accesos.getLast().id;
         
         if  (this.e != null) {
             // sí tiene parámetros, crear nuevo nombre
@@ -74,9 +82,10 @@ public class InsLlamadaMF extends Instruccion {
         }
         
         // adjuntar el último valor modificado para el método
-        Id id = this.id_.accesos.pollLast();
-        this.id_.accesos.addLast(new Id (nombre_ , id.linea, id.columna));
-        
+        if (!aux.equalsIgnoreCase("")) {
+            Id id = this.id_.accesos.pollLast();
+            this.id_.accesos.addLast(new Id (nombre_ , id.linea, id.columna));
+        }
         // buscar que exista la función o método creados
         Simbolo simbolo = ent.global.buscar(this.id_, linea, columna, "El metodo");
         
@@ -89,7 +98,6 @@ public class InsLlamadaMF extends Instruccion {
             prueba = simbolo;
             
             if (this.e != null  &&  ((SimboloMF) simbolo).getParametros() != null ) {
-                
                 
                 // iniciar las declaraciones para la llamada con los valores resutletos 
                 for (Declaracion declaracion : ((SimboloMF)simbolo).getParametros() ) {
@@ -106,7 +114,6 @@ public class InsLlamadaMF extends Instruccion {
                 if (entorno != null) {
                     entornoNuevo.global = entorno;
                     entornoNuevo.anterior = entorno.anterior;
-                    
                 }
             }
             
@@ -128,7 +135,6 @@ public class InsLlamadaMF extends Instruccion {
             // la el simbolo no existe
             Errores eeee = new Errores(Errores.enumTipoError.semantico,"No se ha declarado la propiedad utilizada: " + nombre_ + " en la fila " + this.linea + " columna: " + this.columna );
         }
-        
         return retorno;
     }
     

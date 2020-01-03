@@ -30,7 +30,7 @@ class hola {
 	void main () {
 
 		println(" soy un main ");
-		int resultado = ackermann( 3,8) ;
+		int resultado = ackermann(3 , 7) ;
 		println(resultado);
 	}
 

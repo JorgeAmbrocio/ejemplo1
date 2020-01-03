@@ -56,9 +56,7 @@ public class Acceso extends Expresion {
                 // sí es de tipo objeto, ahora vamos a buscar en el entorno del objeto
                 busqueda = ((Objeto)l.valor).global;
             }
-            
         }
-        
         return retorno;
     }
     

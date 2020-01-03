@@ -53,7 +53,6 @@ public class ExpLlamadaMF extends Expresion {
     
     @Override
     public Expresion getValor(Entorno ent) {
-        
         Entorno entornoNuevo = new Entorno( ent.global, ent.global);
         Expresion retorno = new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@");
         
@@ -87,8 +86,6 @@ public class ExpLlamadaMF extends Expresion {
         // buscar que exista la función o método creados
         Simbolo simbolo = ent.global.buscar(this.id_, linea, columna, "El metodo ");
         
-        
-        
         // verifica rexistencia del simbolo metodo funcion
         if (simbolo != null) {
             // la el simbolo sí existe
@@ -98,7 +95,6 @@ public class ExpLlamadaMF extends Expresion {
             prueba = simbolo;
             
             if (this.e != null  &&  ((SimboloMF) simbolo).getParametros() != null ) {
-                
                 
                 // iniciar las declaraciones para la llamada con los valores resutletos 
                 for (Declaracion declaracion : ((SimboloMF)simbolo).getParametros() ) {
@@ -110,7 +106,6 @@ public class ExpLlamadaMF extends Expresion {
             }
             
             // obtener el entorno global del objeto con elque se ejecutará la llamada
-            
             if (this.id_.accesos.size() > 1) {
                 Entorno entorno = ent.getEntornoAcceso(id_);
                 if (entorno != null) {
