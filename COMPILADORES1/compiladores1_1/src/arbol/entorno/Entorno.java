@@ -59,6 +59,20 @@ public class Entorno {
         return null;
     }
     
+    public Simbolo buscarEnEntorno (String nombre, int linea, int columna, String cadenaError) {
+        
+        
+        if (this.global.tabla.containsKey(nombre)) {
+            Simbolo sim = this.global.tabla.get(nombre);
+            return sim;
+        }
+
+        
+        System.out.println("Error semántico: " + cadenaError + " '" + nombre + "' No existe en Linea:" + linea + " Columna:" + columna);
+        Errores errr = new Errores(Errores.enumTipoError.semantico , "Error semántico: " + cadenaError + " '" + "' No existe en Linea:" + linea + " Columna:" + columna);
+        return null;
+    }
+    
     
     public Simbolo buscar (Acceso nombre, int linea, int columna, String cadenaError) {
         
@@ -70,7 +84,7 @@ public class Entorno {
         
         // recorrer todos los id
         for (Id id : aux){
-            Simbolo l = id.getSimbolo(this); // obtiene el objeto en el entorno indicado
+            Simbolo l = id.getSimbolo(busqueda); // obtiene el objeto en el entorno indicado
             //aux.pollFirst();
             
             //verificar si es el último elemento

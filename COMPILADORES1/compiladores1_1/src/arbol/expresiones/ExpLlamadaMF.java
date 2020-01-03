@@ -54,13 +54,21 @@ public class ExpLlamadaMF extends Expresion {
     @Override
     public Expresion getValor(Entorno ent) {
         
-        Entorno entornoNuevo = new Entorno(ent, ent.global);
+        Entorno entornoNuevo = new Entorno( ent.global, ent.global);
         Expresion retorno = new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@");
         
         LinkedList<Expresion> resueltos = new LinkedList<>();
         
         // preprar el nombre
-        String nombre_ =  "#" + this.id_.accesos.getLast().id;
+        
+        String aux = "";
+        String strId = this.id_.accesos.getLast().id;
+        String lastLetter = strId.substring(0,1);
+        if ( !lastLetter.equals("#")) {
+            aux = "#";
+        }
+        
+        String nombre_ =  aux + this.id_.accesos.getLast().id;
         
         if  (this.e != null) {
             // sí tiene parámetros, crear nuevo nombre
@@ -72,11 +80,12 @@ public class ExpLlamadaMF extends Expresion {
         }
         
         // adjuntar el último valor modificado para el método
-        Id id = this.id_.accesos.pollLast();
-        this.id_.accesos.addLast(new Id (nombre_ , id.linea, id.columna));
-        
+        if (!aux.equalsIgnoreCase("")) {
+            Id id = this.id_.accesos.pollLast();
+            this.id_.accesos.addLast(new Id (nombre_ , id.linea, id.columna));
+        }
         // buscar que exista la función o método creados
-        Simbolo simbolo = ent.buscar(this.id_, linea, columna, "El metodo");
+        Simbolo simbolo = ent.global.buscar(this.id_, linea, columna, "El metodo ");
         
         
         

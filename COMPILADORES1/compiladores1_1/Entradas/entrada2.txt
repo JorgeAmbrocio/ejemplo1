@@ -19,6 +19,7 @@ class hola {
 	}
 
 	int factorial (int contador) {
+		println(contador);
 		if (contador != 1) {
 			return contador * factorial(contador -1);
 		}else {
@@ -29,7 +30,7 @@ class hola {
 	void main () {
 
 		println(" soy un main ");
-		int resultado = multi( 5 , 6) ;
+		int resultado = ackermann( 3,8) ;
 		println(resultado);
 	}
 

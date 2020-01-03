@@ -14,6 +14,7 @@ import arbol.instrucciones.Asignacion;
 import arbol.instrucciones.DeclaraMetodoFuncion;
 import arbol.instrucciones.Declaracion;
 import arbol.instrucciones.DeclaracionClase;
+import arbol.instrucciones.Import;
 import arbol.instrucciones.Metodo;
 import interfaz.Errores;
 import java.util.LinkedList;
@@ -24,7 +25,7 @@ import java.util.LinkedList;
  */
 public class Objeto extends Expresion {
     public Entorno global;
-    public Entorno anterior;
+    //public Entorno anterior;
     public LinkedList<Expresion> parametros;
 
     public Objeto(String id, LinkedList<Expresion> parametros, int linea, int columna) {
@@ -63,13 +64,20 @@ public class Objeto extends Expresion {
                 // sí es una clase
                 
                 this.global = new Entorno(null); // crea un entorno blobal de la clase
-                //this.anterior = ent;
+                this.global.global = this.global;
                 
                 // obtener el bloque de datps y declaraciones del objeto
                 DeclaracionClase dclase  = (DeclaracionClase) simbolo.valor;
                 LinkedList<Instruccion> instrucciones  = dclase.bloque.instrucciones;
                 
                 // recorrer las instrucciones, para insertar los datos en el objeto
+                // recorres declaraciones de metodos
+                for (Instruccion instruccion: instrucciones) {
+                    if (instruccion.getClass() == Import.class){
+                        // si es la declaracion de un metodo o funcion
+                        instruccion.ejecutar(this.global);
+                    }
+                }
                 
                 // recorres declaraciones de metodos
                 for (Instruccion instruccion: instrucciones) {

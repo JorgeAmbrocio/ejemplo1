@@ -56,7 +56,7 @@ public class InsLlamadaMF extends Instruccion {
     
     @Override
     public Object ejecutar(Entorno ent) {
-        Entorno entornoNuevo = new Entorno(ent, ent.global);
+        Entorno entornoNuevo = new Entorno( ent, ent.global);
         Object retorno = null;
         
         LinkedList<Expresion> resueltos = new LinkedList<>();
@@ -78,8 +78,7 @@ public class InsLlamadaMF extends Instruccion {
         this.id_.accesos.addLast(new Id (nombre_ , id.linea, id.columna));
         
         // buscar que exista la función o método creados
-        Simbolo simbolo = ent.buscar(this.id_, linea, columna, "El metodo");
-        
+        Simbolo simbolo = ent.global.buscar(this.id_, linea, columna, "El metodo");
         
         // verifica rexistencia del simbolo metodo funcion
         if (simbolo != null) {
@@ -106,6 +105,8 @@ public class InsLlamadaMF extends Instruccion {
                 Entorno entorno = ent.getEntornoAcceso(id_);
                 if (entorno != null) {
                     entornoNuevo.global = entorno;
+                    entornoNuevo.anterior = entorno.anterior;
+                    
                 }
             }
             

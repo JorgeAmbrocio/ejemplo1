@@ -42,7 +42,7 @@ public class If extends Instruccion {
         }
         
         if (this.bloqueElse != null) {
-            Entorno nuevo  = new Entorno (ent);
+            Entorno nuevo  = new Entorno (ent, ent.global);
             Object retorno  =bloqueElse.ejecutar(nuevo);
             return retorno;
         }

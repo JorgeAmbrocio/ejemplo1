@@ -42,7 +42,7 @@ public class CondicionIf extends Instruccion  {
             boolean ejecutar = Boolean.parseBoolean(condicion_.valor.toString());
             if (ejecutar) {
                 this.ejecutado = true;
-                Entorno nuevo = new Entorno(ent);
+                Entorno nuevo = new Entorno(ent, ent.global);
                 this.ejecutado = true;
                 Object retorno = this.bloque.ejecutar(nuevo);
                 this.ejecutado = true;
