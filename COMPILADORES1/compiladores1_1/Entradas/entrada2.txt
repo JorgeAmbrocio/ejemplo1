@@ -31,7 +31,7 @@ class hola {
 
 	void main () {
 		
-		int resultado = ackermann(2,2) ;
+		int resultado = this.multi(2,2) ;
 		println(resultado);
 	}
 
@@ -39,16 +39,17 @@ class hola {
 		println("Se ha ejecutado el constructor.");
 	}
 
-	void hola (int variable){
+	void hola (int a){
 		println("Se ha ejecutado el constructor con parámetro int");
-		a = variable;
+		this.a = a;
+		println(this.a);
 	}
 
 }
 
 
-hola h = new hola();
-println(h.a);
+hola h = new hola(12);
+h.main();
 
 /*
 	

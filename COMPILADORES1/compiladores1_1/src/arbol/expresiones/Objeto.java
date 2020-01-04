@@ -76,12 +76,6 @@ public class Objeto extends Expresion {
                 
                 // recorrer las instrucciones, para insertar los datos en el objeto
                 // recorres declaraciones de metodos
-                for (Instruccion instruccion: instrucciones) {
-                    if (instruccion.getClass() == Import.class){
-                        // si es la declaracion de un metodo o funcion
-                        instruccion.ejecutar(this.global);
-                    }
-                }
                 
                 // recorres declaraciones de metodos
                 for (Instruccion instruccion: instrucciones) {
@@ -92,6 +86,9 @@ public class Objeto extends Expresion {
                 }
                 
                 /// declaracion de variables
+                    // declarar la variable this
+                    Declaracion declaracion = new Declaracion( new Tipo (Tipo.EnumTipo.objeto, dclase.nombre), "this", this, 0,0);
+                    declaracion.ejecutar(this.global);
                 for (Instruccion instruccion: instrucciones) {
                     if (instruccion.getClass() == Declaracion.class){
                         // si es la declaracion de un metodo o funcion
@@ -143,6 +140,11 @@ public class Objeto extends Expresion {
                 if (!tieneConstructorAdecuado) {
                     // si se encontró el constructor adecuado para la instancia
                     retorno = this;
+                }
+                
+                // si no se pudo crear el objeto, se crea el error para mostrar en la tabla
+                if (retorno.tipo.tipo == Tipo.EnumTipo.error) {
+                    Errores errr = new Errores (Errores.enumTipoError.semantico, "No se encontró el constructor adecuado para la instancia solicitada de la clase " + dclase.nombre + ".");
                 }
                 
             }else {

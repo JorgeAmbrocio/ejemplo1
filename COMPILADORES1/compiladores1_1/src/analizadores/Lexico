@@ -144,7 +144,7 @@ BLANCOS=[ \r\t]+
 <YYINITIAL> "toInt" {return new Symbol(sym.rtoInt,yyline,yychar, yytext());}
 <YYINITIAL> "toChar" {return new Symbol(sym.rtoChar,yyline,yychar, yytext());}
 
-<YYINITIAL> "this" {return new Symbol(sym.rthis,yyline,yychar, yytext());}
+
 <YYINITIAL> "super" {return new Symbol(sym.rsuper,yyline,yychar, yytext());}
 <YYINITIAL> "null" {return new Symbol(sym.rnull,yyline,yychar, yytext());}
 <YYINITIAL> "import" {return new Symbol(sym.rimport,yyline,yychar, yytext());}

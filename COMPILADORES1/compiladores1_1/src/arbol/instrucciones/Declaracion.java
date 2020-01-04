@@ -62,12 +62,12 @@ public class Declaracion extends Instruccion {
                     switch (resultado.tipo.tipo) {
                         case entero:
                             simbolo = new Simbolo(tipo, resultado.valor);
-                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            ent.insertar(id, simbolo, linea, columna, "La variable ");
                             return null;
                         case caracter:
                             int ascii = (int) resultado.valor.toString().charAt(0);
                             simbolo = new Simbolo(tipo, ascii);
-                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            ent.insertar(id, simbolo, linea, columna, "La variable ");
                             return null;
                     }
                     break;
@@ -76,12 +76,12 @@ public class Declaracion extends Instruccion {
                         case caracter:
                             int ascii = (int) resultado.valor.toString().charAt(0);
                             simbolo = new Simbolo(tipo, ascii);
-                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            ent.insertar(id, simbolo, linea, columna, "La variable ");
                             return null;
                         case entero:
                         case doble:
                             simbolo = new Simbolo(tipo, resultado.valor);
-                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            ent.insertar(id, simbolo, linea, columna, "La variable ");
                             return null;
                     }
                     break;
@@ -89,7 +89,7 @@ public class Declaracion extends Instruccion {
                     switch (resultado.tipo.tipo) {
                         case caracter:
                             simbolo = new Simbolo(tipo, resultado.valor);
-                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            ent.insertar(id, simbolo, linea, columna, "La variable ");
                             return null;
                     }
                     break;
@@ -97,7 +97,7 @@ public class Declaracion extends Instruccion {
                     switch (resultado.tipo.tipo) {
                         case booleano:
                             simbolo = new Simbolo(tipo, resultado.valor);
-                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            ent.insertar(id, simbolo, linea, columna, "La variable ");
                             return null;
                     }
                     break;
@@ -105,7 +105,7 @@ public class Declaracion extends Instruccion {
                     switch (resultado.tipo.tipo) {
                         case cadena:
                             simbolo = new Simbolo(tipo, resultado.valor);
-                            ent.insertar(id, simbolo, linea, columna, "La variable");
+                            ent.insertar(id, simbolo, linea, columna, "La variable ");
                             return null;
                     }
                     break;
@@ -114,7 +114,7 @@ public class Declaracion extends Instruccion {
                         case objeto:
                             if (this.tipo.tr.equals(resultado.tipo.tr)) {
                                 simbolo = new Simbolo(tipo, resultado.valor);
-                                ent.insertar(id, simbolo, linea, columna, "La variable");
+                                ent.insertar(id, simbolo, linea, columna, "La variable ");
                                 return null;
                             }
                     }

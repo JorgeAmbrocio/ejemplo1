@@ -38,7 +38,7 @@ parser code
 
 terminal String mas,menos,por,division,potencia,parizquierdo,parderecho,igual,puntoycoma,llaveizq,llaveder,rint,rdouble,rchar,rboolean,rstring,rclass,coma,rvoid;
 terminal String entero,doble,rtrue,rfalse,cadena,caracter,id,rprintln,rprint,rprinttabla;
-terminal String menorque,mayorque,menorigualque,mayorigualque,igualigual,diferenteque,or,and,xor,not,rif,relse,rwhile,rbreak,rcontinue,modulo,rfor,rdo,rswitch,rcase,rdefault,dospuntos,interrogacion,masmas,menosmenos,rpow,rreturn,corizquierdo,corderecho,rnew,rpublic,rprotected,rprivate,rabstract,rstatic,rfinal,rstr,rtoDouble,rtoInt,rtoChar,rextends,punto,rthis,rnull,rimport,
+terminal String menorque,mayorque,menorigualque,mayorigualque,igualigual,diferenteque,or,and,xor,not,rif,relse,rwhile,rbreak,rcontinue,modulo,rfor,rdo,rswitch,rcase,rdefault,dospuntos,interrogacion,masmas,menosmenos,rpow,rreturn,corizquierdo,corderecho,rnew,rpublic,rprotected,rprivate,rabstract,rstatic,rfinal,rstr,rtoDouble,rtoInt,rtoChar,rextends,punto,rnull,rimport,
 rgraph,rsuper,rread_file,rwrite_file,rinstanceof,rread;
 
 terminal umenos; //Para manejar el - E
