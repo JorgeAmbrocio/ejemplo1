@@ -67,10 +67,10 @@ public class DeclaraMetodoFuncion  extends Instruccion{
         
         if (this.tipo.tipo == Tipo.EnumTipo.metodo) {
             // si es un método
-            ent.insertar(this.nombre, s, linea, columna, "El metodo");
+            ent.insertar(this.nombre, s, linea, columna, "El metodo ");
         }else {
             // si es una funcion
-            ent.insertar(this.nombre, s, linea, columna, "La funcion");
+            ent.insertar(this.nombre, s, linea, columna, "La funcion ");
         }
         
         return null;

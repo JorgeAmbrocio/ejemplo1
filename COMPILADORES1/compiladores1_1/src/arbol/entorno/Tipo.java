@@ -17,7 +17,6 @@ public class Tipo {
     
     public Tipo (EnumTipo tipo) {
         this.tipo = tipo;
-        // this.tr = null;
         this.tr = "";
     }
     

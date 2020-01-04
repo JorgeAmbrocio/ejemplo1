@@ -35,27 +35,24 @@ class hola {
 		println(resultado);
 	}
 
+	void hola () {
+		println("Se ha ejecutado el constructor.");
+	}
+
+	void hola (int variable){
+		println("Se ha ejecutado el constructor con parámetro int");
+		a = variable;
+	}
+
 }
 
 
 hola h = new hola();
-h.main();
+println(h.a);
+
 /*
 	
 cubo c = new cubo();
 c.imprimir();
 
 */
-/*
-
-println(resultado);
-
-		cubo c = new cubo();
-		cubo cubo1 = new cubo();
-		c.imprimir();
-
-		cubo1.x = 15;		
-		cubo1.imprimir();
-
-// int resultado =  h.factorial(5);
-// println(resultado); */
