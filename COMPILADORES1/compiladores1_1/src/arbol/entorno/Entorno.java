@@ -44,7 +44,6 @@ public class Entorno {
         tabla.put(nombre, sim);
     }
     
-    
     public Simbolo buscar (String nombre, int linea, int columna, String cadenaError) {
         
         for (Entorno e = this; e != null; e = e.anterior) {
@@ -59,19 +58,7 @@ public class Entorno {
         return null;
     }
     
-    public Simbolo buscarEnEntorno (String nombre, int linea, int columna, String cadenaError) {
-        
-        
-        if (this.global.tabla.containsKey(nombre)) {
-            Simbolo sim = this.global.tabla.get(nombre);
-            return sim;
-        }
-
-        
-        System.out.println("Error semántico: " + cadenaError + " '" + nombre + "' No existe en Linea:" + linea + " Columna:" + columna);
-        Errores errr = new Errores(Errores.enumTipoError.semantico , "Error semántico: " + cadenaError + " '" + "' No existe en Linea:" + linea + " Columna:" + columna);
-        return null;
-    }
+    
     
     
     public Simbolo buscar (Acceso nombre, int linea, int columna, String cadenaError) {

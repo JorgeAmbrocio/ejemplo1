@@ -42,6 +42,12 @@ public class Id extends Expresion {
         
         if (sim != null){
             return sim;
+        }else {
+            sim = ent.global.buscar(id, linea, columna, "La variable ");
+            
+            if (sim != null) {
+                return sim;
+            }
         }
         
         return new Simbolo(new Tipo(Tipo.EnumTipo.error), new Literal(new Tipo (Tipo.EnumTipo.error) , "@Error@"));

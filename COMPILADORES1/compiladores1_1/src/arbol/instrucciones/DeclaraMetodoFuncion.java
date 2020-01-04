@@ -44,12 +44,17 @@ public class DeclaraMetodoFuncion  extends Instruccion{
         // crear el objeto símbolo 
         SimboloMF s = new SimboloMF (this.tipo, this.nombre);
         
-        this.nombre = "#" +  nombre ;
+        String lastLetter = this.nombre.substring(0, 1);
+        
+        if (!lastLetter.equals("#")) {
+            // si no se ha utilizado el nombre, se le añade un nuevo #
+            this.nombre = "#" +  nombre ;
+        }
         
         if (this.parametros != null) {
            
-            // setear los datos
-            s.setDatos(this.parametros, this.bloque);
+           // setear los datos
+           s.setDatos(this.parametros, this.bloque);
            
            // obtener el nombre completo de la fución
            for (Declaracion declaracion : this.parametros) {

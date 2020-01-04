@@ -1,4 +1,16 @@
 // comentario 
+
+class cubo {
+	int x = 3 ;
+	int y = 3;
+
+	void imprimir(){
+		println("soy un cubo " + x + "x" + y);
+	}
+}
+
+
+/*
 int var1 = 100;
 char var2 = 'N';
 boolean var3 = false;
@@ -10,3 +22,4 @@ println(var2);
 println(var3);
 println(var4);
 println(var5);
+*/

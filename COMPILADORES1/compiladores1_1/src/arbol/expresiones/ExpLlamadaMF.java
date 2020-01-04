@@ -53,7 +53,7 @@ public class ExpLlamadaMF extends Expresion {
     
     @Override
     public Expresion getValor(Entorno ent) {
-        Entorno entornoNuevo = new Entorno( ent.global, ent.global);
+        Entorno entornoNuevo = new Entorno( ent, ent.global);
         Expresion retorno = new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@");
         
         LinkedList<Expresion> resueltos = new LinkedList<>();
@@ -109,7 +109,7 @@ public class ExpLlamadaMF extends Expresion {
             if (this.id_.accesos.size() > 1) {
                 Entorno entorno = ent.getEntornoAcceso(id_);
                 if (entorno != null) {
-                    entornoNuevo.global = entorno;
+                    entornoNuevo.global = entorno.anterior;
                 }
             }
             

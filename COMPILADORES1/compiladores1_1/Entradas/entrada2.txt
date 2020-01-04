@@ -1,4 +1,6 @@
 
+import "Entradas/entrada1.txt";
+
 class hola {
 	int a = 6 ;
 
@@ -28,9 +30,8 @@ class hola {
 	}
 
 	void main () {
-
-		println(" soy un main ");
-		int resultado = ackermann(3 , 7) ;
+		
+		int resultado = ackermann(2,2) ;
 		println(resultado);
 	}
 
@@ -40,5 +41,21 @@ class hola {
 hola h = new hola();
 h.main();
 /*
+	
+cubo c = new cubo();
+c.imprimir();
+
+*/
+/*
+
+println(resultado);
+
+		cubo c = new cubo();
+		cubo cubo1 = new cubo();
+		c.imprimir();
+
+		cubo1.x = 15;		
+		cubo1.imprimir();
+
 // int resultado =  h.factorial(5);
 // println(resultado); */

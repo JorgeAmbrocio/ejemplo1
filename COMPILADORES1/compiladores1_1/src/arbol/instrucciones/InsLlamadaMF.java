@@ -87,8 +87,12 @@ public class InsLlamadaMF extends Instruccion {
             this.id_.accesos.addLast(new Id (nombre_ , id.linea, id.columna));
         }
         // buscar que exista la función o método creados
-        Simbolo simbolo = ent.global.buscar(this.id_, linea, columna, "El metodo");
-        
+        Simbolo simbolo;
+        if (this.id_.accesos.size() == 1){
+            simbolo = ent.global.buscar(this.id_, linea, columna, "El metodo");
+        }else {
+            simbolo = ent.buscar(this.id_, linea, columna, "El metodo");
+        }
         // verifica rexistencia del simbolo metodo funcion
         if (simbolo != null) {
             // la el simbolo sí existe
@@ -119,6 +123,7 @@ public class InsLlamadaMF extends Instruccion {
             
             // ejecutar el bloque del metodo o funcion
             retorno = ((SimboloMF)simbolo).getBloque().ejecutar(entornoNuevo);
+            
             if (retorno != null) {
                 // el objeto sí retonó un objeto
                 Literal l = (Literal) retorno;
