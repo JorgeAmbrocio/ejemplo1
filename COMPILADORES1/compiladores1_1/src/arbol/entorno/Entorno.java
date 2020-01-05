@@ -11,8 +11,13 @@ import arbol.expresiones.Id;
 import arbol.expresiones.Literal;
 import arbol.expresiones.Objeto;
 import interfaz.Errores;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -136,6 +141,88 @@ public class Entorno {
         }
         
         return retorno;
+    }
+    
+    
+    public void GraficarEntorno(){
+        
+        String c = "";
+        
+        c += "digraph g{\n";
+        c += "  node[shape = record];\n";
+        c += "  rankdir=LR;\n";
+        
+        for (Entorno e = this; e != null; e = e.anterior) {
+            c += e.getContenido() + "\n";
+            
+            if (e.anterior != null) {
+                
+                String stre = e.toString().replace(".", "_").replace("@", "");
+                String stre_ = e.anterior.toString().replace(".", "_").replace("@", "");
+                
+                c += stre + "->" + stre_ +"\n";
+            }else {
+                String stre = e.toString().replace(".", "_").replace("@", "");
+                c += stre + "-> null\n";
+            }
+        }
+        
+        c += "}";
+        
+        try {
+            FileWriter fw = new FileWriter("entorno.dot");
+            PrintWriter pw = new PrintWriter(fw);
+            pw.print(c);
+            pw.close();
+            fw.close();
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo crear el reporte entorno", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        try {
+            String comando = "dot entorno.dot -o entorno.png -Tpng";
+            Runtime.getRuntime().exec(comando);
+        }catch (Exception e){
+           
+        }
+    }
+    
+    public String getContenido(){
+        String c ="" ; 
+        
+        c += this.toString().replace(".", "_").replace("@", "") + "[label = \" ";
+        
+        int iterador = 0;
+        
+        for (Map.Entry<String, Simbolo> contenido : this.tabla.entrySet()) {
+            String tipo ="Variable ";
+            
+            if (contenido.getKey().substring(0, 1).equals("#")) {
+                tipo = "Metodo | Funcion ";
+            }
+            
+            Simbolo s = contenido.getValue();
+            Object object = s.valor;
+            String valor = "";
+            
+            if (object.getClass() == Objeto.class){
+                String [] vector = object.toString().split("@");
+                valor = " Instancia: " + vector[vector.length - 1];
+            }else {
+                valor = object.toString();
+            }
+            
+            
+            c += "<f" + iterador + "> " + tipo + 
+                    " de tipo: " + s.tipo.tipo + " " + s.tipo.tr +
+                    " con valor: " + valor + " | ";
+            iterador ++;
+        }
+        
+        c += "";
+        c += "<f" + (iterador ) + "> \"];\n" ;
+        
+        return c;
     }
     
 }

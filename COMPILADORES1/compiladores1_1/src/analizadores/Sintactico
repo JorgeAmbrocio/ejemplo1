@@ -40,13 +40,14 @@ terminal String mas,menos,por,division,potencia,parizquierdo,parderecho,igual,pu
 terminal String entero,doble,rtrue,rfalse,cadena,caracter,id,rprintln,rprint,rprinttabla;
 terminal String menorque,mayorque,menorigualque,mayorigualque,igualigual,diferenteque,or,and,xor,not,rif,relse,rwhile,rbreak,rcontinue,modulo,rfor,rdo,rswitch,rcase,rdefault,dospuntos,interrogacion,masmas,menosmenos,rpow,rreturn,corizquierdo,corderecho,rnew,rpublic,rprotected,rprivate,rabstract,rstatic,rfinal,rstr,rtoDouble,rtoInt,rtoChar,rextends,punto,rnull,rimport,
 rgraph,rsuper,rread_file,rwrite_file,rinstanceof,rread;
+terminal String rgraficarentornos;
 
 terminal umenos; //Para manejar el - E
 
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES, L_INSTRUCCIONES_CLASE;
 non terminal Instruccion INSTRUCCION, INSTRUCCION_CLASE, DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO, SENTENCIA_IMPORT,  METODO;
-non terminal Instruccion  SENTENCIA_LLAMADA, RETORNO, DECLARACION_CLASE;
+non terminal Instruccion  SENTENCIA_LLAMADA, RETORNO, DECLARACION_CLASE, SENTENCIA_GRAFICAR_ENTORNO;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
@@ -112,6 +113,10 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_LLAMADA:a {: RESULT = a; :}
             | RETORNO:a {: RESULT =a; :}
             | DECLARACION_CLASE:a {: RESULT = a ; :}
+            | SENTENCIA_GRAFICAR_ENTORNO:a {: RESULT = a; :}
+;
+
+SENTENCIA_GRAFICAR_ENTORNO ::= rgraficarentornos parizquierdo  parderecho puntoycoma {: RESULT = new GraficarEntornos(); :}
 ;
 
 INSTRUCCION_CLASE ::= METODO:a {: RESULT = a; :}

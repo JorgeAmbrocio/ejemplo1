@@ -10,6 +10,7 @@ import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Tipo;
 import arbol.expresiones.Acceso;
+import arbol.expresiones.Objeto;
 
 /**
  *
@@ -32,7 +33,13 @@ public class Imprimir extends Instruccion{
         
         Expresion resultado = valor.getValor(ent);
         
+        String rv = resultado.valor.toString();
         
+        if (resultado.valor.getClass() == Objeto.class) {
+            String [] vector = resultado.toString().split("@");
+            
+            rv = "Instancia Objeto->" + resultado.tipo.tr + "." + vector[1] ;
+        }
         
         String auxiliar = "";
         
@@ -41,7 +48,7 @@ public class Imprimir extends Instruccion{
         }
         
         if (resultado.tipo.tipo != Tipo.EnumTipo.error) {
-            System.out.print(resultado.valor + auxiliar);
+            System.out.print(rv + auxiliar);
                 
             try {
                 compiladores1_1.Compiladores1_1.fmrP.setData(resultado.valor + auxiliar);

@@ -114,6 +114,8 @@ BLANCOS=[ \r\t]+
 <YYINITIAL> "println" {return new Symbol(sym.rprintln,yyline,yychar, yytext());}
 <YYINITIAL> "print" {return new Symbol(sym.rprint,yyline,yychar, yytext());}
 <YYINITIAL> "printtabla" {return new Symbol(sym.rprinttabla,yyline,yychar, yytext());}
+<YYINITIAL> "Graficar_entornos" {return new Symbol(sym.rgraficarentornos,yyline,yychar, yytext());}
+
 
 
 <YYINITIAL> "if" {return new Symbol(sym.rif,yyline,yychar, yytext());}

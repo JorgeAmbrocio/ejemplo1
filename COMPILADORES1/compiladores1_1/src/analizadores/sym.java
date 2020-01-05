@@ -27,7 +27,7 @@ public class sym {
   public static final int rprotected = 62;
   public static final int rdouble = 14;
   public static final int rinstanceof = 79;
-  public static final int umenos = 81;
+  public static final int umenos = 82;
   public static final int interrogacion = 53;
   public static final int rprintln = 28;
   public static final int rtoDouble = 68;
@@ -69,6 +69,7 @@ public class sym {
   public static final int potencia = 6;
   public static final int rwhile = 43;
   public static final int error = 1;
+  public static final int rgraficarentornos = 81;
   public static final int entero = 21;
   public static final int rwrite_file = 78;
   public static final int rpow = 56;
@@ -172,6 +173,7 @@ public class sym {
   "rwrite_file",
   "rinstanceof",
   "rread",
+  "rgraficarentornos",
   "umenos"
   };
 }
