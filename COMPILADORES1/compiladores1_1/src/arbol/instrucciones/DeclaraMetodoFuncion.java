@@ -9,6 +9,7 @@ import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.SimboloMF;
 import arbol.entorno.Tipo;
+import arbol.expresiones.Acceso;
 import arbol.instrucciones.sentencias.Bloque;
 import java.util.LinkedList;
 
@@ -21,6 +22,7 @@ public class DeclaraMetodoFuncion  extends Instruccion{
 
     Tipo tipo;
     String nombre;
+    Acceso nombre_;
     LinkedList<Declaracion> parametros;
     Bloque bloque;
 
@@ -37,10 +39,31 @@ public class DeclaraMetodoFuncion  extends Instruccion{
         this.bloque = bloque;
     }
     
+    public DeclaraMetodoFuncion(Acceso nombre, Bloque bloque) {
+        this.tipo = new Tipo(Tipo.EnumTipo.metodo);
+        this.nombre_ = nombre;
+        this.nombre = null;
+        this.bloque = bloque;
+    }
+    
+    public DeclaraMetodoFuncion(Acceso nombre, LinkedList<Declaracion> parametros, Bloque bloque) {
+        this.tipo = new Tipo(Tipo.EnumTipo.metodo);
+        this.nombre_ = nombre;
+        this.nombre = null;
+        this.parametros = parametros;
+        this.bloque = bloque;
+    }
     
     
     @Override
     public Object ejecutar(Entorno ent) {
+        
+        // verificar si el el nombre es limpio
+        // si lo es, entonces se le da el nombre que existe en el acceso
+        if (this.nombre == null) {
+            this.nombre = this.nombre_.accesos.getFirst().id;
+        }
+        
         // crear el objeto símbolo 
         SimboloMF s = new SimboloMF (this.tipo, this.nombre);
         

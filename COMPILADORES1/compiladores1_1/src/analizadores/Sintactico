@@ -47,7 +47,7 @@ terminal umenos; //Para manejar el - E
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES, L_INSTRUCCIONES_CLASE;
 non terminal Instruccion INSTRUCCION, INSTRUCCION_CLASE, DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO, SENTENCIA_IMPORT,  METODO;
-non terminal Instruccion  SENTENCIA_LLAMADA, RETORNO, DECLARACION_CLASE, SENTENCIA_GRAFICAR_ENTORNO;
+non terminal Instruccion  SENTENCIA_LLAMADA, RETORNO, DECLARACION_CLASE, SENTENCIA_GRAFICAR_ENTORNO, CONSTRUCTOR;
 non terminal Expresion E;
 non terminal Tipo T;
 non terminal LinkedList<CondicionIf> L_IF;
@@ -110,13 +110,11 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | SENTENCIA_DECREMENTO:a {: RESULT = a; :}
             | SENTENCIA_IMPORT:a puntoycoma {: RESULT = a ;:}
             | METODO:a {: RESULT = a; :}
+            | CONSTRUCTOR:a {: RESULT = a; :}
             | SENTENCIA_LLAMADA:a {: RESULT = a; :}
             | RETORNO:a {: RESULT =a; :}
             | DECLARACION_CLASE:a {: RESULT = a ; :}
             | SENTENCIA_GRAFICAR_ENTORNO:a {: RESULT = a; :}
-;
-
-SENTENCIA_GRAFICAR_ENTORNO ::= rgraficarentornos parizquierdo  parderecho puntoycoma {: RESULT = new GraficarEntornos(); :}
 ;
 
 INSTRUCCION_CLASE ::= METODO:a {: RESULT = a; :}
@@ -135,10 +133,6 @@ BLOQUE_CLASE ::= llaveizq:z llaveder:y     {: RESULT = null; :}
 DECLARACION_CLASE ::= rclass id:a BLOQUE_CLASE:b {: RESULT = new DeclaracionClase (a, b, aleft, aright); :} 
 ;
 
-RETORNO ::= rreturn puntoycoma {: RESULT = new Return(); :}
-            | rreturn E:a puntoycoma {: RESULT = new Return (a); :}
-;
-
 SENTENCIA_LLAMADA ::= ID:a parizquierdo PARAMETROS_LLAMADA:b parderecho puntoycoma {: RESULT = new InsLlamadaMF(new Acceso(a), b,aleft, aright); :}
             | ID:a parizquierdo  parderecho puntoycoma {: RESULT = new InsLlamadaMF(new Acceso(a),aleft, aright); :}
 ;
@@ -147,12 +141,25 @@ PARAMETROS_LLAMADA ::= PARAMETROS_LLAMADA:a coma E:b {:a.add(b) ; RESULT = a; :}
             | E:a {: RESULT = new LinkedList<>() ; RESULT.add (a);:}
 ;
 
-METODO ::= T:a id:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,c,d ); :}
-            |T:a id:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,d ); :}
-;
-
 PARAMETROS ::= PARAMETROS:a coma DECLARACION:b {: a.add((Declaracion)b); RESULT = a; :}
             | DECLARACION:a {: RESULT = new LinkedList<>() ; RESULT.add((Declaracion)a); :}
+;
+
+SENTENCIA_GRAFICAR_ENTORNO ::= rgraficarentornos parizquierdo  parderecho puntoycoma {: RESULT = new GraficarEntornos(); :}
+;
+
+RETORNO ::= rreturn puntoycoma {: RESULT = new Return(); :}
+            | rreturn E:a puntoycoma {: RESULT = new Return (a); :}
+;
+
+IMPRIMIR ::= rprintln parizquierdo E:a parderecho {: RESULT = new Imprimir(a,true); :}
+    | rprint parizquierdo E:a parderecho {: RESULT = new Imprimir(a,false); :}
+;
+
+BREAK ::= rbreak:a {:RESULT = new Break(aleft, aright);:}
+;
+
+CONTINUE ::= rcontinue:a {:RESULT = new Continue(aleft, aright);:}
 ;
 
 SENTENCIA_IMPORT ::= rimport cadena:a {: RESULT = new Import (a , aleft , aright); :}
@@ -184,12 +191,6 @@ L_CASOS ::= L_CASOS:a rcase E:b dospuntos L_INSTRUCCIONES:c {: a.add(new Condici
 ;
 
 
-BREAK ::= rbreak:a {:RESULT = new Break(aleft, aright);:}
-;
-
-CONTINUE ::= rcontinue:a {:RESULT = new Continue(aleft, aright);:}
-;
-
 SENTENCIA_WHILE ::= rwhile:z parizquierdo:x E:a parderecho:y BLOQUE:b {: RESULT = new While (a, b,zleft, zright) ;:} // crear nueva instruccion
 ;
 
@@ -209,14 +210,23 @@ BLOQUE ::= llaveizq:z llaveder:y     {: RESULT = new Bloque(); :}
 DECLARACION ::= 
         T:a id:b igual E:c {: RESULT = new Declaracion(a, b, c, bleft, bright); :}
         | T:a id:b {: RESULT = new Declaracion(a, b, bleft, bright); :}
-        //| id:a id:b igual rnew id:c PARAMETROS_LLAMADA:d {: RESULT  = new DeclaraionInstancia(a,b, c, aleft, aright); :}
-        //| id:a id:b {: RESULT = new DeclaracionInstancia(a,b, aleft, aright); :}
+        
 ;
 
 ASIGNACION ::= 
                 ID:a igual E:b {: RESULT = new Asignacion(new Acceso(a) ,aleft,aright ,b); :}
                 //| id:a igual rnew id:b PARAMETROS_LLAMADA:c {: RESULT = new AsignacionInstancia(); :}
                 //| id:a L_DIMENSIONES_EXPRESION:b igual E:c {: RESULT = new AsignacionArreglo(a,aleft,aright,b,c); :}
+;
+
+ID ::= ID:a punto id:b {: a.add(new Id(b, bleft,bright)); RESULT = a; :}
+        | id:a {: RESULT  = new LinkedList<>(); RESULT.add(new Id(a, aleft,aright)); :}
+;
+
+METODO ::= T:a id:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,c,d ); :}
+            |T:a id:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,d ); :}
+            |ID:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion( new Acceso(b) ,c,d ); :}
+            |ID:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(new Acceso(b),d ); :}
 ;
 
 T ::= rint:a {: RESULT = new Tipo(Tipo.EnumTipo.entero); :}
@@ -228,13 +238,8 @@ T ::= rint:a {: RESULT = new Tipo(Tipo.EnumTipo.entero); :}
     | id:a {: RESULT = new Tipo(Tipo.EnumTipo.objeto, a); :}
 ;
 
-IMPRIMIR ::= rprintln parizquierdo E:a parderecho {: RESULT = new Imprimir(a,true); :}
-    | rprint parizquierdo E:a parderecho {: RESULT = new Imprimir(a,false); :}
-;
 
-ID ::= ID:a punto id:b {: a.add(new Id(b, bleft,bright)); RESULT = a; :}
-        | id:a {: RESULT  = new LinkedList<>(); RESULT.add(new Id(a, aleft,aright)); :}
-;
+
 
 E ::= 
         entero:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.entero), a); :}
@@ -267,8 +272,8 @@ E ::=
         | not:a E:b {: RESULT =new Not(b, aleft,aright);:}
         | menos E:a {:RESULT = new Negativo (a, aleft, aright); :}
         | parizquierdo E:a parderecho {:RESULT = a;:}
-        | rnew id:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new Objeto(a, b , aleft, aright); :}
-        | rnew id:a parizquierdo  parderecho {: RESULT = new Objeto(a,  aleft, aright); :}
+        | rnew T:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new Objeto(a, b , aleft, aright); :}
+        | rnew T:a parizquierdo  parderecho {: RESULT = new Objeto(a,  aleft, aright); :}
         
 ;
 

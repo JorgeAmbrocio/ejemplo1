@@ -38,12 +38,12 @@ class hola {
 		println(hh.a);
 	}
 
-	void hola () {
+	hola () {
 		println("Se ha ejecutado el constructor.");
 	}
 
-	void hola (int a){
-		//println("Se ha ejecutado el constructor con parámetro int");
+	hola (int a){
+		println("Se ha ejecutado el constructor con parámetro int");
 		this.a = a;
 
 		Graficar_entornos();
@@ -54,8 +54,6 @@ class hola {
 }
 
 
-hola h = new hola(12);
-println(h);
 
 /*
 	

@@ -1,13 +1,13 @@
 digraph g{
   node[shape = record];
   rankdir=LR;
-arbol_entorno_Entorno77a567e1[label = " <f0> Variable  de tipo: entero  con valor: 12 | <f1> "];
+arbol_entorno_Entorno736e9adb[label = " <f0> Variable  de tipo: entero  con valor: 12 | <f1> "];
 
-arbol_entorno_Entorno77a567e1->arbol_entorno_Entorno736e9adb
-arbol_entorno_Entorno736e9adb[label = " <f0> Metodo | Funcion  de tipo: metodo  con valor: hola | <f1> Variable  de tipo: entero  con valor: 12 | <f2> Metodo | Funcion  de tipo: entero  con valor: multi | <f3> Metodo | Funcion  de tipo: entero  con valor: factorial | <f4> Variable  de tipo: objeto hola con valor:  Instancia: 6d21714c | <f5> Metodo | Funcion  de tipo: metodo  con valor: hola | <f6> Metodo | Funcion  de tipo: entero  con valor: ackermann | <f7> Metodo | Funcion  de tipo: metodo  con valor: main | <f8> "];
+arbol_entorno_Entorno736e9adb->arbol_entorno_Entorno6d21714c
+arbol_entorno_Entorno6d21714c[label = " <f0> Metodo | Funcion  de tipo: metodo  con valor: hola | <f1> Variable  de tipo: entero  con valor: 12 | <f2> Metodo | Funcion  de tipo: entero  con valor: multi | <f3> Metodo | Funcion  de tipo: entero  con valor: factorial | <f4> Variable  de tipo: objeto hola con valor:  Instancia: 108c4c35 | <f5> Metodo | Funcion  de tipo: metodo  con valor: hola | <f6> Metodo | Funcion  de tipo: entero  con valor: ackermann | <f7> Metodo | Funcion  de tipo: metodo  con valor: main | <f8> "];
 
-arbol_entorno_Entorno736e9adb->arbol_entorno_Entorno108c4c35
-arbol_entorno_Entorno108c4c35[label = " <f0> Variable  de tipo: nulo  con valor: arbol.instrucciones.DeclaracionClase@4ccabbaa | <f1> "];
+arbol_entorno_Entorno6d21714c->arbol_entorno_Entorno4ccabbaa
+arbol_entorno_Entorno4ccabbaa[label = " <f0> Variable  de tipo: nulo  con valor: arbol.instrucciones.DeclaracionClase@4bf558aa | <f1> "];
 
-arbol_entorno_Entorno108c4c35-> null
+arbol_entorno_Entorno4ccabbaa-> null
 }

@@ -31,17 +31,15 @@ public class Objeto extends Expresion {
     //public Entorno anterior;
     public LinkedList<Expresion> parametros;
 
-    public Objeto(String id, LinkedList<Expresion> parametros, int linea, int columna) {
-        this.tipo = new Tipo(Tipo.EnumTipo.objeto,id );
-        this.tipo.tr = id;
+    public Objeto(Tipo tipo, LinkedList<Expresion> parametros, int linea, int columna) {
+        this.tipo = tipo;
         this.parametros = parametros;
         this.linea = linea;
         this.columna = columna;
     }
     
-    public Objeto(String id,  int linea, int columna) {
-        this.tipo = new Tipo(Tipo.EnumTipo.objeto,id );
-        this.tipo.tr = id;
+    public Objeto(Tipo tipo,  int linea, int columna) {
+        this.tipo = tipo;
         this.parametros = null;
         this.linea = linea;
         this.columna = columna;
@@ -50,10 +48,28 @@ public class Objeto extends Expresion {
     @Override
     public Expresion getValor(Entorno ent) {
         
+        Expresion retorno = new Literal(new Tipo(Tipo.EnumTipo.error), "@ERROR@");
+        
+        // si no es un objeto, entonces es una expresion normal que retorna el valor de su
+        // parámetro
+        if (this.tipo.tipo != Tipo.EnumTipo.objeto) {
+            if (this.parametros!= null && this.parametros.size() == 1) {
+                Expresion expresion = this.parametros.getFirst().getValor(ent);
+                    
+                if (this.tipo.tipo == expresion.tipo.tipo) {
+                    return new Literal(expresion.tipo, expresion.valor);
+                }else {
+                    Errores errr = new Errores(Errores.enumTipoError.semantico, "El valor de la declaración no coincide con el valor del parámetro " + this.tipo.tipo + "-" + expresion.tipo.tipo);
+                    return retorno;
+                }
+            }else {
+                Errores errr = new Errores(Errores.enumTipoError.semantico, "Se esperaba un único parámetro en la declaración de tipo " + this.tipo.tipo + " línea " + this.linea + " columna " + this.columna);
+                return retorno;
+            }
+        }
+        
         // el valor del objeto
         this.valor = this;
-        
-        Expresion retorno = new Literal(new Tipo(Tipo.EnumTipo.error), "@ERROR@");
         
         // buscar la clase en el entorno
         Simbolo simbolo = ent.buscar(this.tipo.tr, linea, columna, "La clase ");
