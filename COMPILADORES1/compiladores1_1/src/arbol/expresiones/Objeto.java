@@ -84,7 +84,7 @@ public class Objeto extends Expresion {
                 
                 this.global = new Entorno(null); // crea un entorno blobal de la clase
                 this.global.global = this.global;
-                this.global.anterior = ent.anterior;
+                this.global.anterior = ent;
                 
                 // obtener el bloque de datps y declaraciones del objeto
                 DeclaracionClase dclase  = (DeclaracionClase) simbolo.valor;
@@ -92,6 +92,7 @@ public class Objeto extends Expresion {
                 
                 // recorrer las instrucciones, para insertar los datos en el objeto
                 // recorres declaraciones de metodos
+                
                 
                 // recorres declaraciones de metodos
                 for (Instruccion instruccion: instrucciones) {
@@ -103,8 +104,8 @@ public class Objeto extends Expresion {
                 
                 /// declaracion de variables
                     // declarar la variable this
-                    Declaracion declaracion = new Declaracion( new Tipo (Tipo.EnumTipo.objeto, dclase.nombre), "this", this, 0,0);
-                    declaracion.ejecutar(this.global);
+                    Simbolo simThis = new Simbolo(this.tipo, this);
+                    this.global.insertar("this", simThis, 0, 0, "La variable ");
                 for (Instruccion instruccion: instrucciones) {
                     if (instruccion.getClass() == Declaracion.class){
                         // si es la declaracion de un metodo o funcion
@@ -171,7 +172,6 @@ public class Objeto extends Expresion {
             // no existe la clase
             Errores errr = new Errores (Errores.enumTipoError.semantico , "No se ha encontrado la clase " + this.tipo.tr + " para crear el objeto.");
         }
-        
         
         return this;
     }

@@ -5,11 +5,13 @@
  */
 package arbol.instrucciones;
 
+import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.entorno.SimboloClase;
 import arbol.entorno.Tipo;
+import arbol.expresiones.Objeto;
 import arbol.instrucciones.sentencias.Bloque;
 import java.util.LinkedList;
 
@@ -22,7 +24,6 @@ public class DeclaracionClase extends Instruccion {
     public String nombre;
     public Bloque bloque;
     
-    public Entorno imports;
     
     public DeclaracionClase(String nombre, Bloque bloque,int linea , int columna) {
         this.nombre = nombre;
@@ -53,5 +54,17 @@ public class DeclaracionClase extends Instruccion {
         ent.insertar(this.nombre, sc, linea, columna, "La clase ");
         return null;
     }
+    
+    public Object getObjeto(Entorno ent){
+        
+        Objeto objeto = new Objeto(new Tipo(Tipo.EnumTipo.objeto, this.nombre),0,0);
+        
+        Expresion expresion  = objeto.getValor(ent);
+        
+        //LlamadaMF llamada = new LlamadaMF();
+        
+        return null;
+    }
+    
     
 }

@@ -31,11 +31,13 @@ class hola {
 
 	void main () {
 		
-		//int resultado = this.multi(2,2) ;
-		println("resultado");
+		int resultado = ackermann(1,1);
+		println(resultado);
 
-		hola hh = new hola();
-		println(hh.a);
+		hola nn = new hola();
+		nn.a ++;
+		println(nn.a);
+
 	}
 
 	hola () {
@@ -53,6 +55,8 @@ class hola {
 
 }
 
+hola n = new hola();
+n.main();
 
 
 /*
