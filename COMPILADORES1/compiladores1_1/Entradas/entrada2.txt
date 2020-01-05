@@ -55,12 +55,13 @@ class hola {
 
 }
 
-hola n = new hola();
-n.main();
+
 
 
 /*
 	
+	hola n = new hola();
+n.main();
 cubo c = new cubo();
 c.imprimir();
 

@@ -11,6 +11,8 @@ import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.entorno.SimboloClase;
 import arbol.entorno.Tipo;
+import arbol.expresiones.Acceso;
+import arbol.expresiones.Id;
 import arbol.expresiones.Objeto;
 import arbol.instrucciones.sentencias.Bloque;
 import java.util.LinkedList;
@@ -61,7 +63,16 @@ public class DeclaracionClase extends Instruccion {
         
         Expresion expresion  = objeto.getValor(ent);
         
-        //LlamadaMF llamada = new LlamadaMF();
+        LinkedList<Id> lid = new LinkedList<>();
+        lid.add(new Id("main",0,0));
+        InsLlamadaMF llamada = new InsLlamadaMF(new Acceso(lid), 0,0);
+        objeto = (Objeto) expresion.valor;
+        
+        // buscar el main
+        
+        if (objeto.global.tabla.containsKey("#main")) {
+            llamada.ejecutar(objeto.global);
+        }
         
         return null;
     }
