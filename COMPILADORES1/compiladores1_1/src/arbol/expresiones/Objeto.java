@@ -89,7 +89,7 @@ public class Objeto extends Expresion {
                 // obtener el bloque de datps y declaraciones del objeto
                 DeclaracionClase dclase  = (DeclaracionClase) simbolo.valor;
                 LinkedList<Instruccion> instrucciones  = dclase.bloque.instrucciones;
-                
+                String strClase =new String(dclase.nombre);
                 // recorrer las instrucciones, para insertar los datos en el objeto
                 // recorres declaraciones de metodos
                 
@@ -114,7 +114,7 @@ public class Objeto extends Expresion {
                 }
                 
                 // verificar si tiene parámetros
-                String nombreClase = "#" + dclase.nombre;
+                String nombreClase = "#" + strClase;
                 LinkedList<Expresion> resueltos = new LinkedList<>();
                 if (this.parametros != null) {
                     // crear el nuevo anexo de parámetros al nombre
@@ -131,7 +131,7 @@ public class Objeto extends Expresion {
                     
                     String nombreClave = dato.getKey();
                     // verifica si tiene al menos un constructor
-                    if ( nombreClave.contains("#"+ dclase.nombre)) {
+                    if ( nombreClave.contains("#"+ strClase)) {
                         tieneConstructor = true;
                     }
                     

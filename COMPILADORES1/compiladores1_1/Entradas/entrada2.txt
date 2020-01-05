@@ -31,12 +31,14 @@ class hola {
 
 	void main () {
 		
-		int resultado = ackermann(1,1);
+		int resultado = ackermann(3,4);
 		println(resultado);
 
-		hola nn = new hola();
-		nn.a ++;
+
+		hola nn = new hola(12);
 		println(nn.a);
+		
+
 
 	}
 
@@ -48,21 +50,9 @@ class hola {
 		println("Se ha ejecutado el constructor con parámetro int");
 		this.a = a;
 
-		Graficar_entornos();
-
-		//println(this.a);
 	}
 
 }
 
 
 
-
-/*
-	
-	hola n = new hola();
-n.main();
-cubo c = new cubo();
-c.imprimir();
-
-*/

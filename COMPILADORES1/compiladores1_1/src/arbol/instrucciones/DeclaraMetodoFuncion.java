@@ -64,14 +64,16 @@ public class DeclaraMetodoFuncion  extends Instruccion{
             this.nombre = this.nombre_.accesos.getFirst().id;
         }
         
-        // crear el objeto símbolo 
-        SimboloMF s = new SimboloMF (this.tipo, this.nombre);
+        String strNombre = new String(this.nombre);
         
-        String lastLetter = this.nombre.substring(0, 1);
+        // crear el objeto símbolo 
+        SimboloMF s = new SimboloMF (this.tipo, strNombre);
+        
+        String lastLetter = strNombre.substring(0, 1);
         
         if (!lastLetter.equals("#")) {
             // si no se ha utilizado el nombre, se le añade un nuevo #
-            this.nombre = "#" +  nombre ;
+            strNombre = "#" +  strNombre ;
         }
         
         if (this.parametros != null) {
@@ -81,7 +83,7 @@ public class DeclaraMetodoFuncion  extends Instruccion{
            
            // obtener el nombre completo de la fución
            for (Declaracion declaracion : this.parametros) {
-               this.nombre += declaracion.tipo.tipo.toString();
+               strNombre += declaracion.tipo.tipo.toString();
            }
            
         } else {
@@ -90,10 +92,10 @@ public class DeclaraMetodoFuncion  extends Instruccion{
         
         if (this.tipo.tipo == Tipo.EnumTipo.metodo) {
             // si es un método
-            ent.insertar(this.nombre, s, linea, columna, "El metodo ");
+            ent.insertar(strNombre, s, linea, columna, "El metodo ");
         }else {
             // si es una funcion
-            ent.insertar(this.nombre, s, linea, columna, "La funcion ");
+            ent.insertar(strNombre, s, linea, columna, "La funcion ");
         }
         
         return null;
