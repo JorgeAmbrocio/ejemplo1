@@ -10,6 +10,7 @@ import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Tipo;
 import arbol.expresiones.Acceso;
+import arbol.expresiones.Arreglo;
 import arbol.expresiones.Literal;
 import arbol.expresiones.Objeto;
 
@@ -45,6 +46,12 @@ public class Imprimir extends Instruccion{
             
             rv = "Instancia Objeto->" + resultado.tipo.tr + "." + vector[1] ;
         }
+        
+        if (resultado.valor.getClass() == Arreglo.class) {
+            Arreglo arreglo = (Arreglo) resultado.valor;
+            rv = arreglo.getContenido();
+        }
+        
         
         String auxiliar = "";
         

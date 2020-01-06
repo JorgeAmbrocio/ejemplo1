@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -46,10 +46,6 @@ public class DeclaracionClase extends Instruccion {
     @Override
     public Object ejecutar(Entorno ent) {
         
-        // ejecutar los imports del archivo para enlazar el entorno
-        
-        
-    
         // crear un un nuevo simbolo que contiene un objeto clase
         
         Simbolo sc = new Simbolo (new Tipo (Tipo.EnumTipo.nulo) , this );

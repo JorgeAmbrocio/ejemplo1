@@ -197,27 +197,54 @@ public class Arreglo extends Expresion {
         Literal l = null;
         switch(this.tipo.tipo) {
             case entero:
-                l = new Literal(this.tipo,0);
+                l = new Literal(new Tipo(Tipo.EnumTipo.entero),0);
                 break;
             case doble:
-                l = new Literal(this.tipo,0.0);
+                l = new Literal(new Tipo(Tipo.EnumTipo.entero),0.0);
                 break;
             case caracter:
-                l = new Literal(this.tipo,'\0');
+                l = new Literal(new Tipo(Tipo.EnumTipo.entero),'\0');
                 break;
             case cadena:
-                l = new Literal(this.tipo,"");
+                l = new Literal(new Tipo(Tipo.EnumTipo.entero),"");
                 break;
             case booleano:
-                l = new Literal(this.tipo,false);
+                l = new Literal(new Tipo(Tipo.EnumTipo.entero),false);
                 break;
             case objeto:
-                l = new Literal(this.tipo,Tipo.EnumTipo.nulo);
+                l = new Literal(new Tipo(Tipo.EnumTipo.entero),Tipo.EnumTipo.nulo);
                 break;
         }
         
         return l;
         
+    }
+    
+    public String getContenido () {
+        String c = this.getContenido_(this);
+        
+        return c;
+    }
+    
+    public String getContenido_ (Arreglo a) {
+        String c = "{ ";
+        
+        if (a != null) {
+            LinkedList<Expresion> e = (LinkedList) a.contenido.clone();
+            for (Expresion ee : a.contenido) {
+                if (a.profundidad != 1) {
+                    c += this.getContenido_((Arreglo) ee) + ",";
+                }else {
+                    c += ee.valor.toString() + ",";
+                }
+            }
+        }
+        
+        c = c.substring(0, c.length() - 1);
+        
+        c += " }";
+        
+        return c;
     }
     
 }

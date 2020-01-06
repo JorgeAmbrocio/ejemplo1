@@ -32,10 +32,9 @@ class hola {
 	void main () {
 		
 		println(" se está ejecutando el main");
-		cubo c = new cubo();
-
-		c.arreglo = {5,6,3,2};
-		println(c.arreglo[1]);
+		int [][] arreglo = new int[2][3];
+		arreglo[1][1] = 55;
+		println(arreglo);
 	}
 
 	hola () {
