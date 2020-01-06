@@ -16,11 +16,10 @@ import java.util.LinkedList;
  *
  * @author David Ventura
  */
-public class Acceso extends Expresion {
+public class AccesoCompleto extends Expresion{
+    public LinkedList<Expresion> accesos;
 
-    public LinkedList<Id> accesos;
-
-    public Acceso(LinkedList<Id> accesos ) {
+    public AccesoCompleto(LinkedList<Expresion> accesos ) {
         this.accesos = accesos;
     }
     
@@ -29,13 +28,29 @@ public class Acceso extends Expresion {
         
         Expresion retorno = new Literal (new Tipo(Tipo.EnumTipo.error), "@error@") ;
         
-        LinkedList<Id> aux = this.accesos;
+        LinkedList<Expresion> aux = this.accesos;
         
         Entorno busqueda = ent;
         
         // recorrer todos los id
-        for (Id id : aux){
-            Simbolo l = id.getSimbolo(busqueda); // obtiene el objeto en el entorno indicado
+        for (Expresion ex : aux){
+            
+            // puede pertenecer a tres tipos
+            // id
+            
+            
+            // acceso 
+            
+            
+        }
+        return retorno;
+    }
+}
+
+
+/*
+    Simbolo l = id.getSimbolo(busqueda); // obtiene el objeto en el entorno indicado
+            //aux.pollFirst();
             
             //verificar si es el último elemento
             if (id == aux.getLast()) {
@@ -55,8 +70,4 @@ public class Acceso extends Expresion {
                 // sí es de tipo objeto, ahora vamos a buscar en el entorno del objeto
                 busqueda = ((Objeto)l.valor).global;
             }
-        }
-        return retorno;
-    }
-    
-}
+*/

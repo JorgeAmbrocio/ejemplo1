@@ -11,6 +11,7 @@ import arbol.entorno.Entorno;
 import arbol.entorno.Simbolo;
 import arbol.expresiones.Acceso;
 import arbol.expresiones.Id;
+import arbol.expresiones.Literal;
 import interfaz.Errores;
 import java.util.LinkedList;
 
@@ -98,20 +99,35 @@ public class Asignacion extends Instruccion {
                 case cadena:
                     switch (resultado.tipo.tipo) {
                         case cadena:
-                            sim.valor = resultado.valor;
+                            if (sim.valor.getClass() != Literal.class) {
+                                sim.valor = resultado.valor;
+                            }else{
+                                Literal ll = (Literal) sim.valor;
+                                ll.valor = resultado.valor;
+                            }
                             return null;
                     }
                     break;
                 case objeto:
                     switch (resultado.tipo.tipo) {
                         case nulo:
-                            sim.valor = resultado.valor;
+                            if (sim.valor.getClass() != Literal.class) {
+                                sim.valor = resultado.valor;
+                            }else{
+                                Literal ll = (Literal) sim.valor;
+                                ll.valor = resultado.valor;
+                            }
                             return null;
                         case objeto:
                             //verificar que sean el mismo tipo de objeto
                             if (sim.tipo.tr.equals(resultado.tipo.tr)) {
                                 // sí son del mismo tipo
+                                if (sim.valor.getClass() != Literal.class) {
                                 sim.valor = resultado.valor;
+                            }else{
+                                Literal ll = (Literal) sim.valor;
+                                ll.valor = resultado.valor;
+                            }
                                 return null;
                             }
                     }

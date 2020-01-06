@@ -59,6 +59,7 @@ non terminal LinkedList<Integer> DIMENSIONES_VACIAS, DIMENSIONES_LLENAS;
 non terminal Bloque BLOQUE;
 non terminal Bloque BLOQUE_CLASE;
 non terminal Arreglo LISTA_ARREGLO, LISTA_ARREGLO2;
+non terminal Id ID_ACCESOS;
 
 
 //Operaciones numericas
@@ -78,7 +79,7 @@ precedence left por,division,modulo;
 precedence left potencia;
 precedence left masmas,menosmenos; //Así lo tenía antes
 
-precedence left punto; //Para los accesos
+precedence left punto,corizquierdo; //Para los accesos
 
 precedence left umenos;
 
@@ -221,8 +222,17 @@ ASIGNACION ::=
                 //| id:a L_DIMENSIONES_EXPRESION:b igual E:c {: RESULT = new AsignacionArreglo(a,aleft,aright,b,c); :}
 ;
 
-ID ::= ID:a punto id:b {: a.add(new Id(b, bleft,bright)); RESULT = a; :}
-        | id:a {: RESULT  = new LinkedList<>(); RESULT.add(new Id(a, aleft,aright)); :}
+//ID ::= ID:a punto id:b {: a.add(new Id(b, bleft,bright)); RESULT = a; :}
+  //      | id:a {: RESULT  = new LinkedList<>(); RESULT.add(new Id(a, aleft,aright)); :}
+//;
+
+ID ::= ID:a punto ID_ACCESOS:b {: a.add(b); RESULT = a; :}
+        | ID_ACCESOS:a {: RESULT  = new LinkedList<>(); RESULT.add(a); :}
+;
+
+ID_ACCESOS ::= id:a {: RESULT = new Id(a, aleft , aright); :}
+        | id:a DIMENSIONES_LLENAS:b {: RESULT = new Id(a, b, aleft , aright); :}
+        //| id:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new ExpLlamadaMF(a, b, aleft,aright); :}
 ;
 
 METODO ::= T2:a id:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,c,d ); :}

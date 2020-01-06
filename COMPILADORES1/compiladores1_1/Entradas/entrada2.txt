@@ -33,8 +33,11 @@ class hola {
 		
 		println(" se está ejecutando el main");
 		
-		String [][] resultado ;
-		resultado = {{"1", "2"},{"3","4"}};
+		String [][] resultado = {{"1", "2"},{"3","4"}};
+
+		resultado[0][0] = "camino";
+
+		println(resultado[0][0]);
 
 	}
 

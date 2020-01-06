@@ -10,6 +10,7 @@ import arbol.Instruccion;
 import arbol.entorno.Entorno;
 import arbol.entorno.Tipo;
 import arbol.expresiones.Acceso;
+import arbol.expresiones.Literal;
 import arbol.expresiones.Objeto;
 
 /**
@@ -34,6 +35,10 @@ public class Imprimir extends Instruccion{
         Expresion resultado = valor.getValor(ent);
         
         String rv = resultado.valor.toString();
+        
+        if (resultado.valor.getClass() == Literal.class) {
+            rv = ((Literal)resultado.valor).valor.toString();
+        }
         
         if (resultado.valor.getClass() == Objeto.class) {
             String [] vector = resultado.toString().split("@");
