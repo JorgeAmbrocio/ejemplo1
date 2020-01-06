@@ -1,4 +1,4 @@
-import "NodoArbolBinario.nm";
+import "Entradas/NodoArbolBinario.nm";
 
  class ArbolBinario
  {
@@ -46,10 +46,10 @@ import "NodoArbolBinario.nm";
         println("");
     }
 
-    String preorden(NodoArbolBinario a)
+    String preorden (NodoArbolBinario a)
     {
         if (a == null)
-	{
+	   {
             return null;
         }
 

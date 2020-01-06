@@ -1,5 +1,5 @@
-import("ArbolBinario.nm");
-import("ArbolAVL.nm");
+import "Entradas/ArbolBinario.nm";
+import "Entradas/ArbolAVL.nm" ;
 
 class Arboles
 {
@@ -34,7 +34,8 @@ class Arboles
     }
 
     NodoArbolBinario buscarABB() {
-        return abb.elemento_minimo(abb.getRaiz()).valor;
+        NodoArbolBinario nd = abb.getRaiz();
+        return abb.elemento_minimo(nd).valor;
     }
 
     void eliminarABB() {
@@ -46,7 +47,7 @@ class Arboles
         arbol_numeros.insertar(12);
         arbol_numeros.insertar(5);
         arbol_numeros.insertar(26);
-        arbol_numeros.insertar(33);
+        arbol_numeros.insertar( 33 );
         arbol_numeros.insertar(59);
         arbol_numeros.insertar(27);
         arbol_numeros.insertar(15);

@@ -1,4 +1,4 @@
-import "NodoAVL.nm";
+import "Entradas/NodoAVL.nm";
 
 class ArbolAVL
 {
@@ -32,7 +32,7 @@ class ArbolAVL
 
 	void preorden()
 	{
-        	print("Recorrido preorden del arbol AVL: ");
+        	print("Recorrido preorden del arbol AVL ");
         	preorden(raiz);
         	println("");
     	}
@@ -46,7 +46,7 @@ class ArbolAVL
 
         	print(a.valor + ", ");
         	preorden(a.izquierdo);
-        	preorden(a.derecho);
+        	preorden( a.derecho );
         	return null;
     	}
 

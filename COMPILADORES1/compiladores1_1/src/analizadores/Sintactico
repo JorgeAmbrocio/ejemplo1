@@ -48,15 +48,17 @@ non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES, L_INSTRUCCIONES_CLASE;
 non terminal Instruccion INSTRUCCION, INSTRUCCION_CLASE, DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO, SENTENCIA_IMPORT,  METODO;
 non terminal Instruccion  SENTENCIA_LLAMADA, RETORNO, DECLARACION_CLASE, SENTENCIA_GRAFICAR_ENTORNO, CONSTRUCTOR;
-non terminal Expresion E;
-non terminal Tipo T;
+non terminal Expresion E, E1;
+non terminal Tipo T, T2;
 non terminal LinkedList<CondicionIf> L_IF;
 non terminal LinkedList<CondicionSwitch> L_CASOS;
 non terminal LinkedList<Declaracion> PARAMETROS;
 non terminal LinkedList<Expresion> PARAMETROS_LLAMADA;
 non terminal LinkedList<Id> ID;
+non terminal LinkedList<Integer> DIMENSIONES_VACIAS, DIMENSIONES_LLENAS;
 non terminal Bloque BLOQUE;
 non terminal Bloque BLOQUE_CLASE;
+non terminal Arreglo LISTA_ARREGLO, LISTA_ARREGLO2;
 
 
 //Operaciones numericas
@@ -208,13 +210,13 @@ BLOQUE ::= llaveizq:z llaveder:y     {: RESULT = new Bloque(); :}
 
 
 DECLARACION ::= 
-        T:a id:b igual E:c {: RESULT = new Declaracion(a, b, c, bleft, bright); :}
-        | T:a id:b {: RESULT = new Declaracion(a, b, bleft, bright); :}
+        T2:a id:b igual E1:c {: RESULT = new Declaracion(a, b, c, bleft, bright); :}
+        | T2:a id:b {: RESULT = new Declaracion(a, b, bleft, bright); :}
         
 ;
 
 ASIGNACION ::= 
-                ID:a igual E:b {: RESULT = new Asignacion(new Acceso(a) ,aleft,aright ,b); :}
+                ID:a igual E1:b {: RESULT = new Asignacion(new Acceso(a) ,aleft,aright ,b); :}
                 //| id:a igual rnew id:b PARAMETROS_LLAMADA:c {: RESULT = new AsignacionInstancia(); :}
                 //| id:a L_DIMENSIONES_EXPRESION:b igual E:c {: RESULT = new AsignacionArreglo(a,aleft,aright,b,c); :}
 ;
@@ -223,8 +225,8 @@ ID ::= ID:a punto id:b {: a.add(new Id(b, bleft,bright)); RESULT = a; :}
         | id:a {: RESULT  = new LinkedList<>(); RESULT.add(new Id(a, aleft,aright)); :}
 ;
 
-METODO ::= T:a id:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,c,d ); :}
-            |T:a id:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,d ); :}
+METODO ::= T2:a id:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,c,d ); :}
+            |T2:a id:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,d ); :}
             |ID:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion( new Acceso(b) ,c,d ); :}
             |ID:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(new Acceso(b),d ); :}
 ;
@@ -238,8 +240,32 @@ T ::= rint:a {: RESULT = new Tipo(Tipo.EnumTipo.entero); :}
     | id:a {: RESULT = new Tipo(Tipo.EnumTipo.objeto, a); :}
 ;
 
+T2 ::= T:a DIMENSIONES_VACIAS:b {: a.dimension = b.size(); RESULT = a; :}
+    | T:a {: RESULT = a; :}
+;
 
 
+
+LISTA_ARREGLO ::= llaveizq llaveder {: RESULT = new Arreglo (); :}
+        | llaveizq PARAMETROS_LLAMADA:a llaveder {: RESULT = new Arreglo(a); :}
+        | llaveizq LISTA_ARREGLO2:a llaveder {: RESULT = a; :}
+;
+
+LISTA_ARREGLO2 ::= LISTA_ARREGLO2:a coma LISTA_ARREGLO:b {: a.contenido.add(b); a.agregar() ;RESULT = a; :}
+        | LISTA_ARREGLO:a {: RESULT =  new Arreglo(); RESULT.contenido.add(a); RESULT.calcularProfundidad(); :}
+;
+
+DIMENSIONES_VACIAS ::= DIMENSIONES_VACIAS:a corizquierdo corderecho {: a.add(0); RESULT = a; :}
+        | corizquierdo corderecho {: RESULT = new LinkedList<>() ; RESULT.add(0); :}
+;
+
+DIMENSIONES_LLENAS ::= DIMENSIONES_LLENAS:a corizquierdo entero:b corderecho {: a.add(Integer.parseInt(b)); RESULT = a; :}
+        | corizquierdo entero:a corderecho {: RESULT = new LinkedList<>() ; RESULT.add(Integer.parseInt(a)); :}
+;
+
+E1 ::= LISTA_ARREGLO:a {: RESULT = a; :} 
+        | E:a {: RESULT = a; :}
+;
 
 E ::= 
         entero:a {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.entero), a); :}
@@ -254,6 +280,7 @@ E ::=
         | ID:a masmas {: RESULT = new ExpIncremento ( new Acceso(a), aleft,aright) ;:}
         | ID:a menosmenos {: RESULT = new ExpDecremento( new Acceso(a), aleft,aright) ;:}
         | ID:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new ExpLlamadaMF(new Acceso(a), b, aleft,aright); :}
+        | ID:a parizquierdo parderecho {: RESULT = new ExpLlamadaMF(new Acceso(a), aleft,aright); :}
         | E:a mas:b E:c {: RESULT = new Suma(aleft, aright, a, c) ; :}
         | E:a menos:b E:c {: RESULT = new Resta (a,c, aleft, aright) ;:}
         | E:a por:b E:c {: RESULT = new Multiplicacion(a,c, aleft, aright);:}
@@ -272,8 +299,10 @@ E ::=
         | not:a E:b {: RESULT =new Not(b, aleft,aright);:}
         | menos E:a {:RESULT = new Negativo (a, aleft, aright); :}
         | parizquierdo E:a parderecho {:RESULT = a;:}
+        | rnew T:a DIMENSIONES_LLENAS:b {: RESULT = new Arreglo(a, b); :}
         | rnew T:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new Objeto(a, b , aleft, aright); :}
         | rnew T:a parizquierdo  parderecho {: RESULT = new Objeto(a,  aleft, aright); :}
+        | rnull {: RESULT = new Literal(new Tipo(Tipo.EnumTipo.nulo) , Tipo.EnumTipo.nulo); :}
         
 ;
 

@@ -31,14 +31,10 @@ class hola {
 
 	void main () {
 		
-		int resultado = ackermann(3,4);
-		println(resultado);
-
-
-		hola nn = new hola(12);
-		println(nn.a);
+		println(" se está ejecutando el main");
 		
-
+		String [][] resultado ;
+		resultado = {{"1", "2"},{"3","4"}};
 
 	}
 

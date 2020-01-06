@@ -13,6 +13,7 @@ public class Tipo {
     
     public EnumTipo tipo;
     public String tr;
+    public Integer dimension = 0;
     
     
     public Tipo (EnumTipo tipo) {
@@ -25,8 +26,14 @@ public class Tipo {
         this.tr = tr;
     }
     
+    public Tipo (EnumTipo tipo ,  int dimension) {
+        this.tipo = tipo;
+        this.tr = tr;
+        this.dimension = dimension;
+    }
+    
     public enum EnumTipo {
-        entero, caracter, booleano, doble,cadena,error, objeto, nulo, metodo
+        entero, caracter, booleano, doble,cadena,error, objeto, nulo, metodo, arreglo
     }
 }
 

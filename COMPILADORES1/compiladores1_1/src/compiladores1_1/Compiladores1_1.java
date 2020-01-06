@@ -47,8 +47,8 @@ public class Compiladores1_1 {
         
         fmrP =new fmrPrincipal();
         //fmrP.show();
-        interpretar("Entradas/entrada2.txt");
-        //compiladores1_1.Compiladores1_1.generarErrores();
+        interpretar("Entradas/Entrada2.txt");
+        compiladores1_1.Compiladores1_1.generarErrores();
         fmrP.hide();
   
         System.exit(0);
@@ -135,6 +135,7 @@ public class Compiladores1_1 {
     
     
     public static AST obtenerArbol_  (String ruta) {
+        System.out.println("Analizando sintacticamentre: " +ruta);
         analizadores.parser pars;
 //        Instruccion bloque;
         AST arbol;
@@ -145,6 +146,7 @@ public class Compiladores1_1 {
             arbol = pars.AST;
 
             if (arbol != null) { //Si no existió un error en el análisis
+                System.out.println("Ejecutando: " +ruta);
                 arbol.Ejecutar();
             } else {
                 System.out.println("<----------> Existió un error en el análisis, no se pudo construir el árbol <---------->");

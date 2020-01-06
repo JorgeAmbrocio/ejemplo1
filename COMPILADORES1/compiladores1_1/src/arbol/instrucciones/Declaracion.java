@@ -57,6 +57,15 @@ public class Declaracion extends Instruccion {
             Expresion resultado = valor.getValor(ent);
 
             Simbolo simbolo;
+            
+            if (this.tipo.dimension != resultado.tipo.dimension) {
+                // no coinciden en su tipo y dimension
+                System.out.println("Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + "-" + tipo.tr + " ARREGLO[ " + this.tipo.dimension + " dimensiones]  " + resultado.tipo.tipo + "-" + resultado.tipo.tr  + " ARREGLO[ " + resultado.tipo.dimension + " dimensiones]" + ". Línea: " + linea + " Columna: " + columna);
+                Errores errr = new Errores(Errores.enumTipoError.semantico , "Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + "-" + tipo.tr + " ARREGLO[ " + this.tipo.dimension + " dimensiones]   " + resultado.tipo.tipo + "-" + resultado.tipo.tr  + " ARREGLO[ " + resultado.tipo.dimension + " dimensiones]" + ". Línea: " + linea + " Columna: " + columna);
+        
+                return null;
+            }
+            
             switch (tipo.tipo) { //Tipo de la variable
                 case entero:
                     switch (resultado.tipo.tipo) {
@@ -111,6 +120,10 @@ public class Declaracion extends Instruccion {
                     break;
                 case objeto:
                     switch (resultado.tipo.tipo) {
+                        case nulo:
+                            // el valor que se le desea asignar a un objeto es nulo
+                            simbolo = new Simbolo(tipo, resultado.valor);
+                            ent.insertar(id, simbolo, linea, columna, "La variable");
                         case objeto:
                             if (this.tipo.tr.equals(resultado.tipo.tr)) {
                                 simbolo = new Simbolo(tipo, resultado.valor);
@@ -127,6 +140,13 @@ public class Declaracion extends Instruccion {
             Errores errr = new Errores(Errores.enumTipoError.semantico , "Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + tipo.tipo + "-" + tipo.tr + " = " + resultado.tipo.tipo + "-" + resultado.tipo.tr + ". Línea: " + linea + " Columna: " + columna);
         
         } else { //Si no se le asignó valor a la variable le pongo uno por defecto
+            
+            if (this.tipo.dimension > 0) {
+                // es un arreglo y se debe iniciar con valor null
+                ent.insertar(id, new Simbolo(this.tipo, Tipo.EnumTipo.nulo), linea, columna, "La variable ");
+                return null;
+            }
+            
             switch (tipo.tipo) {
                 case entero:
                     ent.insertar(id, new Simbolo(tipo, 0), linea, columna, "La variable");

@@ -47,6 +47,15 @@ public class Asignacion extends Instruccion {
         if (sim != null) { //Si la variable existe
 
             Expresion resultado = valor.getValor(ent);
+            
+            if (sim.tipo.dimension  != valor.tipo.dimension) {
+                // no coinciden en su tipo y dimension
+                System.out.println("Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + sim.tipo.tipo + "-" + sim.tipo.tr + " ARREGLO[ " + sim.tipo.dimension + " dimensiones]  " + resultado.tipo.tipo + "-" + resultado.tipo.tr  + " ARREGLO[ " + resultado.tipo.dimension + " dimensiones]" + ". Línea: " + linea + " Columna: " + columna);
+                Errores errr = new Errores(Errores.enumTipoError.semantico , "Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + sim.tipo + "-" + sim.tipo.tr + " ARREGLO[ " + sim.tipo.dimension + " dimensiones]   " + resultado.tipo.tipo + "-" + resultado.tipo.tr  + " ARREGLO[ " + resultado.tipo.dimension + " dimensiones]" + ". Línea: " + linea + " Columna: " + columna);
+        
+                return null;
+            }
+            
 
             switch (sim.tipo.tipo) { //Tipo de la variable
                 case entero:
@@ -95,11 +104,15 @@ public class Asignacion extends Instruccion {
                     break;
                 case objeto:
                     switch (resultado.tipo.tipo) {
+                        case nulo:
+                            sim.valor = resultado.valor;
+                            return null;
                         case objeto:
                             //verificar que sean el mismo tipo de objeto
                             if (sim.tipo.tr.equals(resultado.tipo.tr)) {
                                 // sí son del mismo tipo
                                 sim.valor = resultado.valor;
+                                return null;
                             }
                     }
             }

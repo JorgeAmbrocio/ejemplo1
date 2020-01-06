@@ -15,33 +15,33 @@ class NodoArbolBinario
 
     	void insertar(int valor)
     	{
-    		if(valor < this.valor)
-		{	
-    			if(izquierdo == null)
-			{
-    				izquierdo = new NodoArbolBinario(valor);
-    			}
-			else
-			{
+        	if(valor < this.valor)
+    		{	
+        		if(izquierdo == null)
+    			{
+        			izquierdo = new NodoArbolBinario(valor);
+        		}
+    			else
+    			{
     				izquierdo.insertar(valor);
     			}
 
-	    	}
-		else if(valor > this.valor)
-		{
+    	    }
+    		else if(valor > this.valor)
+    		{
     			if(derecho == null)
-			{
+			    {
     				derecho = new NodoArbolBinario(valor);
     			}
-			else
-			{
+    			else
+    			{
     				derecho.insertar(valor);
     			}
-	    	}
-		else
-		{
-    			println("No se permiten los valores duplicados " + valor + ".");
-    		}
+    	    }
+    		else
+    		{
+        			println("No se permiten los valores duplicados " + valor + ".");
+        		}
     	}
    
     	String graficar() 

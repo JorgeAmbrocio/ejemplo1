@@ -33,8 +33,8 @@ class NodoAVL
 
         	if (izquierdo != null)
 		{
-            		etiqueta = etiqueta + izquierdo.getDotNodosInternos() + "nodo" + id + ":C0->nodo" + izquierdo.id + "\n";
-        	}
+        		etiqueta = etiqueta + izquierdo.getDotNodosInternos() + "nodo" + id + ":C0->nodo" + izquierdo.id + "\n";
+    	}
 
         	if (derecho != null)
 		{

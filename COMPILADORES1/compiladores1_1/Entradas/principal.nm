@@ -1,4 +1,4 @@
-import("Arboles.nm");
+import "Entradas/Arboles.nm";
 
 class Main
 {
@@ -46,7 +46,7 @@ class Main
     */
     void ArbolAVL(Arboles a)
     {
-        println("----- ARBOL AVL -----");
+        println("----- ARBOL AVL -----" );
         println("--- Analizando insercion Avl ---");
         a.insertarAVL();
         graficar_dot("AVL1.png", a.getDot());
