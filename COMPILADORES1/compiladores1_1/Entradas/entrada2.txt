@@ -32,13 +32,10 @@ class hola {
 	void main () {
 		
 		println(" se está ejecutando el main");
-		
-		String [][] resultado = {{"1", "2"},{"3","4"}};
+		cubo c = new cubo();
 
-		resultado[0][0] = "camino";
-
-		println(resultado[0][0]);
-
+		c.arreglo = {5,6,3,2};
+		println(c.arreglo[1]);
 	}
 
 	hola () {

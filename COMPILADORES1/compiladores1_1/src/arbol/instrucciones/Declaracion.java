@@ -12,6 +12,7 @@ import arbol.entorno.Simbolo;
 import arbol.entorno.Tipo;
 import arbol.expresiones.Acceso;
 import arbol.expresiones.Id;
+import arbol.expresiones.Literal;
 import interfaz.Errores;
 import java.util.LinkedList;
 
@@ -71,6 +72,12 @@ public class Declaracion extends Instruccion {
                     switch (resultado.tipo.tipo) {
                         case entero:
                             simbolo = new Simbolo(tipo, resultado.valor);
+                            if (simbolo.valor.getClass() != Literal.class) {
+                                simbolo = new Simbolo(tipo, resultado.valor);
+                            }else{
+                                Literal ll = (Literal) simbolo.valor;
+                                simbolo = new Simbolo(tipo, ll.valor);
+                            }
                             ent.insertar(id, simbolo, linea, columna, "La variable ");
                             return null;
                         case caracter:

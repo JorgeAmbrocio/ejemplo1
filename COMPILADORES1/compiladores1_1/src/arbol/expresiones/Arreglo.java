@@ -166,8 +166,6 @@ public class Arreglo extends Expresion {
             for(int i = 0 ; i < tamanoActual ; i++){
                 this.contenido.add(i, this.getLiteralBase());
             }
-            
-            
         }
         
         return this;

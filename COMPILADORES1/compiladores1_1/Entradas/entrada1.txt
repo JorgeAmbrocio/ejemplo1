@@ -3,6 +3,7 @@
 class cubo {
 	int x = 3 ;
 	int y = 3;
+	int [] arreglo;
 
 	void imprimir(){
 		println("soy un cubo " + x + "x" + y);

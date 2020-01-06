@@ -49,7 +49,7 @@ public class Asignacion extends Instruccion {
 
             Expresion resultado = valor.getValor(ent);
             
-            if (sim.tipo.dimension  != valor.tipo.dimension) {
+            if (sim.tipo.dimension  != resultado.tipo.dimension) {
                 // no coinciden en su tipo y dimension
                 System.out.println("Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + sim.tipo.tipo + "-" + sim.tipo.tr + " ARREGLO[ " + sim.tipo.dimension + " dimensiones]  " + resultado.tipo.tipo + "-" + resultado.tipo.tr  + " ARREGLO[ " + resultado.tipo.dimension + " dimensiones]" + ". Línea: " + linea + " Columna: " + columna);
                 Errores errr = new Errores(Errores.enumTipoError.semantico , "Error Semántico: " + "El tipo de dato que se le quiere asignar a la variable '" + id + "' es incorrecto. " + sim.tipo + "-" + sim.tipo.tr + " ARREGLO[ " + sim.tipo.dimension + " dimensiones]   " + resultado.tipo.tipo + "-" + resultado.tipo.tr  + " ARREGLO[ " + resultado.tipo.dimension + " dimensiones]" + ". Línea: " + linea + " Columna: " + columna);
@@ -62,11 +62,21 @@ public class Asignacion extends Instruccion {
                 case entero:
                     switch (resultado.tipo.tipo) {
                         case entero:
-                            sim.valor = resultado.valor;
+                            if (sim.valor.getClass() != Literal.class) {
+                                sim.valor = resultado.valor;
+                            }else{
+                                Literal ll = (Literal) sim.valor;
+                                ll.valor = resultado.valor;
+                            }
                             return null;
                         case caracter:
                             int ascii = (int) resultado.valor.toString().charAt(0);
-                            sim.valor = ascii;
+                            if (sim.valor.getClass() != Literal.class) {
+                                sim.valor = ascii;
+                            }else{
+                                Literal ll = (Literal) sim.valor;
+                                ll.valor = resultado.valor;
+                            }
                             return null;
                     }
                     break;
@@ -74,25 +84,45 @@ public class Asignacion extends Instruccion {
                     switch (resultado.tipo.tipo) {
                         case caracter:
                             int ascii = (int) resultado.valor.toString().charAt(0);
-                            sim.valor = ascii;
+                            if (sim.valor.getClass() != Literal.class) {
+                                sim.valor = ascii;
+                            }else{
+                                Literal ll = (Literal) sim.valor;
+                                ll.valor = resultado.valor;
+                            }
                             return null;
                         case entero:
                         case doble:
-                            sim.valor = resultado.valor;
+                            if (sim.valor.getClass() != Literal.class) {
+                                sim.valor = resultado.valor;
+                            }else{
+                                Literal ll = (Literal) sim.valor;
+                                ll.valor = resultado.valor;
+                            }
                             return null;
                     }
                     break;
                 case caracter:
                     switch (resultado.tipo.tipo) {
                         case caracter:
-                            sim.valor = resultado.valor;
+                            if (sim.valor.getClass() != Literal.class) {
+                                sim.valor = resultado.valor;
+                            }else{
+                                Literal ll = (Literal) sim.valor;
+                                ll.valor = resultado.valor;
+                            }
                             return null;
                     }
                     break;
                 case booleano:
                     switch (resultado.tipo.tipo) {
                         case booleano:
-                            sim.valor = resultado.valor;
+                            if (sim.valor.getClass() != Literal.class) {
+                                sim.valor = resultado.valor;
+                            }else{
+                                Literal ll = (Literal) sim.valor;
+                                ll.valor = resultado.valor;
+                            }
                             return null;
                     }
                     break;
