@@ -89,7 +89,6 @@ public class Id extends Expresion {
         return retorno;
     }
     
-    
     public Expresion getValorArreglo (Arreglo a , LinkedList<Integer> index) {
         
         Expresion retorno = new Literal(new Tipo (Tipo.EnumTipo.error) , "@Error@");
@@ -112,7 +111,6 @@ public class Id extends Expresion {
         
         return retorno;
     }
-    
     
     public Expresion getValorLlamada (Entorno ent){
         

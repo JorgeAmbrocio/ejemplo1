@@ -31,10 +31,8 @@ class hola {
 
 	void main () {
 		
-		println(" se está ejecutando el main");
-		int [][] arreglo = new int[2][3];
-		arreglo[1][1] = 55;
-		println(arreglo);
+		int re = this.ackermann(3,6);
+		println(re);
 	}
 
 	hola () {

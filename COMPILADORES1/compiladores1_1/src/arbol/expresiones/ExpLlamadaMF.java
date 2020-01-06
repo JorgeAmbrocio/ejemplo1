@@ -109,7 +109,7 @@ public class ExpLlamadaMF extends Expresion {
             if (this.id_.accesos.size() > 1) {
                 Entorno entorno = ent.getEntornoAcceso(id_);
                 if (entorno != null) {
-                    entornoNuevo.global = entorno.anterior;
+                    entornoNuevo.global = entorno.global;
                 }
             }
             
