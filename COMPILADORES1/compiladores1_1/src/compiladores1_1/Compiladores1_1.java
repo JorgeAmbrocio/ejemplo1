@@ -45,13 +45,13 @@ public class Compiladores1_1 {
         hojas = new ArrayList();
         
         
-        fmrP =new fmrPrincipal();
-        fmrP.show();
-        //interpretar("Entradas/Entrada2.txt");
+        //fmrP =new fmrPrincipal();
+        //fmrP.show();
+        interpretar("EntradasFase2/Proyecto.NM");
         //compiladores1_1.Compiladores1_1.generarErrores();
         //fmrP.hide();
   
-        //System.exit(0);
+        System.exit(0);
     }
     
     
