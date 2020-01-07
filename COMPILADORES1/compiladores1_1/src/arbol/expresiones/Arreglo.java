@@ -86,6 +86,7 @@ public class Arreglo extends Expresion {
         
         LinkedList<Expresion> lista = a.contenido;
         
+        
         // obtener los datos iniciales
         int profundidad = -1;
         int tamano = -1 ;
@@ -98,6 +99,7 @@ public class Arreglo extends Expresion {
             tamano = ((Arreglo)lista.get(0)).tamano;
         }else {
             esArreglo = false;
+            
             tipo = ((Expresion)lista.get(0)).tipo;
             this.tipo =tipo;
         }
@@ -220,21 +222,22 @@ public class Arreglo extends Expresion {
         
     }
     
-    public String getContenido () {
-        String c = this.getContenido_(this);
+    public String getContenido (Entorno ent) {
+        String c = this.getContenido_(this, ent);
         
         return c;
     }
     
-    public String getContenido_ (Arreglo a) {
+    public String getContenido_ (Arreglo a, Entorno ent) {
         String c = "{ ";
         
         if (a != null) {
             LinkedList<Expresion> e = (LinkedList) a.contenido.clone();
             for (Expresion ee : a.contenido) {
                 if (a.profundidad != 1) {
-                    c += this.getContenido_((Arreglo) ee) + ",";
+                    c += this.getContenido_((Arreglo) ee, ent) + ",";
                 }else {
+                  ee = ee.getValor(ent);
                     c += ee.valor.toString() + ",";
                 }
             }

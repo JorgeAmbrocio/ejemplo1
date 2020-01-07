@@ -70,7 +70,6 @@ public class Id extends Expresion {
             Literal retorno = new Literal (sim.tipo, sim.valor );
             return retorno;
         }
-        
         return new Literal(new Tipo (Tipo.EnumTipo.error) , "@Error@");
     }
     
@@ -79,7 +78,6 @@ public class Id extends Expresion {
         Simbolo sim = ent.buscar(id, linea, columna, "La variable ");
         
         if (sim != null  ){
-            
             if (sim.valor.getClass() == Arreglo.class) {
                 // es un arreglo
                 Arreglo arreglo = (Arreglo) sim.valor;
@@ -92,13 +90,15 @@ public class Id extends Expresion {
     public Expresion getValorArreglo (Arreglo a , LinkedList<Integer> index) {
         
         Expresion retorno = new Literal(new Tipo (Tipo.EnumTipo.error) , "@Error@");
-        
         // verifica que tengan la profundidad adecuada
         if (a.profundidad >= index.size()) {
             // verifica que tenga el tamaño adecuado
             if (a.tamano >= index.get(0)) {
                 // la primera posición existe
-                if (a.profundidad != 1) {
+                
+                
+                
+                if (a.profundidad != 1 ) {
                     // aún hay más arreglos que inspeccionar
                     Arreglo aa = (Arreglo) a.contenido.get(index.removeFirst());
                     retorno = this.getValorArreglo(aa, (LinkedList) index.clone());
@@ -159,7 +159,6 @@ public class Id extends Expresion {
                 retorno = this.getSimboloArreglo(arreglo, (LinkedList) this.accesoArreglo.clone());
             }
         }
-        
         return retorno;
     }
     
@@ -172,13 +171,22 @@ public class Id extends Expresion {
             // verifica que tenga el tamaño adecuado
             if (a.tamano >= index.get(0)) {
                 // la primera posición existe
-                if (a.profundidad != 1) {
+                
+                if (a.profundidad != 1 && index.size() != 1) {
                     // aún hay más arreglos que inspeccionar
                     Arreglo aa = (Arreglo) a.contenido.get(index.removeFirst());
+                    if (aa.tipo == null) {
+                        aa.tipo = new Tipo (a.tipo.tipo, a.profundidad -1);
+                    }
                     retorno = this.getSimboloArreglo(aa, (LinkedList) index.clone());
                 }else {
                     // profundidad es uno, ya podemos objeter el valor de la posición final
                     Expresion retorno_ = a.contenido.get(index.getFirst());
+                    
+                    if (retorno_.tipo == null) {
+                        retorno_.tipo = new Tipo (a.tipo.tipo, a.profundidad -1);
+                    }
+                    
                     retorno = new Simbolo(retorno_.tipo, retorno_);
                 }
             }

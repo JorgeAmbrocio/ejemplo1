@@ -121,7 +121,7 @@ public class ExpLlamadaMF extends Expresion {
                 if (simbolo.tipo.tipo == Tipo.EnumTipo.metodo) {
                     Errores eeee = new Errores(Errores.enumTipoError.semantico,"Error semántico, no se puede retornar un objeto desde el método: "  + nombre_ + " en la fila: " + this.linea + " columna: " + this.columna );
                     retorno = new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@"); // se evita el retorno del objeto
-                }else if (simbolo.tipo.tipo != l.tipo.tipo) {
+                }else if (simbolo.tipo.tipo != l.tipo.tipo && l.tipo.tipo !=Tipo.EnumTipo.nulo) {
                     // los tipos del retorno y de la función no son los mismos
                     Errores eeee = new Errores(Errores.enumTipoError.semantico,"Error semántico, no se puede retornar un casteo directo del tipo " + l.tipo.tipo.toString() + " a " + simbolo.tipo.tipo.toString() + " desde el método: "  + nombre_ + " en la fila: " + this.linea + " columna: " + this.columna );
                     retorno =new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@"); // se evita el retorno del objeto
@@ -131,9 +131,7 @@ public class ExpLlamadaMF extends Expresion {
             // la el simbolo no existe
             Errores eeee = new Errores(Errores.enumTipoError.semantico,"No se ha declarado la propiedad utilizada: " + nombre_ + " en la fila " + this.linea + " columna: " + this.columna );
         }
-        
         return retorno;
-        
         //return new Literal (new Tipo (Tipo.EnumTipo.error) , "@ERROR@") ;
     }
     

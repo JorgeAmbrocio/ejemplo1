@@ -79,7 +79,7 @@ precedence left por,division,modulo;
 precedence left potencia;
 precedence left masmas,menosmenos; //Así lo tenía antes
 
-precedence left punto,corizquierdo; //Para los accesos
+precedence left punto, corizquierdo; //Para los accesos
 
 precedence left umenos;
 
@@ -123,6 +123,24 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
 INSTRUCCION_CLASE ::= METODO:a {: RESULT = a; :}
             |DECLARACION:a puntoycoma {: RESULT = a; :}
             |ASIGNACION:a puntoycoma {: RESULT = a; :}
+;
+
+METODO ::= T2:a id:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,c,d ); :}
+        |T2:a id:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,d ); :}
+        |ID:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion( new Acceso(b) ,c,d ); :}
+        |ID:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(new Acceso(b),d ); :}
+;
+
+DECLARACION ::= 
+        T2:a id:b igual E1:c {: RESULT = new Declaracion(a, b, c, bleft, bright); :}
+        | T2:a id:b {: RESULT = new Declaracion(a, b, bleft, bright); :}
+        
+;
+
+ASIGNACION ::= 
+                ID:a igual E1:b {: RESULT = new Asignacion(new Acceso(a) ,aleft,aright ,b); :}
+                //| id:a igual rnew id:b PARAMETROS_LLAMADA:c {: RESULT = new AsignacionInstancia(); :}
+                //| id:a L_DIMENSIONES_EXPRESION:b igual E:c {: RESULT = new AsignacionArreglo(a,aleft,aright,b,c); :}
 ;
 
 L_INSTRUCCIONES_CLASE ::= L_INSTRUCCIONES_CLASE:a INSTRUCCION_CLASE:b {: RESULT = a; RESULT.add(b); :}
@@ -210,21 +228,7 @@ BLOQUE ::= llaveizq:z llaveder:y     {: RESULT = new Bloque(); :}
 ;
 
 
-DECLARACION ::= 
-        T2:a id:b igual E1:c {: RESULT = new Declaracion(a, b, c, bleft, bright); :}
-        | T2:a id:b {: RESULT = new Declaracion(a, b, bleft, bright); :}
-        
-;
 
-ASIGNACION ::= 
-                ID:a igual E1:b {: RESULT = new Asignacion(new Acceso(a) ,aleft,aright ,b); :}
-                //| id:a igual rnew id:b PARAMETROS_LLAMADA:c {: RESULT = new AsignacionInstancia(); :}
-                //| id:a L_DIMENSIONES_EXPRESION:b igual E:c {: RESULT = new AsignacionArreglo(a,aleft,aright,b,c); :}
-;
-
-//ID ::= ID:a punto id:b {: a.add(new Id(b, bleft,bright)); RESULT = a; :}
-  //      | id:a {: RESULT  = new LinkedList<>(); RESULT.add(new Id(a, aleft,aright)); :}
-//;
 
 ID ::= ID:a punto ID_ACCESOS:b {: a.add(b); RESULT = a; :}
         | ID_ACCESOS:a {: RESULT  = new LinkedList<>(); RESULT.add(a); :}
@@ -235,11 +239,7 @@ ID_ACCESOS ::= id:a {: RESULT = new Id(a, aleft , aright); :}
         //| id:a parizquierdo PARAMETROS_LLAMADA:b parderecho {: RESULT = new ExpLlamadaMF(a, b, aleft,aright); :}
 ;
 
-METODO ::= T2:a id:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,c,d ); :}
-            |T2:a id:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(a, b,d ); :}
-            |ID:b parizquierdo PARAMETROS:c parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion( new Acceso(b) ,c,d ); :}
-            |ID:b parizquierdo parderecho BLOQUE:d {: RESULT = new DeclaraMetodoFuncion(new Acceso(b),d ); :}
-;
+
 
 T ::= rint:a {: RESULT = new Tipo(Tipo.EnumTipo.entero); :}
     | rchar {: RESULT = new Tipo(Tipo.EnumTipo.caracter); :}
@@ -317,6 +317,9 @@ E ::=
 ;
 
 
+//ID ::= ID:a punto id:b {: a.add(new Id(b, bleft,bright)); RESULT = a; :}
+  //      | id:a {: RESULT  = new LinkedList<>(); RESULT.add(new Id(a, aleft,aright)); :}
+//;
 
 
 

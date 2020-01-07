@@ -49,7 +49,7 @@ public class Imprimir extends Instruccion{
         
         if (resultado.valor.getClass() == Arreglo.class) {
             Arreglo arreglo = (Arreglo) resultado.valor;
-            rv = arreglo.getContenido();
+            rv = arreglo.getContenido(ent);
         }
         
         
