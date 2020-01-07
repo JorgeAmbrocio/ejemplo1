@@ -1,5 +1,5 @@
 
-import "Entradas/entrada1.txt";
+Import "Entradas/entrada1.txt";
 
 class hola {
 
@@ -12,7 +12,7 @@ class hola {
 
 	void main () {
 		int [] bb = {5,5+6,3};
-		println(bb);
+		Println(bb);
 	}
 
 	int [] retorno () {
@@ -43,7 +43,7 @@ class hola {
 	
 
 	hola () {
-		println("Se ha ejecutado el constructor.");
+		Println("Se ha ejecutado el constructor.");
 	}
 
 	hola (int a){

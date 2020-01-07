@@ -44,20 +44,35 @@ class Objetos{
 	*	Métodos del árbol binario
 	*/
 	void insertarABB(){
+		Println("Insertar1");
 		arbolBinario.insertar(500);
+		Println("Insertar1");
 		arbolBinario.insertar(400);
+		Println("Insertar1");
 		arbolBinario.insertar(300);
+		Println("Insertar1");
 		arbolBinario.insertar(600);
+		Println("Insertar1");
 		arbolBinario.insertar(700);
+		Println("Insertar1");
 		arbolBinario.insertar(800);
+		Println("Insertar1");
 		arbolBinario.insertar(410);
+		Println("Insertar1");
 		arbolBinario.insertar(405);
+		Println("Insertar1");
 		arbolBinario.insertar(415);
+		Println("Insertar1");
 		arbolBinario.insertar(590);
+		Println("Insertar1");
 		arbolBinario.insertar(595);
+		Println("Insertar1");
 		arbolBinario.insertar(585);
+		Println("Insertar1");
 		arbolBinario.insertar(810);
+		Println("Insertar1");
 		arbolBinario.insertar(790);
+		Println("Insertar1");
 		arbolBinario.insertar(500); //Repetido
 	}
 
@@ -149,5 +164,5 @@ class Objetos{
 
 Import "EntradasFase2/ArbolBinario.NM";
 Import "EntradasFase2/ArbolAVL.NM";
-Import "EntradasFase2/TablaHash.NM";
+//Import "EntradasFase2/TablaHash.NM";
 

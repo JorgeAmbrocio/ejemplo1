@@ -19,6 +19,8 @@ public class Arreglo extends Expresion {
     
     public LinkedList<Expresion> contenido;
     
+    public LinkedList<Expresion> dimensiones_;
+    
     public int profundidad ;
     
     public int tamano;

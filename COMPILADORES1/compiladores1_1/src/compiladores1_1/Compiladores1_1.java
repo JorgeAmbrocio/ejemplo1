@@ -69,7 +69,7 @@ public class Compiladores1_1 {
             
 
             if (arbol != null) { //Si no existió un error en el análisis
-                arbol.Ejecutar();
+                arbol.Ejecutar(true);
             } else {
                 System.out.println("<----------> Existió un error en el análisis, no se pudo construir el árbol <---------->");
             }
@@ -95,7 +95,7 @@ public class Compiladores1_1 {
             arbol = pars.AST;
 
             if (arbol != null) { //Si no existió un error en el análisis
-                arbol.Ejecutar();
+                arbol.Ejecutar(true);
             } else {
                 System.out.println("<----------> Existió un error en el análisis, no se pudo construir el árbol <---------->");
             }
@@ -118,7 +118,7 @@ public class Compiladores1_1 {
             arbol = pars.AST;
 
             if (arbol != null) { //Si no existió un error en el análisis
-                arbol.Ejecutar();
+                arbol.Ejecutar(false);
             } else {
                 System.out.println("<----------> Existió un error en el análisis, no se pudo construir el árbol <---------->");
             }
@@ -147,7 +147,7 @@ public class Compiladores1_1 {
 
             if (arbol != null) { //Si no existió un error en el análisis
                 System.out.println("Ejecutando: " +ruta);
-                arbol.Ejecutar();
+                arbol.Ejecutar(false);
             } else {
                 System.out.println("<----------> Existió un error en el análisis, no se pudo construir el árbol <---------->");
             }

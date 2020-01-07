@@ -32,7 +32,7 @@ public class Bloque extends Instruccion {
     public Object ejecutar(Entorno ent) {
         
         for (Instruccion instruccion : instrucciones) {
-            Object retorno = instruccion.ejecutar(ent);
+             Object retorno = instruccion.ejecutar(ent);
             
             if (retorno != null ) {
                 // si retorna un objeto de tipo break, continue o return , entonces se deja de ejecutar el bloque

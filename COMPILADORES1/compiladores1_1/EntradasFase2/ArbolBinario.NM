@@ -16,7 +16,9 @@ class ArbolBinario{
 	void insertar(int val) {
 		if (raiz == null) {
 			raiz = new NodoArbolBinario(val);
+            Println("Insertar en raiz");
 		} else {
+            Println("Insertar en nodo " + val);
 			raiz.insertar(val);
 		}
 	}

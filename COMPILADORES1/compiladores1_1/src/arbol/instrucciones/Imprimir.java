@@ -59,11 +59,15 @@ public class Imprimir extends Instruccion{
             auxiliar = "\n";
         }
         
+        if (rv.contains("Insertar1")) {
+            int a= 5;
+        }
+        
         if (resultado.tipo.tipo != Tipo.EnumTipo.error) {
             System.out.print(rv + auxiliar);
                 
             try {
-                compiladores1_1.Compiladores1_1.fmrP.setData(resultado.valor + auxiliar);
+                compiladores1_1.Compiladores1_1.fmrP.setData(rv + auxiliar);
             } catch (Exception e) {}
         }
         

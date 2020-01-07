@@ -94,6 +94,12 @@ public class Igual extends Expresion {
                         mayor = str1.equals(str2);
                         return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
                 }
+            case objeto:
+                switch (e2.tipo.tipo){
+                    case nulo:
+                        mayor = str1.equals(str2);
+                        return new Literal (new Tipo (Tipo.EnumTipo.booleano), mayor.toString()) ;
+                }
         }
         
         

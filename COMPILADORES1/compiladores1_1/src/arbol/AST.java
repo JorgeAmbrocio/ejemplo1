@@ -25,7 +25,7 @@ public class AST {
         tablaGlobal.global = tablaGlobal;
     }
     
-    public void Ejecutar () {
+    public void Ejecutar (boolean EjecutarMain) {
         
         DeclaracionClase clase = null;
         
@@ -50,7 +50,7 @@ public class AST {
         
         //luego de ejecutar todas las sntencias
         // ejecutar el main del archivo 
-        if (true && clase != null){
+        if (EjecutarMain && clase != null){
             // ejecutar main
             clase.getObjeto(tablaGlobal);
         }

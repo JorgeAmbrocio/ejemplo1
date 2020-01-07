@@ -61,8 +61,11 @@ public class InsLlamadaMF extends Instruccion {
         
         LinkedList<Expresion> resueltos = new LinkedList<>();
         
-        // preprar el nombre
+        // crea un clon del acceso
+        Acceso acceso = new Acceso(null);
+        acceso.accesos = (LinkedList) this.id_.accesos.clone();
         
+        // preprar el nombre
         String aux = "";
         String strId = this.id_.accesos.getLast().id;
         String lastLetter = strId.substring(0,1);

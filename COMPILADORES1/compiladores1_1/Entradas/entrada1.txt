@@ -6,7 +6,7 @@ class cubo {
 	int [] arreglo;
 
 	void imprimir(){
-		println("soy un cubo " + x + "x" + y);
+		Println("soy un cubo " + x + "x" + y);
 	}
 }
 

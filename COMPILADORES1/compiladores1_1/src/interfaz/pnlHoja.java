@@ -80,7 +80,6 @@ public class pnlHoja extends JPanel implements ActionListener {
             }
         } );
         this.txt.setBounds(0,0,1000,400);
-        this.txt.setText("este es un texo");
         this.txt.setLineWrap(true);
         this.txt.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         this.txt.setComponentPopupMenu(menu);

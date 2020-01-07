@@ -18,6 +18,7 @@ class NodoArbolBinario{
         if(valor < this.valor){
 
             if(izquierdo == null){
+                Println("creado bvalor en izquierda");
                 izquierdo = new NodoArbolBinario(valor);
             }else{
                 izquierdo.insertar(valor);
@@ -26,6 +27,7 @@ class NodoArbolBinario{
         }else if(valor > this.valor){
 
             if(derecho == null){
+                Println("creado bvalor en derecha");
                 derecho = new NodoArbolBinario(valor);
             }else{
                 derecho.insertar(valor);
