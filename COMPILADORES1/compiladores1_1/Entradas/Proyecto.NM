@@ -12,11 +12,19 @@ class Proyecto{
 	}
 
 	void main(){
+		String ruta = "prueba.jpg";
+		String contenido  = "digraph D { A -> {B, C, D} -> {F} }";
+
+		Graficar_dot(ruta, contenido);
+
+		/*
 		Println("/*********** Iniciando la calificación ***********/\n\n");
 		
 		Funcionalidades f = new Funcionalidades();
 
 		Println("\n\n/********** Finalizando la calificación **********/");
+
+		*/
 	}
 
 	

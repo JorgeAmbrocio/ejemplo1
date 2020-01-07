@@ -11,25 +11,30 @@ class NodoArbolBinario{
         this.valor = valor;
         this.izquierdo = null;
         this.derecho = null;
+        Print("creado nodoBinario");
+        Println(valor);
     }
 
 
     void insertar(int valor){
+        
         if(valor < this.valor){
-
+            Println("Nodo arbol binario insertar valor menor que actual " + valor + "-" + this.valor);
             if(izquierdo == null){
-                Println("creado bvalor en izquierda");
+                Println("creado valor en izquierda -> " + valor);
                 izquierdo = new NodoArbolBinario(valor);
             }else{
+                Println("ya hay nodo aquí insertar en este nuevo nodo ");
                 izquierdo.insertar(valor);
             }
 
         }else if(valor > this.valor){
-
+            Println("Nodo arbol binario insertar valor maypr que actual " + valor + "-" + this.valor);
             if(derecho == null){
-                Println("creado bvalor en derecha");
+                Println("creado valor en derecha " + valor);
                 derecho = new NodoArbolBinario(valor);
             }else{
+                Println("ya hay nodo, insertar en este nuevo nodo" );
                 derecho.insertar(valor);
             }
 

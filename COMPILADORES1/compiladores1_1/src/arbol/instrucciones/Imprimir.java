@@ -59,7 +59,7 @@ public class Imprimir extends Instruccion{
             auxiliar = "\n";
         }
         
-        if (rv.contains("Insertar1")) {
+        if (rv.contains("creado nodoBinario")) {
             int a= 5;
         }
         

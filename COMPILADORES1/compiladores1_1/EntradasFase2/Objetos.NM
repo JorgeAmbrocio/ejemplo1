@@ -44,7 +44,7 @@ class Objetos{
 	*	Métodos del árbol binario
 	*/
 	void insertarABB(){
-		Println("Insertar1");
+		
 		arbolBinario.insertar(500);
 		Println("Insertar1");
 		arbolBinario.insertar(400);
@@ -72,7 +72,7 @@ class Objetos{
 		arbolBinario.insertar(810);
 		Println("Insertar1");
 		arbolBinario.insertar(790);
-		Println("Insertar1");
+		Println("Insertar5");
 		arbolBinario.insertar(500); //Repetido
 	}
 

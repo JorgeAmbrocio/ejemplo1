@@ -37,7 +37,7 @@ parser code
 :}
 
 terminal String mas,menos,por,division,potencia,parizquierdo,parderecho,igual,puntoycoma,llaveizq,llaveder,rint,rdouble,rchar,rboolean,rstring,rclass,coma,rvoid;
-terminal String entero,doble,rtrue,rfalse,cadena,caracter,id,rprintln,rprint,rprinttabla;
+terminal String entero,doble,rtrue,rfalse,cadena,caracter,id,rprintln,rprint,rprinttabla,rgraficardot;
 terminal String menorque,mayorque,menorigualque,mayorigualque,igualigual,diferenteque,or,and,xor,not,rif,relse,rwhile,rbreak,rcontinue,modulo,rfor,rdo,rswitch,rcase,rdefault,dospuntos,interrogacion,masmas,menosmenos,rpow,rreturn,corizquierdo,corderecho,rnew,rpublic,rprotected,rprivate,rabstract,rstatic,rfinal,rstr,rtoDouble,rtoInt,rtoChar,rextends,punto,rnull,rimport,
 rgraph,rsuper,rread_file,rwrite_file,rinstanceof,rread;
 terminal String rgraficarentornos;
@@ -47,7 +47,7 @@ terminal umenos; //Para manejar el - E
 non terminal INICIO;
 non terminal LinkedList<Instruccion> L_INSTRUCCIONES, L_INSTRUCCIONES_CLASE;
 non terminal Instruccion INSTRUCCION, INSTRUCCION_CLASE, DECLARACION,ASIGNACION, IMPRIMIR,BREAK, CONTINUE ,SENTENCIA_IF, SENTENCIA_WHILE, SENTENCIA_SWITCH, SENTENCIA_FOR, ASIGNACION_DECLARACION,SENTENCIA_DO, SENTENCIA_INCREMENTO, SENTENCIA_DECREMENTO, SENTENCIA_IMPORT,  METODO;
-non terminal Instruccion  SENTENCIA_LLAMADA, RETORNO, DECLARACION_CLASE, SENTENCIA_GRAFICAR_ENTORNO, CONSTRUCTOR;
+non terminal Instruccion  SENTENCIA_LLAMADA, RETORNO, DECLARACION_CLASE, SENTENCIA_GRAFICAR_ENTORNO, CONSTRUCTOR, GRAFICAR_DOT;
 non terminal Expresion E, E1;
 non terminal Tipo T, T2;
 non terminal LinkedList<CondicionIf> L_IF;
@@ -118,6 +118,10 @@ INSTRUCCION ::= DECLARACION:a puntoycoma {: RESULT = a; :}
             | RETORNO:a {: RESULT =a; :}
             | DECLARACION_CLASE:a {: RESULT = a ; :}
             | SENTENCIA_GRAFICAR_ENTORNO:a {: RESULT = a; :}
+            | GRAFICAR_DOT:a {: RESULT =a; :}
+;
+
+GRAFICAR_DOT ::= rgraficardot parizquierdo E:a coma E:b parderecho puntoycoma {: RESULT = new GraficarDot(a,b); :}
 ;
 
 INSTRUCCION_CLASE ::= METODO:a {: RESULT = a; :}

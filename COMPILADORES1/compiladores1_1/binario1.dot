@@ -1,0 +1,5 @@
+digraph grafica{
+rankdir=TB;
+node [shape = record, style=filled, fillcolor=seashell2];
+nodo500 [ label ="<C0>|500|<C1>"];
+}

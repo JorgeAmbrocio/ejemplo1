@@ -153,11 +153,11 @@ public class Asignacion extends Instruccion {
                             if (sim.tipo.tr.equals(resultado.tipo.tr)) {
                                 // sí son del mismo tipo
                                 if (sim.valor.getClass() != Literal.class) {
-                                sim.valor = resultado.valor;
-                            }else{
-                                Literal ll = (Literal) sim.valor;
-                                ll.valor = resultado.valor;
-                            }
+                                    sim.valor = resultado.valor;
+                                }else{
+                                    Literal ll = (Literal) sim.valor;
+                                    ll.valor = resultado.valor;
+                                }
                                 return null;
                             }
                     }

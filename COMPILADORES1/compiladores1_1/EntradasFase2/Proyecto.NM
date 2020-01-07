@@ -12,11 +12,17 @@ class Proyecto{
 	}
 
 	void main(){
+
+		
+		
 		Println("/*********** Iniciando la calificación ***********/\n\n");
 	
 		Funcionalidades f = new Funcionalidades();
 
 		Println("\n\n/********** Finalizando la calificación **********/");
+
+		
+		
 	}
 
 	

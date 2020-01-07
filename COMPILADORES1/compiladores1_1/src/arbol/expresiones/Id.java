@@ -133,7 +133,12 @@ public class Id extends Expresion {
     }
     
     public Simbolo getSimboloId (Entorno ent){
+        
         Simbolo sim = ent.buscar(id, linea, columna, "La variable ");
+        
+        if (id.equals("this")) {
+            sim = null;
+        }
         
         if (sim != null){
             return sim;
